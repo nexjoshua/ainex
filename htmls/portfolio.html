@@ -9,6 +9,122 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
+<style>
+  /* ===== Standout AI Voice Agent section (bigger call visual) ===== */
+  .voiceb-section{
+    position:relative;overflow:hidden;
+    padding:5rem 1.5rem;border-radius:24px;
+    background:
+      radial-gradient(ellipse 70% 60% at 15% 10%, rgba(255,138,91,.14), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,95,143,.08), transparent 55%),
+      var(--panel);
+    border:1px solid rgba(255,150,80,.25);
+  }
+  .voiceb-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center;
+    max-width:var(--maxw);margin:0 auto;position:relative;z-index:1;
+  }
+  .voiceb-eyebrow{
+    display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-body);
+    font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#ffb648;margin-bottom:1rem;
+  }
+  .voiceb-eyebrow::before{content:"";width:20px;height:1px;background:#ffb648}
+  .voiceb-title{
+    font-family:var(--font-display);font-size:clamp(1.9rem,4.2vw,2.9rem);line-height:1.08;
+    font-weight:400;letter-spacing:-.01em;margin-bottom:1.1rem;
+  }
+  .voiceb-title em{
+    font-style:normal;background:linear-gradient(100deg,#ff8a5b,#ffb648);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .voiceb-lead{color:var(--muted);font-size:1.02rem;line-height:1.65;max-width:520px;margin-bottom:2rem}
+
+  .voiceb-caps{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.75rem;margin-bottom:2rem}
+  .voiceb-cap{display:flex;gap:.75rem;align-items:flex-start}
+  .voiceb-cap-icon{
+    width:30px;height:30px;flex:none;border-radius:8px;background:rgba(255,150,80,.1);
+    border:1px solid rgba(255,150,80,.3);display:flex;align-items:center;justify-content:center;
+  }
+  .voiceb-cap-icon svg{width:15px;height:15px}
+  .voiceb-cap h5{font-family:var(--font-body);font-size:.92rem;font-weight:700;margin-bottom:.15rem}
+  .voiceb-cap p{color:var(--muted-2);font-size:.82rem;line-height:1.45}
+
+  .voiceb-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+  .voiceb-btn-primary{
+    display:inline-flex;align-items:center;gap:.5rem;border-radius:99px;padding:.9rem 1.7rem;
+    font-weight:700;font-size:.9rem;background:linear-gradient(120deg,#ff8a5b,#ff5f8f);color:#0d0d0e;
+    box-shadow:0 10px 34px -8px rgba(255,90,80,.55);transition:transform .3s,box-shadow .3s;
+  }
+  .voiceb-btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px -8px rgba(255,90,80,.7)}
+  .voiceb-btn-secondary{
+    display:inline-flex;align-items:center;gap:.5rem;border-radius:99px;padding:.9rem 1.7rem;
+    font-weight:600;font-size:.9rem;border:1px solid var(--panel-border);color:var(--text);
+    transition:border-color .3s,color .3s;
+  }
+  .voiceb-btn-secondary:hover{border-color:#ffb648;color:#ffb648}
+
+  .voiceb-live{
+    display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-body);font-size:.8rem;
+    color:var(--muted);border:1px solid var(--panel-border);padding:.55rem 1rem;border-radius:99px;
+  }
+  .voiceb-live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;position:relative}
+  .voiceb-live-dot::after{
+    content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid #4ade80;
+    animation:voicebPulseRing 2s ease-out infinite;
+  }
+  @keyframes voicebPulseRing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+
+  .voiceb-visual{position:relative;display:flex;align-items:center;justify-content:center;height:400px}
+  .voiceb-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,150,80,.4)}
+  .voiceb-ring{width:170px;height:170px;animation:voicebRingOut 2.6s ease-out infinite}
+  .voiceb-ring.r2{animation-delay:.65s}
+  .voiceb-ring.r3{animation-delay:1.3s}
+  @keyframes voicebRingOut{
+    0%{width:170px;height:170px;opacity:.75;border-color:rgba(255,150,80,.55)}
+    100%{width:390px;height:390px;opacity:0;border-color:rgba(255,150,80,0)}
+  }
+  .voiceb-call-btn{
+    position:relative;width:150px;height:150px;border-radius:50%;
+    background:linear-gradient(145deg,#ff8a5b,#ff5f8f);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 20px 60px -10px rgba(255,90,80,.55);
+    animation:voicebBtnPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes voicebBtnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+  .voiceb-call-btn svg{width:58px;height:58px;fill:#0d0d0e}
+
+  .voiceb-badge{
+    position:absolute;background:var(--bg2);border:1px solid var(--panel-border);border-radius:99px;
+    padding:.5rem .9rem;font-family:var(--font-body);font-size:.78rem;color:var(--text);
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .voiceb-badge.b1{top:18px;right:calc(50% - 175px);animation:voicebFloat 4.5s ease-in-out infinite}
+  .voiceb-badge.b2{bottom:28px;left:calc(50% - 195px);animation:voicebFloat 4.5s ease-in-out infinite 1s}
+  @keyframes voicebFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+  .voiceb-wave{display:flex;align-items:center;gap:3px;height:14px}
+  .voiceb-wave span{width:2.5px;background:#4ade80;border-radius:2px;animation:voicebWave 1.1s ease-in-out infinite}
+  .voiceb-wave span:nth-child(1){height:6px;animation-delay:0s}
+  .voiceb-wave span:nth-child(2){height:12px;animation-delay:.15s}
+  .voiceb-wave span:nth-child(3){height:8px;animation-delay:.3s}
+  .voiceb-wave span:nth-child(4){height:14px;animation-delay:.45s}
+  .voiceb-wave span:nth-child(5){height:7px;animation-delay:.6s}
+  @keyframes voicebWave{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+
+  @media(max-width:900px){
+    .voiceb-section{padding:3.5rem 1.25rem}
+    .voiceb-grid{grid-template-columns:1fr;gap:2.5rem}
+    .voiceb-caps{grid-template-columns:1fr}
+    .voiceb-visual{height:300px}
+    .voiceb-ring{width:130px;height:130px}
+    .voiceb-call-btn{width:110px;height:110px}
+    .voiceb-call-btn svg{width:44px;height:44px}
+    .voiceb-badge{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .voiceb-ring,.voiceb-call-btn,.voiceb-live-dot::after,.voiceb-badge,.voiceb-wave span{animation:none}
+  }
+</style>
 </head>
 <body>
 <div id="preloader">
@@ -103,7 +219,163 @@
           <div class="shot" data-cursor="expand"><div class="shot-glow" style="background:var(--accent-bright)"></div><img src="../images/webhook-nc.png" alt="Webhook automation" onerror="this.style.display='none'"><span class="shot-label">webhook-nc.png — Webhook automation flow</span></div>
         </div>
         <div class="tags"><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">Video Ads</span><span class="tag">Image Creatives</span><span class="tag">AI Creative API</span></div>
+
+        <!-- ===== SUB-CASE-STUDY: INTERNAL OPS DASHBOARD ===== -->
+        <div class="section-head" style="margin-top:1rem">
+          <span class="eyebrow-label">Behind The Funnel</span>
+          <h3 style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem)">The Internal Ops Dashboard</h3>
+          <p>Once a lead becomes a job, the team needs somewhere to run it from. I built a password-protected internal tool — Supabase auth, role-based access — with a completely different view for owners versus inspectors.</p>
+        </div>
+
+        <div class="site-grid cols-3">
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-login.jpg" alt="North City Roofing internal tool sign-in screen" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Sign-in</h4>
+              <p>Company-domain email + password gate in front of every dashboard. Nothing is reachable without an account.</p>
+              <div class="tags"><span class="tag">Supabase Auth</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-owner.jpg" alt="North City Roofing owner dashboard" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Owner Dashboard</h4>
+              <p>Real-time inspection volume, an activity trend chart, and a top-performers ranking — the numbers an owner checks every morning.</p>
+              <div class="tags"><span class="tag">Analytics</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-member.jpg" alt="North City Roofing inspector dashboard" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Inspector Dashboard</h4>
+              <p>Field reps see only their own active and completed assignments, with a one-tap path into the inspection form.</p>
+              <div class="tags"><span class="tag">Role-Based Access</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-list" style="max-width:720px;margin-top:1rem">
+          <div class="step"><span class="step-num">—</span><span><strong>7 production automations</strong> run behind the dashboard — form intake, visit-inspection completion, calendar webhook, call-to-Supabase sync, and rep assignment — connecting GHL, Supabase, and the Jobnimbus API.</span></div>
+        </div>
+        <div class="tags"><span class="tag">Supabase</span><span class="tag">Row-Level Security</span><span class="tag">Jobnimbus API</span><span class="tag">Webhooks</span></div>
+        <a href="automations.html" class="link-more">See these workflows on the Automations page →</a>
       </section>
+
+      <!-- ============ FLAGSHIP CASE STUDY: MERIDIAN PLUMBING ============ -->
+      <section class="section" id="meridian-plumbing">
+        <div class="project-list">
+          <article class="project-row reverse">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/meridian-hero.jpg" alt="Meridian Plumbing homepage with AI voice widget" onerror="this.style.display='none'">
+              <span class="shot-label">meridian-hero.jpg</span>
+            </div>
+            <div class="project-copy">
+              <span class="eyebrow-label">Flagship Case Study</span>
+              <h3>Meridian Plumbing Co. — AI Voice Agent Website</h3>
+              <p>A demo site for a plumbing company with an AI front desk built directly into the page. A visitor can start a live call with the agent from the homepage — no phone number to dial — or switch to chat if they'd rather type.</p>
+              <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="link-more">Visit live demo — call the AI agent yourself →</a>
+              <div class="tags"><span class="tag">AI Voice Agent</span><span class="tag">AI Chat Widget</span><span class="tag">Booking</span><span class="tag">Review Funnel</span></div>
+              <div class="step-list">
+                <div class="step"><span class="step-num">—</span><span><strong>Answers the call</strong> — the agent picks up live from the site, no waiting on hold.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Books the job</strong> — checks availability and confirms a service appointment on the call.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Flags emergencies</strong> — burst pipes, no heat, active leaks are recognized and prioritized automatically.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Captures reviews</strong> — a one-tap feedback page routes happy customers to Google and flags anything less than great back to the owner.</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="site-grid cols-3">
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-widget-live.jpg" alt="AI voice widget open on the Meridian Plumbing homepage" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Voice Agent, On The Page</h4>
+              <p>"AI Agent Nab" answers as a live web call, styled to match the site's brand.</p>
+              <div class="tags"><span class="tag">Web Call</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-chat-widget.jpg" alt="AI chat widget on Meridian Plumbing" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Chat, When They'd Rather Type</h4>
+              <p>Same agent logic, text form — questions get routed and answered without a human watching the inbox.</p>
+              <div class="tags"><span class="tag">AI Chat</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-review-page.jpg" alt="Meridian Plumbing review capture page" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Review Capture</h4>
+              <p>One-tap feedback page — happy customers get sent to Google, quieter ratings get routed back privately.</p>
+              <div class="tags"><span class="tag">Google Reviews</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="fineprint" style="text-align:center">Try it yourself on the <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="link-more" style="display:inline-flex;padding:0">live demo →</a> — you can pick the agent's voice and call it directly from the site.</p>
+      </section>
+
+      <!-- ============ AI VOICE AGENT — STANDOUT SECTION ============ -->
+      <section class="section" id="ai-voice-agent">
+        <div class="voiceb-section">
+          <div class="voiceb-grid">
+            <div class="voiceb-copy">
+              <span class="voiceb-eyebrow">AI Voice Agent</span>
+              <h2 class="voiceb-title">Your phone rings.<br><em>Something always answers.</em></h2>
+              <p class="voiceb-lead">An AI agent that picks up every call — day or night, weekends, holidays, mid-job — and actually gets things done instead of taking a message. It's live right now on the Meridian Plumbing demo, answering calls in real time.</p>
+
+              <div class="voiceb-caps">
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Answers every call</h5><p>Picks up in seconds, 24/7 — no hold music, no voicemail.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16M8 3v4M16 3v4M5 6h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Books the appointment</h5><p>Finds an open slot and puts it straight on the calendar.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Qualifies the lead</h5><p>Asks the right questions and flags who's ready to buy.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v6h6M20 20v-6h-6M4.5 15a8 8 0 0 0 14.6 3M19.5 9A8 8 0 0 0 5 6" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Reschedules on request</h5><p>Moves a booking the moment a customer needs to shift it.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Cancels cleanly</h5><p>Handles cancellations and clears the slot for someone else.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Follows up on missed calls</h5><p>A missed call still gets a callback or text within minutes.</p></div>
+                </div>
+              </div>
+
+              <div class="voiceb-ctas">
+                <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="voiceb-btn-primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+                  Call the live demo
+                </a>
+                <a href="contact.html" class="voiceb-btn-secondary">Book a demo call with me →</a>
+              </div>
+
+              <div class="voiceb-live"><span class="voiceb-live-dot"></span> agent live · answering calls 24/7</div>
+            </div>
+
+            <div class="voiceb-visual">
+              <div class="voiceb-ring r1"></div>
+              <div class="voiceb-ring r2"></div>
+              <div class="voiceb-ring r3"></div>
+              <div class="voiceb-call-btn">
+                <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+              </div>
+              <div class="voiceb-badge b1">🕑 24/7 coverage</div>
+              <div class="voiceb-badge b2"><span class="voiceb-wave"><span></span><span></span><span></span><span></span><span></span></span> answering now</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <!-- ============ CLIENT WEBSITES ============ -->
       <section class="section" id="client-websites">
@@ -392,6 +664,7 @@
         <div class="footer-col">
           <h5>Projects</h5>
           <a href="portfolio.html#north-city-roofing">North City Roofing</a>
+          <a href="portfolio.html#meridian-plumbing">Meridian Plumbing — AI Voice Agent</a>
           <a href="https://thumberacademy.com/" target="_blank" rel="noopener">Thumber Academy</a>
           <a href="https://edigishark.com/" target="_blank" rel="noopener">eDigiShark</a>
           <a href="portfolio.html#social-agent">Social Media AI Agent</a>
