@@ -914,3 +914,6 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .layout-gradient{ display:none; }
   .stats-strip{ margin-top: 3.5rem; }
 }
+.services-grid .service-card#ai-agent{
+  grid-column: 1 / -1;
+}
