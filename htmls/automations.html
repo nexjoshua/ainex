@@ -57,6 +57,51 @@
     <div class="sections-flow" style="margin-top:2rem">
 
       <section class="section" id="automations-gallery">
+
+        <div class="section-head">
+          <span class="eyebrow-label">North City Roofing</span>
+          <h2 style="font-size:clamp(1.5rem,3vw,2rem)">Internal Ops Dashboard Automations</h2>
+          <p>Seven production workflows connect the roofing team's booking form, the internal dashboard, and Jobnimbus — all currently live.</p>
+        </div>
+
+        <div class="automations-grid">
+
+          <div class="automation-card automation-card-wide">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/nc-automation-formintake.jpg" alt="North City Roofing Automation A form intake workflow" onerror="this.style.display='none'">
+              <span class="shot-label">nc-automation-formintake.jpg</span>
+            </div>
+            <div class="automation-caption"><strong>Automation A — Form Intake</strong>Branches new leads by urgency and source, tags and scores the contact, creates the matching GHL opportunity, and routes the notification path — all from one inbound webhook trigger. 6 live runs.</div>
+          </div>
+
+          <div class="automation-card">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/nc-automation-visitinspection.jpg" alt="North City Roofing Visit Inspection Completed workflow" onerror="this.style.display='none'">
+              <span class="shot-label">nc-automation-visitinspection.jpg</span>
+            </div>
+            <div class="automation-caption"><strong>Visit Inspection Completed</strong>Fires when a field inspection wraps — creates the contact, updates the opportunity stage, and pushes the result to Jobnimbus via three chained custom webhooks. 28 live runs.</div>
+          </div>
+
+          <div class="automation-card">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/nc-dashboard-login.jpg" alt="North City Roofing dashboard sign-in screen" onerror="this.style.display='none'">
+              <span class="shot-label">nc-dashboard-login.jpg</span>
+            </div>
+            <div class="automation-caption"><strong>Contact to Dashboard (Supabase)</strong>Every new contact created by these workflows syncs straight into the Supabase-backed dashboard behind this sign-in screen — 35 live runs, the busiest workflow in the build.</div>
+          </div>
+
+        </div>
+
+        <p class="fineprint" style="text-align:center">Full run stats — Contact to Dashboard: 35 · Visit Inspection Completed: 28 · Calendar Form Webhook: 19 · Call Completed → Supabase: 16 · Form Intake: 6 · Inspection Assign Rep: 6 · AI Intake: 0. See the full case study on the <a href="portfolio.html#north-city-roofing" class="link-more" style="display:inline-flex;padding:0">Portfolio page →</a></p>
+
+        <div class="section-head" style="margin-top:2rem">
+          <span class="eyebrow-label">General Purpose</span>
+          <h2 style="font-size:clamp(1.5rem,3vw,2rem)">More Sample Workflows</h2>
+        </div>
+
         <div class="automations-grid">
 
           <div class="automation-card">
@@ -132,6 +177,7 @@
         <div class="footer-col">
           <h5>Projects</h5>
           <a href="portfolio.html#north-city-roofing">North City Roofing</a>
+          <a href="portfolio.html#meridian-plumbing">Meridian Plumbing — AI Voice Agent</a>
           <a href="https://thumberacademy.com/" target="_blank" rel="noopener">Thumber Academy</a>
           <a href="https://edigishark.com/" target="_blank" rel="noopener">eDigiShark</a>
           <a href="portfolio.html#social-agent">Social Media AI Agent</a>
