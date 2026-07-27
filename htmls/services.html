@@ -9,6 +9,54 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
+<style>
+  /* ===== AI Voice Agent card — page-specific hooky animation ===== */
+  .service-card.voice-agent{
+    position:relative;
+    background:radial-gradient(ellipse 120% 80% at 100% 0%, rgba(255,150,80,.10), transparent 60%), var(--panel);
+    border-color:rgba(255,150,80,.22);
+  }
+  .service-card.voice-agent:hover{border-color:rgba(255,150,80,.5)}
+  .voice-agent-head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .voice-live-pill{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-family:var(--font-body);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:#ffb648;border:1px solid rgba(255,150,80,.35);background:rgba(255,150,80,.08);
+    padding:.3rem .7rem;border-radius:99px;white-space:nowrap;
+  }
+  .voice-live-dot{width:6px;height:6px;border-radius:50%;background:#ffb648;position:relative}
+  .voice-live-dot::after{
+    content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid #ffb648;
+    animation:voicePulseRing 1.8s ease-out infinite;
+  }
+  @keyframes voicePulseRing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+
+  .voice-call-visual{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    height:120px;margin:.5rem 0 .25rem;
+  }
+  .voice-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,150,80,.4)}
+  .voice-ring{width:64px;height:64px;animation:voiceRingOut 2.4s ease-out infinite}
+  .voice-ring.r2{animation-delay:.6s}
+  .voice-ring.r3{animation-delay:1.2s}
+  @keyframes voiceRingOut{
+    0%{width:64px;height:64px;opacity:.7;border-color:rgba(255,150,80,.55)}
+    100%{width:150px;height:150px;opacity:0;border-color:rgba(255,150,80,0)}
+  }
+  .voice-call-btn{
+    position:relative;width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(145deg,#ff8a5b,#ff5f8f);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 30px -6px rgba(255,90,80,.55);
+    animation:voiceBtnPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes voiceBtnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .voice-call-btn svg{width:22px;height:22px;fill:#0d0d0e}
+
+  @media(prefers-reduced-motion:reduce){
+    .voice-ring, .voice-call-btn, .voice-live-dot::after{animation:none}
+  }
+</style>
 </head>
 <body>
 <div id="preloader">
@@ -46,7 +94,7 @@
     <section class="page-banner">
       <h2 class="eyebrow-label" style="justify-content:center">What I Offer</h2>
       <h1>Services</h1>
-      <p>Nine disciplines, one goal: systems that turn traffic into booked, paying clients — end to end.</p>
+      <p>Ten disciplines, one goal: systems that turn traffic into booked, paying clients — end to end.</p>
     </section>
 
     <div class="sections-flow" style="margin-top:2rem">
@@ -77,8 +125,38 @@
             <div class="tags"><span class="tag">GoHighLevel</span><span class="tag">HTML/CSS/JS</span><span class="tag">WordPress</span><span class="tag">Framer</span><span class="tag">GitHub</span></div>
           </div>
 
+          <div class="service-card voice-agent" id="ai-voice-agent">
+            <div class="voice-agent-head">
+              <span class="card-num">02 / VOICE</span>
+              <span class="voice-live-pill"><span class="voice-live-dot"></span>Live 24/7</span>
+            </div>
+            <h3>AI Voice Agent — Your Phone, Always Answered</h3>
+            <p>An AI agent that picks up every call — day or night, weekends, holidays, mid-job — and actually gets things done instead of taking a message.</p>
+
+            <div class="voice-call-visual">
+              <div class="voice-ring r1"></div>
+              <div class="voice-ring r2"></div>
+              <div class="voice-ring r3"></div>
+              <div class="voice-call-btn">
+                <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+              </div>
+            </div>
+
+            <div class="step-list">
+              <div class="step"><span class="step-num">—</span><span><strong>Answers every call</strong> — picks up in seconds, 24/7, no hold music, no voicemail</span></div>
+              <div class="step"><span class="step-num">—</span><span><strong>Books the appointment</strong> — finds an open slot and puts it straight on the calendar</span></div>
+              <div class="step"><span class="step-num">—</span><span><strong>Qualifies the lead</strong> — asks the right questions and flags who's ready to buy</span></div>
+              <div class="step"><span class="step-num">—</span><span><strong>Reschedules on request</strong> — moves a booking the moment a customer needs to shift it</span></div>
+              <div class="step"><span class="step-num">—</span><span><strong>Cancels cleanly</strong> — handles cancellations and clears the slot for someone else</span></div>
+              <div class="step"><span class="step-num">—</span><span><strong>Follows up on missed calls</strong> — a missed call still gets a callback or text within minutes</span></div>
+              <div class="step"><span class="step-num">—</span><span>Built and deployed live on the Meridian Plumbing demo site — see it answer a call in the Portfolio</span></div>
+            </div>
+            <div class="tags"><span class="tag">AI Voice Agent</span><span class="tag">Call Booking</span><span class="tag">Lead Qualification</span><span class="tag">Missed-Call Follow-up</span></div>
+            <a href="portfolio.html#meridian-plumbing" class="link-more" style="margin-top:auto">See it live on Meridian Plumbing →</a>
+          </div>
+
           <div class="service-card" id="automations">
-            <span class="card-num">02 / AUTO</span>
+            <span class="card-num">03 / AUTO</span>
             <h3>Automations &amp; CRM Systems</h3>
             <p>Build intelligent automation workflows that handle lead capture, follow-up, appointment booking, and pipeline management — 24/7 without manual work.</p>
             <div class="step-list">
@@ -95,7 +173,7 @@
           </div>
 
           <div class="service-card" id="integrations">
-            <span class="card-num">03 / INT</span>
+            <span class="card-num">04 / INT</span>
             <h3>Integrations &amp; APIs</h3>
             <p>Connect platforms, build webhook pipelines, create custom API integrations so tools work together seamlessly.</p>
             <div class="step-list">
@@ -113,7 +191,7 @@
           </div>
 
           <div class="service-card" id="ads">
-            <span class="card-num">04 / ADS</span>
+            <span class="card-num">05 / ADS</span>
             <h3>Google, Facebook &amp; Instagram Ads</h3>
             <p>Manage Google and Meta Ads campaigns end-to-end — creative strategy, audience targeting, funnel integration, performance reporting.</p>
             <div class="step-list">
@@ -130,7 +208,7 @@
           </div>
 
           <div class="service-card" id="content">
-            <span class="card-num">05 / CONTENT</span>
+            <span class="card-num">06 / CONTENT</span>
             <h3>Content Creation &amp; Design</h3>
             <p>Scroll-stopping social media content, video edits, branded visuals using CapCut, Canva, and AI tools.</p>
             <div class="step-list">
@@ -145,7 +223,7 @@
           </div>
 
           <div class="service-card" id="seo">
-            <span class="card-num">06 / SEO</span>
+            <span class="card-num">07 / SEO</span>
             <h3>Rank &amp; Rent / SEO Support</h3>
             <p>Build SEO-optimized lead gen properties and rank-and-rent sites.</p>
             <div class="step-list">
@@ -161,7 +239,7 @@
           </div>
 
           <div class="service-card" id="ops">
-            <span class="card-num">07 / OPS</span>
+            <span class="card-num">08 / OPS</span>
             <h3>Communication &amp; Operations</h3>
             <p>Reliable executive support, professional communication, efficient project coordination — from 2 years of mission service.</p>
             <div class="step-list">
@@ -177,7 +255,7 @@
           </div>
 
           <div class="service-card" id="team-ops">
-            <span class="card-num">08 / TEAM OPS</span>
+            <span class="card-num">09 / TEAM OPS</span>
             <h3>Team Notifications &amp; CRM Ops</h3>
             <p>Connect your CRM directly to how your team actually works — real-time Slack alerts and organized monday.com tracking, so nothing sits unseen.</p>
             <div class="step-list">
@@ -192,7 +270,7 @@
           </div>
 
           <div class="service-card" id="ai-agent">
-            <span class="card-num">09 / AI AGENT</span>
+            <span class="card-num">10 / AI AGENT</span>
             <h3>Social Media AI Agent</h3>
             <p>Autonomous social media agent using Claude Code in VS Code — researches, generates content, creates visuals, publishes in 1 click.</p>
             <div class="step-list">
@@ -233,6 +311,7 @@
         <div class="footer-col">
           <h5>Projects</h5>
           <a href="portfolio.html#north-city-roofing">North City Roofing</a>
+          <a href="portfolio.html#meridian-plumbing">Meridian Plumbing — AI Voice Agent</a>
           <a href="https://thumberacademy.com/" target="_blank" rel="noopener">Thumber Academy</a>
           <a href="https://edigishark.com/" target="_blank" rel="noopener">eDigiShark</a>
           <a href="portfolio.html#social-agent">Social Media AI Agent</a>
