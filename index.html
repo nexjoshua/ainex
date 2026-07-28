@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="./images/logo-x.png" type="image/png" />
-<link rel="stylesheet" href="../styles.css?v=2" />
+<link rel="stylesheet" href="./styles.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
   /* ===== Standout AI Voice Agent section (bigger call visual) ===== */
@@ -194,6 +194,38 @@
   .ncmobile-arrow svg{width:clamp(14px,3.4vw,18px);height:clamp(14px,3.4vw,18px)}
   @media(max-width:520px){
     .ncmobile-arrow{display:none}
+  }
+
+  /* ===== Desktop (≥901px): restore the original 3D coverflow look =====
+     Below 901px, sizing stays on the clamp()-based flat carousel above
+     (that's the part that had to be bulletproof for phones/tablets).
+     At 901px+ we override with the original fixed-px dimensions and
+     let Swiper's coverflow effect (see script below) handle the
+     rotation/depth — this is a straight revert to the pre-mobile-fix
+     desktop design, just scoped so it can't leak onto small screens. */
+  @media(min-width:901px){
+    .nc-swiper{height:660px}
+    .nc-swiper .swiper-slide{
+      width:230px; opacity:1; transform:none; filter:none; transition:none;
+    }
+    .nc-swiper .swiper-slide .iphone-frame{
+      width:200px; height:410px; aspect-ratio:auto; border-radius:34px;
+      padding:9px; filter:brightness(.65) saturate(.7);
+      transition:width .5s var(--ease),height .5s var(--ease),filter .5s var(--ease),box-shadow .5s var(--ease);
+    }
+    .nc-swiper .swiper-slide-active .iphone-frame{
+      width:270px; height:554px; filter:brightness(1) saturate(1);
+      box-shadow:0 45px 110px -14px rgba(0,0,0,.8), 0 0 70px 14px rgba(127,184,204,.38), inset 0 0 0 2px rgba(255,255,255,.14);
+    }
+    .iphone-island{width:60px;height:17px;top:15px}
+    .iphone-screen{border-radius:26px}
+    .ncmobile-caption{font-size:.82rem}
+    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.92rem}
+    .ncmobile-arrow{width:46px;height:46px;display:flex}
+    .ncmobile-arrow svg{width:18px;height:18px}
+    .nc-swiper-prev{left:0}
+    .nc-swiper-next{right:0}
+    .ncmobile-wrap::after{width:280px;height:44px;bottom:2.6rem}
   }
   @media(prefers-reduced-motion:reduce){
     .nc-swiper .swiper-slide{transition:none}
@@ -768,26 +800,50 @@
     document.body.style.overflow = 'hidden';
   }
 
-  // One simple carousel config at every screen size — sizing is handled
-  // entirely by the --nc-w CSS variable (clamp-based) so there is no
-  // separate coverflow math or breakpoint list left to go out of sync.
+  // Desktop (≥901px) gets the original 3D coverflow effect back.
+  // Mobile/tablet (<901px) uses the simpler flat scale effect, which is
+  // the version proven to stay inside the viewport on phones. Only ONE
+  // threshold to reason about, and the two configs never mix.
   const ncSwiperEl = document.querySelector('.nc-swiper');
   if (ncSwiperEl) {
-    const ncSwiper = new Swiper(ncSwiperEl, {
-      effect: 'slide',
-      grabCursor: true,
-      centeredSlides: true,
-      loop: true,
-      slidesPerView: 'auto',
-      spaceBetween: 14,
-      slideToClickedSlide: true,
-      watchOverflow: true,
-      observer: true,
-      observeParents: true,
-      observeSlideChildren: true,
-      resizeObserver: true,
-      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' }
-    });
+    const ncMql = window.matchMedia('(min-width: 901px)');
+    let ncSwiper = null;
+    let ncIsDesktop = null;
+
+    function ncBuildSwiper(isDesktop) {
+      if (ncSwiper) { ncSwiper.destroy(true, true); ncSwiper = null; }
+
+      const baseConfig = {
+        grabCursor: true,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: 'auto',
+        slideToClickedSlide: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true,
+        resizeObserver: true,
+        navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' }
+      };
+
+      const config = isDesktop
+        ? Object.assign({}, baseConfig, {
+            effect: 'coverflow',
+            spaceBetween: 0,
+            coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true }
+          })
+        : Object.assign({}, baseConfig, {
+            effect: 'slide',
+            spaceBetween: 14
+          });
+
+      ncSwiper = new Swiper(ncSwiperEl, config);
+      ncSwiper.slideToLoop(0, 0, false);
+    }
+
+    ncBuildSwiper(ncMql.matches);
+    ncIsDesktop = ncMql.matches;
 
     ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
       slide.addEventListener('click', () => {
@@ -798,11 +854,15 @@
     let ncResizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(ncResizeTimer);
-      ncResizeTimer = setTimeout(() => ncSwiper.update(), 150);
-    });
-    window.addEventListener('load', () => {
-      ncSwiper.update();
-      ncSwiper.slideToLoop(0, 0, false);
+      ncResizeTimer = setTimeout(() => {
+        const nowDesktop = ncMql.matches;
+        if (nowDesktop !== ncIsDesktop) {
+          ncIsDesktop = nowDesktop;
+          ncBuildSwiper(nowDesktop);
+        } else if (ncSwiper) {
+          ncSwiper.update();
+        }
+      }, 150);
     });
   }
 
