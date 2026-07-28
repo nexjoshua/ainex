@@ -126,99 +126,76 @@
     .voiceb-ring,.voiceb-call-btn,.voiceb-live-dot::after,.voiceb-badge,.voiceb-wave span{animation:none}
   }
 
-  /* ===== NC Mobile Dashboard — 3D Coverflow (Swiper), responsive at every size ===== */
-  .ncmobile-wrap{position:relative !important;width:100% !important;max-width:100% !important;overflow:hidden !important;padding:1rem 0 !important}
-  .ncmobile-wrap::after{
-    content:"" !important;position:absolute !important;left:50% !important;bottom:2.6rem !important;transform:translateX(-50%) !important;
-    width:280px !important;height:44px !important;border-radius:50% !important;
-    background:radial-gradient(ellipse at center, rgba(0,0,0,.6), transparent 72%) !important;
-    filter:blur(4px) !important;pointer-events:none !important;z-index:0 !important;
+  /* ===== NC Mobile Dashboard carousel =====
+     Rebuilt to use ONE size formula (CSS custom property + clamp())
+     instead of four separate fixed-px breakpoints. Every phone's size
+     is derived from --nc-w, which itself is derived from viewport
+     width, so there is nothing for different breakpoints to disagree
+     about, and nothing left to conflict or go stale. Active slide is
+     distinguished with scale/opacity/brightness instead of a second
+     set of fixed dimensions. */
+  .ncmobile-wrap{
+    --nc-w: clamp(84px, 24vw, 230px);
+    position:relative; width:100%; max-width:100%; overflow:hidden; padding:1rem 0;
   }
-  .nc-swiper{width:100% !important;max-width:100% !important;height:660px !important;position:relative !important;z-index:1 !important;overflow:hidden !important}
-  .nc-swiper .swiper-wrapper{align-items:center !important}
+  .ncmobile-wrap::after{
+    content:""; position:absolute; left:50%; bottom:1.4rem; transform:translateX(-50%);
+    width:calc(var(--nc-w) * 1.35); height:calc(var(--nc-w) * .2); border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.6), transparent 72%);
+    filter:blur(4px); pointer-events:none; z-index:0;
+  }
+  .nc-swiper{
+    width:100%; max-width:100%; position:relative; z-index:1; overflow:hidden;
+    height:calc(var(--nc-w) * 2.2 + 56px);
+  }
+  .nc-swiper .swiper-wrapper{ align-items:center }
   .nc-swiper .swiper-slide{
-    width:230px !important;display:flex !important;flex-direction:column !important;align-items:center !important;gap:1rem !important;
+    width:var(--nc-w); display:flex; flex-direction:column; align-items:center; gap:.6rem;
+    opacity:.42; transform:scale(.82); filter:brightness(.55) saturate(.7);
+    transition:opacity .45s var(--ease), transform .45s var(--ease), filter .45s var(--ease);
+  }
+  .nc-swiper .swiper-slide-active{
+    opacity:1; transform:scale(1); filter:brightness(1) saturate(1);
   }
   .nc-swiper .swiper-slide .iphone-frame{
-    position:relative !important;width:200px !important;height:410px !important;border-radius:34px !important;
-    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%) !important;
-    padding:9px !important;box-shadow:0 26px 60px -16px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06) !important;
-    filter:brightness(.65) saturate(.7) !important;
-    transition:width .5s var(--ease),height .5s var(--ease),filter .5s var(--ease),box-shadow .5s var(--ease) !important;
+    position:relative; width:100%; aspect-ratio:200/410;
+    border-radius:calc(var(--nc-w) * .15);
+    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+    padding:calc(var(--nc-w) * .045);
+    box-shadow:0 20px 50px -14px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06);
   }
   .nc-swiper .swiper-slide-active .iphone-frame{
-    width:270px !important;height:554px !important;
-    box-shadow:0 45px 110px -14px rgba(0,0,0,.8), 0 0 70px 14px rgba(127,184,204,.38), inset 0 0 0 2px rgba(255,255,255,.14) !important;
-    filter:brightness(1) saturate(1) !important;
+    box-shadow:0 30px 80px -14px rgba(0,0,0,.8), 0 0 50px 10px rgba(127,184,204,.35), inset 0 0 0 2px rgba(255,255,255,.14);
   }
   .iphone-island{
-    position:absolute !important;top:15px !important;left:50% !important;transform:translateX(-50%) !important;
-    width:60px !important;height:17px !important;border-radius:99px !important;background:#0d0d0e !important;z-index:2 !important;
+    position:absolute; top:calc(var(--nc-w) * .065); left:50%; transform:translateX(-50%);
+    width:calc(var(--nc-w) * .26); height:calc(var(--nc-w) * .075);
+    border-radius:99px; background:#0d0d0e; z-index:2;
   }
-  .iphone-screen{position:relative !important;width:100% !important;height:100% !important;border-radius:26px !important;overflow:hidden !important;background:#000 !important}
-  .iphone-screen img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:top center !important}
+  .iphone-screen{position:relative;width:100%;height:100%;border-radius:calc(var(--nc-w) * .12);overflow:hidden;background:#000}
+  .iphone-screen img{width:100%;height:100%;object-fit:cover;object-position:top center}
   .ncmobile-caption{
-    font-size:.82rem !important;color:var(--muted) !important;text-align:center !important;opacity:.6 !important;
-    transition:opacity .4s var(--ease),color .4s var(--ease),font-weight .4s var(--ease) !important;
+    font-size:clamp(.62rem, 2.2vw, .82rem); color:var(--muted); text-align:center; opacity:.6;
+    transition:opacity .4s var(--ease), color .4s var(--ease), font-weight .4s var(--ease);
   }
-  .nc-swiper .swiper-slide-active .ncmobile-caption{opacity:1 !important;color:var(--accent-bright) !important;font-weight:700 !important;font-size:.92rem !important}
-  .nc-swiper .swiper-slide-shadow-left, .nc-swiper .swiper-slide-shadow-right{border-radius:34px !important}
+  .nc-swiper .swiper-slide-active .ncmobile-caption{opacity:1;color:var(--accent-bright);font-weight:700;font-size:clamp(.7rem, 2.4vw, .92rem)}
   .ncmobile-arrow{
-    position:absolute !important;top:50% !important;transform:translateY(-50%) !important;z-index:6 !important;
-    width:46px !important;height:46px !important;border-radius:50% !important;
-    border:1px solid var(--panel-border) !important;background:rgba(13,13,14,.6) !important;backdrop-filter:blur(6px) !important;
-    display:flex !important;align-items:center !important;justify-content:center !important;color:var(--text) !important;
-    transition:border-color .25s,color .25s,background-color .25s !important;
+    position:absolute; top:50%; transform:translateY(-50%); z-index:6;
+    width:clamp(34px, 8vw, 46px); height:clamp(34px, 8vw, 46px); border-radius:50%;
+    border:1px solid var(--panel-border); background:rgba(13,13,14,.6); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; color:var(--text);
+    transition:border-color .25s,color .25s,background-color .25s;
   }
-  .nc-swiper-prev{left:0 !important}
-  .nc-swiper-next{right:0 !important}
-  .ncmobile-arrow:hover{border-color:var(--accent-bright) !important;color:var(--accent-bright) !important;background:rgba(127,184,204,.1) !important}
-  .ncmobile-arrow.swiper-button-disabled{opacity:.3 !important;pointer-events:none !important}
-  .ncmobile-arrow svg{width:18px !important;height:18px !important}
-
-  /* Coverflow scales down at every breakpoint below instead of being
-     swapped out for a different mobile-only component.
-     !important used throughout this responsive block so nothing else
-     on the page can override the mobile sizing. */
-  @media(max-width:900px){
-    .nc-swiper{height:560px !important}
-    .nc-swiper .swiper-slide{width:195px !important}
-    .nc-swiper .swiper-slide .iphone-frame{width:175px !important;height:360px !important;border-radius:30px !important}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:225px !important;height:462px !important}
-    .ncmobile-arrow{width:40px !important;height:40px !important}
-    .ncmobile-arrow svg{width:16px !important;height:16px !important}
-    .nc-swiper-prev{left:2px !important}
-    .nc-swiper-next{right:2px !important}
-    .ncmobile-wrap::after{width:220px !important;bottom:2.2rem !important}
-  }
-  @media(max-width:640px){
-    .ncmobile-arrow{display:none !important}
-    .nc-swiper{height:360px !important;padding:0 .5rem !important}
-    .nc-swiper .swiper-slide{width:118px !important}
-    .nc-swiper .swiper-slide .iphone-frame{width:106px !important;height:218px !important;border-radius:22px !important}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:140px !important;height:288px !important}
-    .iphone-island{width:36px !important;height:11px !important;top:9px !important}
-    .ncmobile-caption{font-size:.66rem !important}
-    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.75rem !important}
-    .ncmobile-wrap::after{width:150px !important;height:26px !important;bottom:1.1rem !important}
-  }
-  @media(max-width:480px){
-    .nc-swiper{height:320px !important}
-    .nc-swiper .swiper-slide{width:100px !important}
-    .nc-swiper .swiper-slide .iphone-frame{width:90px !important;height:185px !important;border-radius:18px !important}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:118px !important;height:243px !important}
-    .iphone-island{width:30px !important;height:9px !important;top:7px !important}
-    .ncmobile-caption{font-size:.58rem !important}
-    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.66rem !important}
-  }
-  @media(max-width:400px){
-    .nc-swiper{height:290px !important}
-    .nc-swiper .swiper-slide{width:88px !important}
-    .nc-swiper .swiper-slide .iphone-frame{width:80px !important;height:164px !important;border-radius:16px !important}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:104px !important;height:214px !important}
+  .nc-swiper-prev{left:2px}
+  .nc-swiper-next{right:2px}
+  .ncmobile-arrow:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.1)}
+  .ncmobile-arrow.swiper-button-disabled{opacity:.3;pointer-events:none}
+  .ncmobile-arrow svg{width:clamp(14px,3.4vw,18px);height:clamp(14px,3.4vw,18px)}
+  @media(max-width:520px){
+    .ncmobile-arrow{display:none}
   }
   @media(prefers-reduced-motion:reduce){
-    .nc-swiper .swiper-slide .iphone-frame{transition:none}
+    .nc-swiper .swiper-slide{transition:none}
   }
 </style>
 </head>
@@ -991,32 +968,25 @@
     document.body.style.overflow = 'hidden';
   }
 
-  // Single coverflow carousel at every screen size — it scales itself
-  // down via the CSS breakpoints above instead of swapping to a
-  // separate mobile-only component.
+  // One simple carousel config at every screen size — sizing is handled
+  // entirely by the --nc-w CSS variable (clamp-based) so there is no
+  // separate coverflow math or breakpoint list left to go out of sync.
   const ncSwiperEl = document.querySelector('.nc-swiper');
   if (ncSwiperEl) {
     const ncSwiper = new Swiper(ncSwiperEl, {
-      effect: 'coverflow',
+      effect: 'slide',
       grabCursor: true,
       centeredSlides: true,
       loop: true,
       slidesPerView: 'auto',
+      spaceBetween: 14,
       slideToClickedSlide: true,
       watchOverflow: true,
       observer: true,
       observeParents: true,
       observeSlideChildren: true,
       resizeObserver: true,
-      coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
-      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
-      breakpoints: {
-        0:   { spaceBetween: -46, coverflowEffect: { rotate: 8,  stretch: 0, depth: 18, modifier: 1, slideShadows: true } },
-        401: { spaceBetween: -40, coverflowEffect: { rotate: 10, stretch: 0, depth: 24, modifier: 1, slideShadows: true } },
-        481: { spaceBetween: -32, coverflowEffect: { rotate: 14, stretch: 0, depth: 40, modifier: 1, slideShadows: true } },
-        641: { spaceBetween: -14, coverflowEffect: { rotate: 20, stretch: 0, depth: 100, modifier: 1, slideShadows: true } },
-        901: { spaceBetween: 0,   coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true } }
-      }
+      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' }
     });
 
     ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
