@@ -126,7 +126,7 @@
     .voiceb-ring,.voiceb-call-btn,.voiceb-live-dot::after,.voiceb-badge,.voiceb-wave span{animation:none}
   }
 
-  /* ===== NC Mobile Dashboard — 3D Coverflow (Swiper) ===== */
+  /* ===== NC Mobile Dashboard — 3D Coverflow (Swiper), responsive at every size ===== */
   .ncmobile-wrap{position:relative;width:100%;max-width:100%;overflow:hidden;padding:1rem 0}
   .ncmobile-wrap::after{
     content:"";position:absolute;left:50%;bottom:2.6rem;transform:translateX(-50%);
@@ -176,74 +176,8 @@
   .ncmobile-arrow.swiper-button-disabled{opacity:.3;pointer-events:none}
   .ncmobile-arrow svg{width:18px;height:18px}
 
-  /* ===== NC Mobile Dashboard — simple mobile-only carousel ===== */
-  .nc-mobile-simple{display:none}
-  @media(max-width:900px){
-    .ncmobile-wrap{display:none}
-    .nc-mobile-simple{
-      display:flex;flex-direction:column;align-items:center;gap:1.4rem;
-      width:100%;max-width:100%;overflow:hidden;padding:1.5rem 0 .5rem;
-    }
-    .nc-mobile-swiper{width:100%;max-width:100%;overflow:hidden;padding:1.5rem 0}
-    .nc-mobile-swiper .swiper-slide{
-      display:flex;flex-direction:column;align-items:center;gap:1.1rem;
-      opacity:.28;transform:scale(.86);
-      transition:opacity .55s var(--ease),transform .55s var(--ease);
-    }
-    .nc-mobile-swiper .swiper-slide-active{opacity:1;transform:scale(1)}
-    .nc-mobile-swiper .iphone-frame{
-      position:relative;width:250px;height:513px;border-radius:38px;margin:0 auto;
-      background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
-      padding:10px;box-shadow:0 30px 70px -16px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.05) inset;
-      transition:box-shadow .55s var(--ease);
-    }
-    .nc-mobile-swiper .swiper-slide-active .iphone-frame{
-      box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 60px 10px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
-      animation:ncMobileGlow 3.4s ease-in-out infinite;
-    }
-    @keyframes ncMobileGlow{
-      0%,100%{box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 60px 10px rgba(127,184,204,.28), inset 0 0 0 2px rgba(255,255,255,.1)}
-      50%{box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 74px 14px rgba(127,184,204,.42), inset 0 0 0 2px rgba(255,255,255,.13)}
-    }
-    .nc-mobile-swiper .iphone-island{width:64px;height:18px}
-    .nc-mobile-caption-wrap{display:flex;flex-direction:column;align-items:center;gap:.35rem}
-    .nc-mobile-swiper .ncmobile-caption{opacity:1;color:var(--accent-bright);font-weight:700;font-size:.98rem;letter-spacing:.01em}
-    .nc-mobile-counter{
-      font-family:var(--font-body);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-      color:var(--muted-2);
-    }
-    .nc-mobile-pagination{
-      position:relative;margin-top:.2rem;display:flex;justify-content:center;align-items:center;gap:.45rem;
-    }
-    .nc-mobile-pagination .swiper-pagination-bullet{
-      width:6px;height:6px;border-radius:50%;background:var(--panel-border);opacity:1;margin:0!important;
-      transition:width .3s var(--ease),background-color .3s var(--ease),box-shadow .3s var(--ease);
-    }
-    .nc-mobile-pagination .swiper-pagination-bullet-active{
-      background:var(--accent-bright);width:22px;border-radius:99px;
-      box-shadow:0 0 10px 1px rgba(127,184,204,.6);
-    }
-    .nc-mobile-nav{display:flex;justify-content:center;gap:1.1rem}
-    .nc-mnav-btn{
-      width:46px;height:46px;border-radius:50%;flex:none;
-      border:1px solid var(--panel-border);background:rgba(255,255,255,.03);
-      display:flex;align-items:center;justify-content:center;color:var(--text);
-      transition:border-color .25s,color .25s,background-color .25s,transform .2s;
-    }
-    .nc-mnav-btn:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.08)}
-    .nc-mnav-btn:active{transform:scale(.92)}
-    .nc-mnav-btn svg{width:18px;height:18px}
-  }
-  @media(max-width:480px){
-    .nc-mobile-swiper .iphone-frame{width:210px;height:431px;border-radius:34px}
-  }
-  @media(max-width:360px){
-    .nc-mobile-swiper .iphone-frame{width:182px;height:374px;border-radius:30px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .nc-mobile-swiper .swiper-slide{transition:none}
-    .nc-mobile-swiper .swiper-slide-active .iphone-frame{animation:none}
-  }
+  /* Coverflow scales down at every breakpoint below instead of being
+     swapped out for a different mobile-only component. */
   @media(max-width:900px){
     .nc-swiper{height:560px}
     .nc-swiper .swiper-slide{width:195px}
@@ -552,107 +486,6 @@
           <button class="ncmobile-arrow nc-swiper-next" aria-label="Next screen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
-        </div>
-
-        <!-- Mobile-only simple carousel (shown ≤900px instead of the 3D coverflow above) -->
-        <div class="nc-mobile-simple">
-          <div class="swiper nc-mobile-swiper">
-            <div class="swiper-wrapper">
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Welcome Home"
-                data-desc="The home screen the field team sees the moment they log in — active assignments and completions at a glance."
-                data-tags="Mobile,GHL,Dashboard" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
-                <p class="ncmobile-caption">Welcome Home</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Secure Sign-In"
-                data-desc="Company-domain email and password gate in front of the entire internal tool — nothing is reachable without an account."
-                data-tags="Security,Auth" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-signin.jpg" alt="North City Roofing internal tool sign-in"></div></div>
-                <p class="ncmobile-caption">Secure Sign-In</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Team Performance"
-                data-desc="Real-time inspection volume for the week, today, and the month, tracked automatically the moment a rep completes a job."
-                data-tags="Analytics,Real-Time" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-team-performance.jpg" alt="Team performance overview"></div></div>
-                <p class="ncmobile-caption">Team Performance</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Analytics &amp; Rankings"
-                data-desc="A live trend chart of contacts, assignments, and completed inspections, plus a top-performers leaderboard for the team."
-                data-tags="Charts,Rankings" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-analytics.jpg" alt="Analytics overview with top performers"></div></div>
-                <p class="ncmobile-caption">Analytics &amp; Rankings</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Quick-Access Menu"
-                data-desc="One tap to Priorities, Team, Sales Form, Bookings, Call Reports and more — the whole tool reachable from a single menu."
-                data-tags="Navigation,UX" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-menu.jpg" alt="Dashboard menu with quick links"></div></div>
-                <p class="ncmobile-caption">Quick-Access Menu</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Active Assignments"
-                data-desc="Every open assignment with its assigned rep and a one-tap delete — nothing falls through the cracks."
-                data-tags="Assignments,CRM" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-assignments.jpg" alt="Active assignments list"></div></div>
-                <p class="ncmobile-caption">Active Assignments</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Customer Database"
-                data-desc="The full contact record — property details, notice window, and date — with one-tap Assign or Form actions."
-                data-tags="CRM,Contacts" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-customer-database.jpg" alt="Customer database contact detail"></div></div>
-                <p class="ncmobile-caption">Customer Database</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Inspection Sales Form"
-                data-desc="The 1st Visit Inspection form that creates or updates the opportunity in GHL the moment it's submitted in the field."
-                data-tags="Forms,Automation" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-inspection-form.jpg" alt="1st visit inspection form"></div></div>
-                <p class="ncmobile-caption">Inspection Sales Form</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — My Assignments"
-                data-desc="Each rep's personal queue — commercial vs. residential, story count, and notice window at a glance."
-                data-tags="Field Team" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-my-assignments.jpg" alt="My assignments detail"></div></div>
-                <p class="ncmobile-caption">My Assignments</p>
-              </div>
-
-              <div class="swiper-slide" data-cursor="expand"
-                data-title="North City Roofing — Profile Photo Editor"
-                data-desc="Crop and zoom a profile photo right from the phone — the small polish that makes an internal tool feel native."
-                data-tags="Polish,UX" data-href="https://www.northcityroofing.com/nc-dashboard">
-                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-crop-photo.jpg" alt="Crop profile photo screen"></div></div>
-                <p class="ncmobile-caption">Profile Photo Editor</p>
-              </div>
-
-            </div>
-            <div class="nc-mobile-pagination"></div>
-          </div>
-
-          <span class="nc-mobile-counter" id="ncMobileCounter">1 / 10</span>
-
-          <div class="nc-mobile-nav">
-            <button class="nc-mnav-btn nc-mobile-prev" aria-label="Previous screen">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button class="nc-mnav-btn nc-mobile-next" aria-label="Next screen">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
         </div>
 
         <a href="https://www.northcityroofing.com/nc-dashboard" target="_blank" rel="noopener" class="link-more center-btn">Visit the live dashboard →</a>
@@ -1114,7 +947,6 @@
 (function(){
   if (!window.Swiper) return;
 
-  // Tapping a phone opens the site's project preview popup
   function openNcPreview(slide) {
     const overlay = document.querySelector('.pv-overlay');
     if (!overlay) return;
@@ -1148,75 +980,52 @@
     document.body.style.overflow = 'hidden';
   }
 
-  const isMobile = window.matchMedia('(max-width: 900px)').matches;
-
-  if (isMobile) {
-    // ===== Mobile: simple single-slide carousel (no 3D math, can't overflow) =====
-    const mobEl = document.querySelector('.nc-mobile-swiper');
-    if (mobEl) {
-      const totalSlides = mobEl.querySelectorAll('.swiper-slide').length;
-      const counterEl = document.getElementById('ncMobileCounter');
-      function updateCounter(swiper) {
-        if (!counterEl) return;
-        const n = ((swiper.realIndex % totalSlides) + totalSlides) % totalSlides;
-        counterEl.textContent = (n + 1) + ' / ' + totalSlides;
+  // Single coverflow carousel at every screen size — it scales itself
+  // down via the CSS breakpoints above instead of swapping to a
+  // separate mobile-only component.
+  const ncSwiperEl = document.querySelector('.nc-swiper');
+  if (ncSwiperEl) {
+    const ncSwiper = new Swiper(ncSwiperEl, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      slidesPerView: 'auto',
+      slideToClickedSlide: true,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
+      resizeObserver: true,
+      coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
+      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
+      breakpoints: {
+        0:   { coverflowEffect: { rotate: 16, stretch: 0, depth: 80,  modifier: 1, slideShadows: true } },
+        481: { coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: true } },
+        641: { coverflowEffect: { rotate: 24, stretch: 0, depth: 160, modifier: 1, slideShadows: true } },
+        901: { coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true } }
       }
-      const ncMobileSwiper = new Swiper(mobEl, {
-        slidesPerView: 1,
-        centeredSlides: true,
-        loop: true,
-        speed: 450,
-        grabCursor: true,
-        watchOverflow: true,
-        observer: true,
-        observeParents: true,
-        pagination: { el: '.nc-mobile-pagination', clickable: true },
-        navigation: { nextEl: '.nc-mobile-next', prevEl: '.nc-mobile-prev' },
-        on: { slideChange: updateCounter, init: updateCounter },
-      });
-      mobEl.querySelectorAll('.swiper-slide').forEach((slide) => {
-        slide.addEventListener('click', () => openNcPreview(slide));
-      });
-    }
-  } else {
-    // ===== Desktop/tablet: 3D coverflow =====
-    const ncSwiperEl = document.querySelector('.nc-swiper');
-    if (ncSwiperEl) {
-      const ncSwiper = new Swiper(ncSwiperEl, {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        loop: true,
-        slidesPerView: 'auto',
-        slideToClickedSlide: true,
-        watchOverflow: true,
-        observer: true,
-        observeParents: true,
-        observeSlideChildren: true,
-        coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
-        navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
-      });
+    });
 
-      ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
-        slide.addEventListener('click', () => {
-          if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
-        });
+    ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
       });
+    });
 
-      let ncResizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(ncResizeTimer);
-        ncResizeTimer = setTimeout(() => ncSwiper.update(), 150);
-      });
-      window.addEventListener('load', () => {
-        ncSwiper.update();
-        ncSwiper.slideToLoop(0, 0, false);
-      });
-    }
+    let ncResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(ncResizeTimer);
+      ncResizeTimer = setTimeout(() => ncSwiper.update(), 150);
+    });
+    window.addEventListener('load', () => {
+      ncSwiper.update();
+      ncSwiper.slideToLoop(0, 0, false);
+    });
   }
 
   // Gentle scroll-in reveal for the whole carousel section
-  const revealEl = document.querySelector('.nc-swiper, .nc-mobile-simple');
+  const revealEl = document.querySelector('.nc-swiper');
   if (window.gsap && window.ScrollTrigger && revealEl) {
     gsap.from(revealEl, {
       opacity: 0, y: 60, duration: 0.9, ease: 'power2.out',
