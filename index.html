@@ -176,11 +176,30 @@
   .ncmobile-arrow:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.1)}
   .ncmobile-arrow.swiper-button-disabled{opacity:.3;pointer-events:none}
   .ncmobile-arrow svg{width:18px;height:18px}
+  @media(max-width:900px){
+    .nc-swiper{height:560px}
+    .nc-swiper .swiper-slide .iphone-frame{width:175px;height:360px;border-radius:30px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:225px;height:462px}
+    .ncmobile-arrow{width:40px;height:40px}
+    .ncmobile-arrow svg{width:16px;height:16px}
+    .nc-swiper-prev{left:2px}
+    .nc-swiper-next{right:2px}
+    .ncmobile-wrap::after{width:220px;bottom:2.2rem}
+  }
   @media(max-width:640px){
     .ncmobile-arrow{display:none}
-    .nc-swiper{height:500px}
-    .nc-swiper .swiper-slide .iphone-frame{width:150px;height:308px;border-radius:26px}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:195px;height:400px}
+    .nc-swiper{height:460px;padding:0 1.25rem}
+    .nc-swiper .swiper-slide .iphone-frame{width:140px;height:288px;border-radius:26px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:182px;height:374px}
+    .iphone-island{width:44px;height:13px;top:11px}
+    .ncmobile-caption{font-size:.72rem}
+    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.8rem}
+    .ncmobile-wrap::after{width:170px;height:32px;bottom:1.5rem}
+  }
+  @media(max-width:400px){
+    .nc-swiper{height:410px}
+    .nc-swiper .swiper-slide .iphone-frame{width:118px;height:242px;border-radius:22px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:154px;height:316px}
   }
   @media(prefers-reduced-motion:reduce){
     .nc-swiper .swiper-slide .iphone-frame{transition:none}
@@ -730,8 +749,13 @@
     loop: true,
     slidesPerView: 'auto',
     slideToClickedSlide: true,
-    coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
+    watchOverflow: true,
+    coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: true },
     navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
+    breakpoints: {
+      641: { coverflowEffect: { rotate: 26, stretch: 0, depth: 180, modifier: 1, slideShadows: true } },
+      901: { coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true } },
+    },
   });
 
   // Tapping the already-front-and-center phone opens the site's project preview popup
