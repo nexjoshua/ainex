@@ -917,3 +917,95 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 .services-grid .service-card#ai-agent{
   grid-column: 1 / -1;
 }
+ /* Desktop-only 3D coverflow — now only shown above 1024px */
+  @media(max-width:1024px){
+    .ncmobile-wrap{display:none}
+  }
+ 
+  /* ===== NC Mobile & Tablet Dashboard — Peek Carousel (≤1024px) ===== */
+  .nc-mobile-simple{display:none}
+  @media(max-width:1024px){
+    .nc-mobile-simple{
+      display:flex;flex-direction:column;align-items:center;gap:1.25rem;
+      width:100%;max-width:100%;overflow:hidden;padding:1.5rem 0 .5rem;
+    }
+    .nc-mobile-swiper{
+      width:100%;max-width:100%;overflow:hidden;padding:2rem 0;
+    }
+    .nc-mobile-swiper .swiper-wrapper{align-items:center}
+ 
+    /* Slide width is a % of the carousel, capped by max-width — this is
+       what makes the peek amount consistent and keeps everything on
+       screen no matter how narrow or wide the device is. */
+    .nc-mobile-swiper .swiper-slide{
+      width:64%;max-width:280px;
+      display:flex;flex-direction:column;align-items:center;gap:.9rem;
+      opacity:.32;filter:brightness(.55) saturate(.75);
+      transform:scale(.86);
+      transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease);
+    }
+    .nc-mobile-swiper .swiper-slide-active{
+      opacity:1;filter:brightness(1) saturate(1);transform:scale(1);
+    }
+ 
+    /* The phone frame is sized purely in % of its own slide, so it can
+       never overflow its container — no more fixed 250px/210px/182px
+       breakpoints needed. */
+    .nc-mobile-swiper .iphone-frame{
+      position:relative;width:100%;aspect-ratio:250/513;
+      border-radius:13%/6.5%;box-sizing:border-box;
+      background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+      padding:4%;
+      box-shadow:0 24px 60px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    .nc-mobile-swiper .swiper-slide-active .iphone-frame{
+      box-shadow:0 34px 80px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
+    }
+    .nc-mobile-swiper .iphone-island{width:24%;height:3.3%;top:3.4%}
+    .nc-mobile-swiper .iphone-screen{border-radius:9%/4.6%}
+ 
+    .nc-mobile-swiper .ncmobile-caption{
+      opacity:0;color:var(--accent-bright);font-weight:700;font-size:.9rem;letter-spacing:.01em;
+      transition:opacity .4s var(--ease);
+    }
+    .nc-mobile-swiper .swiper-slide-active .ncmobile-caption{opacity:1}
+ 
+    .nc-mobile-counter{
+      font-family:var(--font-body);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--muted-2);
+    }
+    .nc-mobile-pagination{
+      position:relative;margin-top:.1rem;display:flex;justify-content:center;align-items:center;gap:.4rem;
+    }
+    .nc-mobile-pagination .swiper-pagination-bullet{
+      width:6px;height:6px;border-radius:50%;background:var(--panel-border);opacity:1;margin:0!important;
+      transition:width .3s var(--ease),background-color .3s var(--ease),box-shadow .3s var(--ease);
+    }
+    .nc-mobile-pagination .swiper-pagination-bullet-active{
+      background:var(--accent-bright);width:20px;border-radius:99px;
+      box-shadow:0 0 10px 1px rgba(127,184,204,.6);
+    }
+    .nc-mobile-nav{display:flex;justify-content:center;gap:1rem}
+    .nc-mnav-btn{
+      width:44px;height:44px;border-radius:50%;flex:none;
+      border:1px solid var(--panel-border);background:rgba(255,255,255,.03);
+      display:flex;align-items:center;justify-content:center;color:var(--text);
+      transition:border-color .25s,color .25s,background-color .25s,transform .2s;
+    }
+    .nc-mnav-btn:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.08)}
+    .nc-mnav-btn:active{transform:scale(.92)}
+    .nc-mnav-btn svg{width:18px;height:18px}
+  }
+ 
+  /* Slightly wider peek on narrow phones so the side phones stay
+     legible instead of shrinking to a sliver */
+  @media(max-width:640px){
+    .nc-mobile-swiper .swiper-slide{width:74%;max-width:240px}
+  }
+  @media(max-width:400px){
+    .nc-mobile-swiper .swiper-slide{width:80%;max-width:210px}
+  }
+ 
+  @media(prefers-reduced-motion:reduce){
+    .nc-mobile-swiper .swiper-slide{transition:none}
+  }
