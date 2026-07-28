@@ -917,9 +917,3 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 .services-grid .service-card#ai-agent{
   grid-column: 1 / -1;
 }
-
-/* Keep the NC Roofing coverflow carousel from ever pushing the page
-   wide on mobile browsers with partial overflow:clip support. */
-.ncmobile-wrap, .nc-swiper{
-  contain: layout paint;
-}
