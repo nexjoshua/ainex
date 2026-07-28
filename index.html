@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="./images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
   /* ===== Standout AI Voice Agent section (bigger call visual) ===== */
   .voiceb-section{
@@ -124,6 +125,65 @@
   }
   @media(prefers-reduced-motion:reduce){
     .voiceb-ring,.voiceb-call-btn,.voiceb-live-dot::after,.voiceb-badge,.voiceb-wave span{animation:none}
+  }
+
+  /* ===== NC Mobile Dashboard — 3D Coverflow (Swiper) ===== */
+  .ncmobile-wrap{position:relative;width:100%;padding:1rem 0}
+  .ncmobile-wrap::after{
+    content:"";position:absolute;left:50%;bottom:2.6rem;transform:translateX(-50%);
+    width:280px;height:44px;border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,.6), transparent 72%);
+    filter:blur(4px);pointer-events:none;z-index:0;
+  }
+  .nc-swiper{width:100%;height:660px;position:relative;z-index:1}
+  .nc-swiper .swiper-wrapper{align-items:center}
+  .nc-swiper .swiper-slide{
+    width:230px;display:flex;flex-direction:column;align-items:center;gap:1rem;
+  }
+  .nc-swiper .swiper-slide .iphone-frame{
+    position:relative;width:200px;height:410px;border-radius:34px;
+    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+    padding:9px;box-shadow:0 26px 60px -16px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06);
+    filter:brightness(.65) saturate(.7);
+    transition:width .5s var(--ease),height .5s var(--ease),filter .5s var(--ease),box-shadow .5s var(--ease);
+  }
+  .nc-swiper .swiper-slide-active .iphone-frame{
+    width:270px;height:554px;
+    box-shadow:0 45px 110px -14px rgba(0,0,0,.8), 0 0 70px 14px rgba(127,184,204,.38), inset 0 0 0 2px rgba(255,255,255,.14);
+    filter:brightness(1) saturate(1);
+  }
+  .iphone-island{
+    position:absolute;top:15px;left:50%;transform:translateX(-50%);
+    width:60px;height:17px;border-radius:99px;background:#0d0d0e;z-index:2;
+  }
+  .iphone-screen{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:#000}
+  .iphone-screen img{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .ncmobile-caption{
+    font-size:.82rem;color:var(--muted);text-align:center;opacity:.6;
+    transition:opacity .4s var(--ease),color .4s var(--ease),font-weight .4s var(--ease);
+  }
+  .nc-swiper .swiper-slide-active .ncmobile-caption{opacity:1;color:var(--accent-bright);font-weight:700;font-size:.92rem}
+  .nc-swiper .swiper-slide-shadow-left, .nc-swiper .swiper-slide-shadow-right{border-radius:34px}
+  .ncmobile-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:6;
+    width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--panel-border);background:rgba(13,13,14,.6);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:border-color .25s,color .25s,background-color .25s;
+  }
+  .nc-swiper-prev{left:0}
+  .nc-swiper-next{right:0}
+  .ncmobile-arrow:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.1)}
+  .ncmobile-arrow.swiper-button-disabled{opacity:.3;pointer-events:none}
+  .ncmobile-arrow svg{width:18px;height:18px}
+  @media(max-width:640px){
+    .ncmobile-arrow{display:none}
+    .nc-swiper{height:500px}
+    .nc-swiper .swiper-slide .iphone-frame{width:150px;height:308px;border-radius:26px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:195px;height:400px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .nc-swiper .swiper-slide .iphone-frame{transition:none}
   }
 </style>
 </head>
@@ -295,6 +355,22 @@
           <article class="project-row">
             <div class="shot" data-cursor="expand">
               <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="./images/valle-del-sol.png" alt="Valle Del Sol homepage — Cabo's Secret Valley" onerror="this.style.display='none'">
+              <span class="shot-label">valle-del-sol.png</span>
+            </div>
+            <div class="project-copy">
+              <span class="eyebrow-label">Featured Migration</span>
+              <h3>Valle Del Sol — Cabo's Secret Valley</h3>
+              <p>A real estate &amp; hospitality development site built entirely from scratch in VS Code with custom HTML, CSS, and JavaScript, first hosted live on Vercel — then migrated into GoHighLevel through vibe coding for the client's long-term management. Configured the OpenTable API for the on-site Torote Restaurant, embedded the reservation script directly into the page, and wired up Make.com + GHL automations connecting every booking to the CRM — plus the ad campaign driving traffic to the whole development.</p>
+              <div class="tags"><span class="tag">VS Code</span><span class="tag">Vercel</span><span class="tag">GHL Migration</span><span class="tag">OpenTable API</span><span class="tag">Make.com</span><span class="tag">Ad Campaign</span></div>
+              <a href="https://vds-site.vibepreview.com/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+              <a href="htmls/portfolio.html#valle-del-sol" class="link-more">See the full case study</a>
+            </div>
+          </article>
+
+          <article class="project-row reverse">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
               <img src="./images/socials.png" alt="AI Social Media Agent publishing platforms" onerror="this.style.display='none'">
               <span class="shot-label">socials-grid.png</span>
             </div>
@@ -307,7 +383,7 @@
             </div>
           </article>
 
-          <article class="project-row reverse">
+          <article class="project-row">
             <div class="shot" data-cursor="expand">
               <div class="shot-glow" style="background:var(--accent-bright)"></div>
               <img src="./images/nc-new.png" alt="North City Roofing website" onerror="this.style.display='none'">
@@ -322,7 +398,7 @@
             </div>
           </article>
 
-          <article class="project-row">
+          <article class="project-row reverse">
             <div class="shot" data-cursor="expand">
               <div class="shot-glow" style="background:var(--accent-bright)"></div>
               <img src="./images/meridian-hero.jpg" alt="Meridian Plumbing AI voice agent website" onerror="this.style.display='none'">
@@ -338,6 +414,124 @@
             </div>
           </article>
         </div>
+      </section>
+
+      <!-- ============ NC ROOFING MOBILE DASHBOARD — 3D COVERFLOW ============ -->
+      <section class="section" id="nc-mobile-dashboard">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">North City Roofing</span>
+          <h2>The Ops Dashboard, In Your Pocket</h2>
+          <p>The same internal tool from the North City Roofing case study, built mobile-first for the field team. Drag or use the arrows to spin through it — tap the front phone to see more.</p>
+        </div>
+
+        <div class="ncmobile-wrap">
+          <button class="ncmobile-arrow nc-swiper-prev" aria-label="Previous screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div class="swiper nc-swiper">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Welcome Home"
+                data-desc="The home screen the field team sees the moment they log in — active assignments and completions at a glance."
+                data-tags="Mobile,GHL,Dashboard"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
+                <p class="ncmobile-caption">Welcome Home</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Secure Sign-In"
+                data-desc="Company-domain email and password gate in front of the entire internal tool — nothing is reachable without an account."
+                data-tags="Security,Auth"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-signin.jpg" alt="North City Roofing internal tool sign-in"></div></div>
+                <p class="ncmobile-caption">Secure Sign-In</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Team Performance"
+                data-desc="Real-time inspection volume for the week, today, and the month, tracked automatically the moment a rep completes a job."
+                data-tags="Analytics,Real-Time"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-team-performance.jpg" alt="Team performance overview"></div></div>
+                <p class="ncmobile-caption">Team Performance</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Analytics &amp; Rankings"
+                data-desc="A live trend chart of contacts, assignments, and completed inspections, plus a top-performers leaderboard for the team."
+                data-tags="Charts,Rankings"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-analytics.jpg" alt="Analytics overview with top performers"></div></div>
+                <p class="ncmobile-caption">Analytics &amp; Rankings</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Quick-Access Menu"
+                data-desc="One tap to Priorities, Team, Sales Form, Bookings, Call Reports and more — the whole tool reachable from a single menu."
+                data-tags="Navigation,UX"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-menu.jpg" alt="Dashboard menu with quick links"></div></div>
+                <p class="ncmobile-caption">Quick-Access Menu</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Active Assignments"
+                data-desc="Every open assignment with its assigned rep and a one-tap delete — nothing falls through the cracks."
+                data-tags="Assignments,CRM"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-assignments.jpg" alt="Active assignments list"></div></div>
+                <p class="ncmobile-caption">Active Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Customer Database"
+                data-desc="The full contact record — property details, notice window, and date — with one-tap Assign or Form actions."
+                data-tags="CRM,Contacts"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-customer-database.jpg" alt="Customer database contact detail"></div></div>
+                <p class="ncmobile-caption">Customer Database</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Inspection Sales Form"
+                data-desc="The 1st Visit Inspection form that creates or updates the opportunity in GHL the moment it's submitted in the field."
+                data-tags="Forms,Automation"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-inspection-form.jpg" alt="1st visit inspection form"></div></div>
+                <p class="ncmobile-caption">Inspection Sales Form</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — My Assignments"
+                data-desc="Each rep's personal queue — commercial vs. residential, story count, and notice window at a glance."
+                data-tags="Field Team"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-my-assignments.jpg" alt="My assignments detail"></div></div>
+                <p class="ncmobile-caption">My Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Profile Photo Editor"
+                data-desc="Crop and zoom a profile photo right from the phone — the small polish that makes an internal tool feel native."
+                data-tags="Polish,UX"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="./images/nc-mobile-crop-photo.jpg" alt="Crop profile photo screen"></div></div>
+                <p class="ncmobile-caption">Profile Photo Editor</p>
+              </div>
+
+            </div>
+          </div>
+
+          <button class="ncmobile-arrow nc-swiper-next" aria-label="Next screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <a href="https://www.northcityroofing.com/nc-dashboard" target="_blank" rel="noopener" class="link-more center-btn">Visit the live dashboard →</a>
+        <a href="htmls/portfolio.html#nc-mobile-dashboard" class="link-more center-btn">See it in the full case study</a>
       </section>
 
       <!-- ============ AI VOICE AGENT — STANDOUT SECTION ============ -->
@@ -469,7 +663,9 @@
         </div>
         <div class="footer-col">
           <h5>Projects</h5>
+          <a href="./htmls/portfolio.html#valle-del-sol">Valle Del Sol</a>
           <a href="./htmls/portfolio.html#north-city-roofing">North City Roofing</a>
+          <a href="./htmls/portfolio.html#nc-mobile-dashboard">NC Roofing — Mobile Dashboard</a>
           <a href="./htmls/portfolio.html#meridian-plumbing">Meridian Plumbing — AI Voice Agent</a>
           <a href="https://thumberacademy.com/" target="_blank" rel="noopener">Thumber Academy</a>
           <a href="https://edigishark.com/" target="_blank" rel="noopener">eDigiShark</a>
@@ -520,6 +716,72 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./script.js"></script>
+<script>
+(function(){
+  const ncSwiperEl = document.querySelector('.nc-swiper');
+  if (!ncSwiperEl || !window.Swiper) return;
+
+  const ncSwiper = new Swiper(ncSwiperEl, {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    loop: true,
+    slidesPerView: 'auto',
+    slideToClickedSlide: true,
+    coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
+    navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
+  });
+
+  // Tapping the already-front-and-center phone opens the site's project preview popup
+  function openNcPreview(slide) {
+    const overlay = document.querySelector('.pv-overlay');
+    if (!overlay) return;
+    const img = slide.querySelector('img');
+    const pvImg = overlay.querySelector('.pv-img');
+    const pvTitle = overlay.querySelector('.pv-title');
+    const pvDesc = overlay.querySelector('.pv-desc');
+    const pvTags = overlay.querySelector('.pv-tags');
+    const pvLive = overlay.querySelector('.pv-live');
+
+    if (pvImg) {
+      pvImg.src = img ? img.src : '';
+      pvImg.style.display = img ? 'block' : 'none';
+    }
+    if (pvTitle) pvTitle.textContent = slide.dataset.title || '';
+    if (pvDesc) pvDesc.textContent = slide.dataset.desc || '';
+    if (pvTags) {
+      pvTags.innerHTML = '';
+      (slide.dataset.tags || '').split(',').map((t) => t.trim()).filter(Boolean).forEach((t) => {
+        const s = document.createElement('span');
+        s.className = 'tag';
+        s.textContent = t;
+        pvTags.appendChild(s);
+      });
+    }
+    if (pvLive) {
+      pvLive.href = slide.dataset.href || 'https://www.northcityroofing.com/nc-dashboard';
+      pvLive.style.display = 'inline-flex';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
+    slide.addEventListener('click', () => {
+      if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
+    });
+  });
+
+  // Gentle scroll-in reveal for the whole carousel
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.from(ncSwiperEl, {
+      opacity: 0, y: 60, duration: 0.9, ease: 'power2.out',
+      scrollTrigger: { trigger: '#nc-mobile-dashboard', start: 'top 85%' },
+    });
+  }
+})();
+</script>
 </body>
 </html>
