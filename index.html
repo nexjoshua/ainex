@@ -192,20 +192,29 @@
   }
   @media(max-width:640px){
     .ncmobile-arrow{display:none}
-    .nc-swiper{height:460px;padding:0 1.25rem}
-    .nc-swiper .swiper-slide{width:155px}
-    .nc-swiper .swiper-slide .iphone-frame{width:140px;height:288px;border-radius:26px}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:182px;height:374px}
-    .iphone-island{width:44px;height:13px;top:11px}
-    .ncmobile-caption{font-size:.72rem}
-    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.8rem}
-    .ncmobile-wrap::after{width:170px;height:32px;bottom:1.5rem}
+    .nc-swiper{height:360px;padding:0 .5rem}
+    .nc-swiper .swiper-slide{width:118px}
+    .nc-swiper .swiper-slide .iphone-frame{width:106px;height:218px;border-radius:22px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:140px;height:288px}
+    .iphone-island{width:36px;height:11px;top:9px}
+    .ncmobile-caption{font-size:.66rem}
+    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.75rem}
+    .ncmobile-wrap::after{width:150px;height:26px;bottom:1.1rem}
+  }
+  @media(max-width:480px){
+    .nc-swiper{height:320px}
+    .nc-swiper .swiper-slide{width:100px}
+    .nc-swiper .swiper-slide .iphone-frame{width:90px;height:185px;border-radius:18px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:118px;height:243px}
+    .iphone-island{width:30px;height:9px;top:7px}
+    .ncmobile-caption{font-size:.58rem}
+    .nc-swiper .swiper-slide-active .ncmobile-caption{font-size:.66rem}
   }
   @media(max-width:400px){
-    .nc-swiper{height:410px}
-    .nc-swiper .swiper-slide{width:130px}
-    .nc-swiper .swiper-slide .iphone-frame{width:118px;height:242px;border-radius:22px}
-    .nc-swiper .swiper-slide-active .iphone-frame{width:154px;height:316px}
+    .nc-swiper{height:290px}
+    .nc-swiper .swiper-slide{width:88px}
+    .nc-swiper .swiper-slide .iphone-frame{width:80px;height:164px;border-radius:16px}
+    .nc-swiper .swiper-slide-active .iphone-frame{width:104px;height:214px}
   }
   @media(prefers-reduced-motion:reduce){
     .nc-swiper .swiper-slide .iphone-frame{transition:none}
@@ -800,10 +809,11 @@
       coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
       navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
       breakpoints: {
-        0:   { coverflowEffect: { rotate: 16, stretch: 0, depth: 80,  modifier: 1, slideShadows: true } },
-        481: { coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: true } },
-        641: { coverflowEffect: { rotate: 24, stretch: 0, depth: 160, modifier: 1, slideShadows: true } },
-        901: { coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true } }
+        0:   { spaceBetween: -46, coverflowEffect: { rotate: 8,  stretch: 0, depth: 18, modifier: 1, slideShadows: true } },
+        401: { spaceBetween: -40, coverflowEffect: { rotate: 10, stretch: 0, depth: 24, modifier: 1, slideShadows: true } },
+        481: { spaceBetween: -32, coverflowEffect: { rotate: 14, stretch: 0, depth: 40, modifier: 1, slideShadows: true } },
+        641: { spaceBetween: -14, coverflowEffect: { rotate: 20, stretch: 0, depth: 100, modifier: 1, slideShadows: true } },
+        901: { spaceBetween: 0,   coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true } }
       }
     });
 
