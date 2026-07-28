@@ -912,9 +912,10 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./script.js"></script>
 <script>
+
 (function(){
   if (!window.Swiper) return;
-
+ 
   // Tapping a phone opens the site's project preview popup
   function openNcPreview(slide) {
     const overlay = document.querySelector('.pv-overlay');
@@ -925,7 +926,7 @@
     const pvDesc = overlay.querySelector('.pv-desc');
     const pvTags = overlay.querySelector('.pv-tags');
     const pvLive = overlay.querySelector('.pv-live');
-
+ 
     if (pvImg) {
       pvImg.src = img ? img.src : '';
       pvImg.style.display = img ? 'block' : 'none';
@@ -948,75 +949,100 @@
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  const isMobile = window.matchMedia('(max-width: 900px)').matches;
-
-  if (isMobile) {
-    // ===== Mobile: simple single-slide carousel (no 3D math, can't overflow) =====
-    const mobEl = document.querySelector('.nc-mobile-swiper');
-    if (mobEl) {
-      const totalSlides = mobEl.querySelectorAll('.swiper-slide').length;
-      const counterEl = document.getElementById('ncMobileCounter');
-      function updateCounter(swiper) {
-        if (!counterEl) return;
-        const n = ((swiper.realIndex % totalSlides) + totalSlides) % totalSlides;
-        counterEl.textContent = (n + 1) + ' / ' + totalSlides;
-      }
-      const ncMobileSwiper = new Swiper(mobEl, {
-        slidesPerView: 1,
-        centeredSlides: true,
-        loop: true,
-        speed: 450,
-        grabCursor: true,
-        watchOverflow: true,
-        observer: true,
-        observeParents: true,
-        pagination: { el: '.nc-mobile-pagination', clickable: true },
-        navigation: { nextEl: '.nc-mobile-next', prevEl: '.nc-mobile-prev' },
-        on: { slideChange: updateCounter, init: updateCounter },
+ 
+  // Breakpoint matches the CSS above: ≤1024px = mobile/tablet peek carousel,
+  // >1024px = desktop 3D coverflow. Listens for live changes so rotating a
+  // tablet (e.g. iPad crossing 1024px in landscape) swaps the right carousel
+  // in instead of leaving a dead/hidden one initialized.
+  const mq = window.matchMedia('(max-width: 1024px)');
+  let ncSwiper = null;
+  let ncMobileSwiper = null;
+ 
+  function initDesktop() {
+    if (ncSwiper) return;
+    const el = document.querySelector('.nc-swiper');
+    if (!el) return;
+    ncSwiper = new Swiper(el, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      slidesPerView: 'auto',
+      slideToClickedSlide: true,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
+      coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
+      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
+    });
+    el.querySelectorAll('.swiper-slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
       });
-      mobEl.querySelectorAll('.swiper-slide').forEach((slide) => {
-        slide.addEventListener('click', () => openNcPreview(slide));
-      });
-    }
-  } else {
-    // ===== Desktop/tablet: 3D coverflow =====
-    const ncSwiperEl = document.querySelector('.nc-swiper');
-    if (ncSwiperEl) {
-      const ncSwiper = new Swiper(ncSwiperEl, {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        loop: true,
-        slidesPerView: 'auto',
-        slideToClickedSlide: true,
-        watchOverflow: true,
-        observer: true,
-        observeParents: true,
-        observeSlideChildren: true,
-        coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
-        navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
-      });
-
-      ncSwiperEl.querySelectorAll('.swiper-slide').forEach((slide) => {
-        slide.addEventListener('click', () => {
-          if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
-        });
-      });
-
-      let ncResizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(ncResizeTimer);
-        ncResizeTimer = setTimeout(() => ncSwiper.update(), 150);
-      });
-      window.addEventListener('load', () => {
-        ncSwiper.update();
-        ncSwiper.slideToLoop(0, 0, false);
-      });
-    }
+    });
   }
-
-  // Gentle scroll-in reveal for the whole carousel section
+ 
+  function destroyDesktop() {
+    if (ncSwiper) { ncSwiper.destroy(true, true); ncSwiper = null; }
+  }
+ 
+  function initMobile() {
+    if (ncMobileSwiper) return;
+    const el = document.querySelector('.nc-mobile-swiper');
+    if (!el) return;
+    const totalSlides = el.querySelectorAll('.swiper-slide').length;
+    const counterEl = document.getElementById('ncMobileCounter');
+    function updateCounter(swiper) {
+      if (!counterEl) return;
+      const n = ((swiper.realIndex % totalSlides) + totalSlides) % totalSlides;
+      counterEl.textContent = (n + 1) + ' / ' + totalSlides;
+    }
+    ncMobileSwiper = new Swiper(el, {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      loop: true,
+      spaceBetween: 16,
+      speed: 450,
+      grabCursor: true,
+      slideToClickedSlide: true,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      pagination: { el: '.nc-mobile-pagination', clickable: true },
+      navigation: { nextEl: '.nc-mobile-next', prevEl: '.nc-mobile-prev' },
+      on: { slideChange: updateCounter, init: updateCounter },
+    });
+    el.querySelectorAll('.swiper-slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
+      });
+    });
+  }
+ 
+  function destroyMobile() {
+    if (ncMobileSwiper) { ncMobileSwiper.destroy(true, true); ncMobileSwiper = null; }
+  }
+ 
+  function applyForViewport() {
+    if (mq.matches) { destroyDesktop(); initMobile(); }
+    else { destroyMobile(); initDesktop(); }
+  }
+ 
+  applyForViewport();
+  if (mq.addEventListener) mq.addEventListener('change', applyForViewport);
+  else mq.addListener(applyForViewport); // Safari <14 fallback
+ 
+  let ncResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(ncResizeTimer);
+    ncResizeTimer = setTimeout(() => {
+      if (ncSwiper) ncSwiper.update();
+      if (ncMobileSwiper) ncMobileSwiper.update();
+    }, 150);
+  });
+ 
+  // Gentle scroll-in reveal for whichever carousel is visible
   const revealEl = document.querySelector('.nc-swiper, .nc-mobile-simple');
   if (window.gsap && window.ScrollTrigger && revealEl) {
     gsap.from(revealEl, {
