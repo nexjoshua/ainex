@@ -866,20 +866,18 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
   const stack = document.getElementById('mdpStack');
   if (!stack) return;
 
-  const phones = Array.from(stack.querySelectorAll('.mdp-phone'));
-  const total = phones.length;
+  const slides = Array.from(stack.querySelectorAll('.mdp-slide'));
+  const total = slides.length;
   if (!total) return;
 
-  const captionEl = document.getElementById('mdpCaption');
   const dotsWrap = document.getElementById('mdpDots');
   const prevBtn = document.querySelector('.mdp-prev');
   const nextBtn = document.querySelector('.mdp-next');
-  const captions = phones.map((p) => p.dataset.caption || '');
 
   let current = 0;
 
   // build dot indicators
-  captions.forEach((_, i) => {
+  slides.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.className = 'mdp-dot';
     dot.addEventListener('click', () => { current = i; render(); });
@@ -888,7 +886,7 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
   const dots = Array.from(dotsWrap.children);
 
   function render() {
-    phones.forEach((phone, i) => {
+    slides.forEach((slide, i) => {
       let offset = i - current;
       // always take the shortest path around the loop
       if (offset > total / 2) offset -= total;
@@ -898,17 +896,13 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
       const x = offset * 78;
       const scale = abs === 0 ? 1 : 0.8;
       const rotate = offset * 9;
-      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.55);
+      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.6);
 
-      phone.style.transform = `translate(-50%,-50%) translateX(${x}px) rotate(${rotate}deg) scale(${scale})`;
-      phone.style.opacity = opacity;
-      phone.style.zIndex = 10 - abs;
-      phone.style.filter = abs === 0 ? 'brightness(1) saturate(1)' : 'brightness(.5) saturate(.75)';
-      phone.style.boxShadow = abs === 0
-        ? '0 30px 80px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.28)'
-        : '0 24px 60px -16px rgba(0,0,0,.7)';
+      slide.style.transform = `translateX(-50%) translateX(${x}px) rotate(${rotate}deg) scale(${scale})`;
+      slide.style.opacity = opacity;
+      slide.style.zIndex = 10 - abs;
+      slide.classList.toggle('is-active', abs === 0);
     });
-    captionEl.textContent = captions[current];
     dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
   }
 
@@ -942,9 +936,9 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
   window.addEventListener('mousemove', (e) => move(e.clientX));
   window.addEventListener('mouseup', (e) => up(e.clientX));
 
-  // clicking a dimmed side phone (not a drag) jumps straight to it
-  phones.forEach((phone, i) => {
-    phone.addEventListener('click', () => {
+  // clicking a dimmed side slide (not a drag) jumps straight to it
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => {
       if (dragged) return;
       if (i !== current) { current = i; render(); }
     });
