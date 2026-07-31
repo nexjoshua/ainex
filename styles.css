@@ -1178,11 +1178,13 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 
 /* =====================================================================
    MOBILE-ONLY: NC ROOFING PHONE STACK CAROUSEL
-   Overlapping-phone visual (big centered phone, dimmed rotated phones
-   behind it) that pages through every screen via drag/swipe or the
-   arrow buttons. Custom vanilla-JS positioning (see initMdpStack in
-   script.js) — no Swiper, no external library, nothing to conflict
-   with breakpoints elsewhere on the page.
+   Reuses the exact same .iphone-frame / .iphone-screen / .iphone-island
+   / .ncmobile-caption components as the desktop coverflow carousel
+   (realistic bezel + notch + browser chrome baked into the screenshots,
+   caption brightens when active) — just repositioned via custom
+   vanilla-JS drag logic (see initMdpStack in script.js) instead of
+   Swiper, so nothing here can conflict with the desktop carousel's own
+   breakpoint/init logic elsewhere on the page.
 ===================================================================== */
 .mobile-dashboard-preview{display:none}
 
@@ -1200,39 +1202,46 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .mdp-stack{
     position:relative;
     width:100%;
-    height:420px;
+    height:440px;
     touch-action:pan-y;
     cursor:grab;
     user-select:none;
   }
   .mdp-stack:active{cursor:grabbing}
 
-  .mdp-phone{
+  .mdp-slide{
     position:absolute;
-    top:50%;
+    top:0;
     left:50%;
-    width:210px;
-    aspect-ratio:250/513;
-    box-sizing:border-box;
-    border-radius:13%/6.5%;
-    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
-    padding:4%;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:0 24px 60px -16px rgba(0,0,0,.7);
-    transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .4s ease, filter .4s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.85rem;
+    transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .4s ease;
     will-change:transform;
     pointer-events:auto;
   }
-  .mdp-phone img{
-    width:100%;height:100%;object-fit:cover;display:block;
-    border-radius:9%/4.6%;
+  .mdp-slide img{
     pointer-events:none;
     -webkit-user-drag:none;
   }
-  .mdp-island{
-    position:absolute;top:3.4%;left:50%;transform:translateX(-50%);
-    width:24%;height:3.3%;border-radius:99px;background:#0d0d0e;z-index:2;
+
+  /* scoped override of the shared .iphone-frame component — sized for
+     this mobile carousel, independent of the desktop .nc-swiper sizing */
+  .mdp-slide .iphone-frame{
+    width:190px;
+    height:390px;
+    filter:brightness(.6) saturate(.72);
+    transition:filter .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
+  }
+  .mdp-slide.is-active .iphone-frame{
+    filter:brightness(1) saturate(1);
+    box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
+  }
+
+  .mdp-slide .ncmobile-caption{opacity:.6}
+  .mdp-slide.is-active .ncmobile-caption{
+    opacity:1;color:var(--accent-bright);font-weight:700;font-size:.92rem;
   }
 
   .mdp-arrow{
@@ -1246,16 +1255,9 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .mdp-prev{margin-right:-4px}
   .mdp-next{margin-left:-4px}
 
-  .mdp-caption{
-    text-align:center;
-    color:var(--accent-bright);
-    font-weight:700;
-    font-size:.95rem;
-    margin-top:-.5rem;
-  }
-
   .mdp-dots{
     display:flex;justify-content:center;align-items:center;gap:.4rem;
+    margin-top:-.5rem;
   }
   .mdp-dot{
     width:6px;height:6px;border-radius:50%;background:var(--panel-border);
@@ -1267,10 +1269,10 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 }
 
 @media(max-width:480px){
-  .mdp-stack{height:380px}
-  .mdp-phone{width:185px}
+  .mdp-stack{height:400px}
+  .mdp-slide .iphone-frame{width:165px;height:340px}
 }
 @media(max-width:360px){
-  .mdp-stack{height:340px}
-  .mdp-phone{width:162px}
+  .mdp-stack{height:360px}
+  .mdp-slide .iphone-frame{width:144px;height:296px}
 }
