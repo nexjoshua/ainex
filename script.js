@@ -687,6 +687,9 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
       openPreview(card);
     });
   });
+
+  // exposed so the NC dashboard carousel (below) can reuse the same modal
+  window.__nexsaleOpenPreview = { overlay, pvImg, pvTitle, pvDesc, pvTags, pvLive };
 })();
 
 /* ================================================================
@@ -703,4 +706,249 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
       if (wrap) wrap.classList.add('glow-always');
     }
   });
+})();
+
+/* ================================================================
+   NORTH CITY ROOFING — MOBILE DASHBOARD CAROUSEL
+   ONE unified init for every page (index.html + portfolio.html).
+   Breakpoint (900px) matches the single CSS block in styles.css —
+   previously index.html and portfolio.html each shipped their own
+   slightly different inline <script>, one checking 1024px and one
+   checking 900px, which fought the CSS breakpoints and caused the
+   carousel to render broken or blank in the gap between them.
+================================================================ */
+(function initNcDashboardCarousel() {
+  if (!window.Swiper) return;
+  if (!document.getElementById('nc-mobile-dashboard')) return;
+
+  const BREAKPOINT = '(max-width: 900px)';
+
+  function openNcPreview(slide) {
+    const overlay = document.querySelector('.pv-overlay');
+    if (!overlay) return;
+    const img = slide.querySelector('img');
+    const pvImg = overlay.querySelector('.pv-img');
+    const pvTitle = overlay.querySelector('.pv-title');
+    const pvDesc = overlay.querySelector('.pv-desc');
+    const pvTags = overlay.querySelector('.pv-tags');
+    const pvLive = overlay.querySelector('.pv-live');
+
+    if (pvImg) {
+      pvImg.src = img ? img.src : '';
+      pvImg.style.display = img ? 'block' : 'none';
+    }
+    if (pvTitle) pvTitle.textContent = slide.dataset.title || '';
+    if (pvDesc) pvDesc.textContent = slide.dataset.desc || '';
+    if (pvTags) {
+      pvTags.innerHTML = '';
+      (slide.dataset.tags || '').split(',').map((t) => t.trim()).filter(Boolean).forEach((t) => {
+        const s = document.createElement('span');
+        s.className = 'tag';
+        s.textContent = t;
+        pvTags.appendChild(s);
+      });
+    }
+    if (pvLive) {
+      pvLive.href = slide.dataset.href || 'https://www.northcityroofing.com/nc-dashboard';
+      pvLive.style.display = 'inline-flex';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  const mq = window.matchMedia(BREAKPOINT);
+  let ncSwiper = null;
+  let ncMobileSwiper = null;
+
+  function initDesktop() {
+    if (ncSwiper) return;
+    const el = document.querySelector('.nc-swiper');
+    if (!el) return;
+    ncSwiper = new Swiper(el, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      slidesPerView: 'auto',
+      slideToClickedSlide: true,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
+      coverflowEffect: { rotate: 32, stretch: 0, depth: 260, modifier: 1, slideShadows: true },
+      navigation: { nextEl: '.nc-swiper-next', prevEl: '.nc-swiper-prev' },
+    });
+    el.querySelectorAll('.swiper-slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
+      });
+    });
+  }
+
+  function destroyDesktop() {
+    if (ncSwiper) { ncSwiper.destroy(true, true); ncSwiper = null; }
+  }
+
+  function initMobile() {
+    if (ncMobileSwiper) return;
+    const el = document.querySelector('.nc-mobile-swiper');
+    if (!el) return;
+    const totalSlides = el.querySelectorAll('.swiper-slide').length;
+    const counterEl = document.getElementById('ncMobileCounter');
+    function updateCounter(swiper) {
+      if (!counterEl) return;
+      const n = ((swiper.realIndex % totalSlides) + totalSlides) % totalSlides;
+      counterEl.textContent = (n + 1) + ' / ' + totalSlides;
+    }
+    ncMobileSwiper = new Swiper(el, {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      loop: true,
+      spaceBetween: 16,
+      speed: 450,
+      grabCursor: true,
+      slideToClickedSlide: true,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      pagination: { el: '.nc-mobile-pagination', clickable: true },
+      navigation: { nextEl: '.nc-mobile-next', prevEl: '.nc-mobile-prev' },
+      on: { slideChange: updateCounter, init: updateCounter },
+    });
+    el.querySelectorAll('.swiper-slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        if (slide.classList.contains('swiper-slide-active')) openNcPreview(slide);
+      });
+    });
+  }
+
+  function destroyMobile() {
+    if (ncMobileSwiper) { ncMobileSwiper.destroy(true, true); ncMobileSwiper = null; }
+  }
+
+  function applyForViewport() {
+    if (mq.matches) { destroyDesktop(); initMobile(); }
+    else { destroyMobile(); initDesktop(); }
+  }
+
+  applyForViewport();
+  if (mq.addEventListener) mq.addEventListener('change', applyForViewport);
+  else mq.addListener(applyForViewport); // Safari <14 fallback
+
+  let ncResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(ncResizeTimer);
+    ncResizeTimer = setTimeout(() => {
+      if (ncSwiper) ncSwiper.update();
+      if (ncMobileSwiper) ncMobileSwiper.update();
+    }, 150);
+  });
+
+  // Gentle scroll-in reveal for whichever carousel is visible
+  const revealEl = document.querySelector('.nc-swiper, .nc-mobile-simple');
+  if (window.gsap && window.ScrollTrigger && revealEl) {
+    gsap.from(revealEl, {
+      opacity: 0, y: 60, duration: 0.9, ease: 'power2.out',
+      scrollTrigger: { trigger: '#nc-mobile-dashboard', start: 'top 85%' },
+    });
+  }
+})();
+
+/* ================================================================
+   MOBILE PHONE-STACK CAROUSEL
+   Custom, dependency-free carousel: a big centered phone with dimmed
+   rotated phones peeking on either side (coverflow look), paged
+   through via drag/swipe, the arrow buttons, or clicking a side phone.
+   No Swiper — self-contained so it can't conflict with the desktop
+   carousel's breakpoint/init logic elsewhere on the page.
+================================================================ */
+(function initMdpStack() {
+  const stack = document.getElementById('mdpStack');
+  if (!stack) return;
+
+  const phones = Array.from(stack.querySelectorAll('.mdp-phone'));
+  const total = phones.length;
+  if (!total) return;
+
+  const captionEl = document.getElementById('mdpCaption');
+  const dotsWrap = document.getElementById('mdpDots');
+  const prevBtn = document.querySelector('.mdp-prev');
+  const nextBtn = document.querySelector('.mdp-next');
+  const captions = phones.map((p) => p.dataset.caption || '');
+
+  let current = 0;
+
+  // build dot indicators
+  captions.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'mdp-dot';
+    dot.addEventListener('click', () => { current = i; render(); });
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render() {
+    phones.forEach((phone, i) => {
+      let offset = i - current;
+      // always take the shortest path around the loop
+      if (offset > total / 2) offset -= total;
+      if (offset < -total / 2) offset += total;
+      const abs = Math.abs(offset);
+
+      const x = offset * 78;
+      const scale = abs === 0 ? 1 : 0.8;
+      const rotate = offset * 9;
+      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.55);
+
+      phone.style.transform = `translate(-50%,-50%) translateX(${x}px) rotate(${rotate}deg) scale(${scale})`;
+      phone.style.opacity = opacity;
+      phone.style.zIndex = 10 - abs;
+      phone.style.filter = abs === 0 ? 'brightness(1) saturate(1)' : 'brightness(.5) saturate(.75)';
+      phone.style.boxShadow = abs === 0
+        ? '0 30px 80px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.28)'
+        : '0 24px 60px -16px rgba(0,0,0,.7)';
+    });
+    captionEl.textContent = captions[current];
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+  }
+
+  function go(delta) {
+    current = ((current + delta) % total + total) % total;
+    render();
+  }
+
+  prevBtn?.addEventListener('click', () => go(-1));
+  nextBtn?.addEventListener('click', () => go(1));
+
+  // drag / swipe (touch + mouse, unified)
+  let dragging = false;
+  let dragged = false;
+  let startX = 0;
+
+  function down(x) { dragging = true; dragged = false; startX = x; }
+  function move(x) { if (dragging && Math.abs(x - startX) > 6) dragged = true; }
+  function up(x) {
+    if (!dragging) return;
+    dragging = false;
+    const dx = x - startX;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+  }
+
+  stack.addEventListener('touchstart', (e) => down(e.touches[0].clientX), { passive: true });
+  stack.addEventListener('touchmove', (e) => move(e.touches[0].clientX), { passive: true });
+  stack.addEventListener('touchend', (e) => up(e.changedTouches[0].clientX));
+
+  stack.addEventListener('mousedown', (e) => { down(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', (e) => move(e.clientX));
+  window.addEventListener('mouseup', (e) => up(e.clientX));
+
+  // clicking a dimmed side phone (not a drag) jumps straight to it
+  phones.forEach((phone, i) => {
+    phone.addEventListener('click', () => {
+      if (dragged) return;
+      if (i !== current) { current = i; render(); }
+    });
+  });
+
+  render();
 })();
