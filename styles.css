@@ -819,14 +819,12 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 .legal-section{padding-bottom:2rem;border-bottom:1px solid var(--panel-border)}
 .legal-section:last-child{border-bottom:none;padding-bottom:0}
 .legal-meta{color:var(--muted-2);font-size:.85rem}
-/* ============ MOBILE FIXES ============ */
 
-/* 1) Proof cards: only $6.32 shows because JS pins the other two
-   off-screen with data-x transforms. Turn it into a swipeable
-   row so all three cards are reachable within the pinned section. */
+/* ============ MOBILE FIXES (general page mobile fixes — unrelated to the
+   NC dashboard carousel, which has its own single consolidated block below) ============ */
+
 @media (max-width:900px){
   .proof-pin{ overflow:visible; }
-  /* All three cards fit on screen at once — no horizontal swipe needed */
   .proof-cards{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
@@ -849,13 +847,8 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .review-author small{ font-size:.58rem; line-height:1.3; }
 }
 
-/* Dots aren't needed anymore now that all three cards are visible together */
 .proof-dots{display:none}
 
-/* Small idle drift for the X logo behind "Real Results" — the desktop
-   version rotates it as you scroll through the pinned section, but that
-   pin is intentionally skipped on mobile, so this keeps some motion
-   instead of the logo just sitting static. */
 @keyframes logoIdleDrift{
   0%,100%{ transform: rotate(-13deg) scale(.95); }
   50%{ transform: rotate(13deg) scale(1.05); }
@@ -866,9 +859,6 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   }
 }
 
-/* 2) Word-cloud (skills 3D scene) overflows the screen and reads
-   as a "whirlwind." Scale the whole thing down and clip overflow
-   so it stays small and centered. */
 @media (max-width:640px){
   .skills-3d-scene{
     height:300px;
@@ -881,22 +871,12 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   }
 }
 
-/* 3) Glowing/blue bar behind the logo on scroll — the ambient
-   home-gradient / proof glow is bleeding through the translucent
-   nav on mobile. Give the nav a solid-ish backing so it blocks it. */
 @media (max-width:1023px){
   .topnav{
     background:rgba(10,10,11,.7);
   }
 }
 
-/* 4) Real Results section shouldn't stay scroll-pinned on mobile — the
-   pinned scrub animation depends on viewport-height math that mobile
-   browsers change mid-scroll as the address bar hides/shows, which is
-   why only the middle card ever fully appeared, and why its glow could
-   bleed up into the stats section above as the pin released oddly.
-   script.js now skips the pin entirely under 901px; this just removes
-   the tall spacer + sticky positioning so the section lays out normally. */
 @media (max-width:900px){
   .proof{min-height:auto}
   .proof-pin{
@@ -906,9 +886,6 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   }
 }
 
-/* 5) Cheaper blur on the fixed backdrop layer (heavy 70px blur on a
-   fixed layer is a common source of scroll banding on mobile GPUs)
-   plus a little breathing room under the stat numbers. */
 @media (max-width:900px){
   .backdrop-blur-layer{ display:none; }
   .layout-gradient{ display:none; }
@@ -917,95 +894,383 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 .services-grid .service-card#ai-agent{
   grid-column: 1 / -1;
 }
- /* Desktop-only 3D coverflow — now only shown above 1024px */
-  @media(max-width:1024px){
-    .ncmobile-wrap{display:none}
+
+/* =====================================================================
+   AI VOICE AGENT — standout section
+   (previously duplicated verbatim in both index.html and portfolio.html
+   inline <style> blocks — now defined once, here, for every page)
+===================================================================== */
+.voiceb-section{
+  position:relative;overflow:hidden;
+  padding:5rem 1.5rem;border-radius:24px;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 10%, rgba(255,138,91,.14), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,95,143,.08), transparent 55%),
+    var(--panel);
+  border:1px solid rgba(255,150,80,.25);
+}
+.voiceb-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center;
+  max-width:var(--maxw);margin:0 auto;position:relative;z-index:1;
+}
+.voiceb-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-body);
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#ffb648;margin-bottom:1rem;
+}
+.voiceb-eyebrow::before{content:"";width:20px;height:1px;background:#ffb648}
+.voiceb-title{
+  font-family:var(--font-display);font-size:clamp(1.9rem,4.2vw,2.9rem);line-height:1.08;
+  font-weight:400;letter-spacing:-.01em;margin-bottom:1.1rem;
+}
+.voiceb-title em{
+  font-style:normal;background:linear-gradient(100deg,#ff8a5b,#ffb648);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.voiceb-lead{color:var(--muted);font-size:1.02rem;line-height:1.65;max-width:520px;margin-bottom:2rem}
+
+.voiceb-caps{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.75rem;margin-bottom:2rem}
+.voiceb-cap{display:flex;gap:.75rem;align-items:flex-start}
+.voiceb-cap-icon{
+  width:30px;height:30px;flex:none;border-radius:8px;background:rgba(255,150,80,.1);
+  border:1px solid rgba(255,150,80,.3);display:flex;align-items:center;justify-content:center;
+}
+.voiceb-cap-icon svg{width:15px;height:15px}
+.voiceb-cap h5{font-family:var(--font-body);font-size:.92rem;font-weight:700;margin-bottom:.15rem}
+.voiceb-cap p{color:var(--muted-2);font-size:.82rem;line-height:1.45}
+
+.voiceb-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.voiceb-btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;border-radius:99px;padding:.9rem 1.7rem;
+  font-weight:700;font-size:.9rem;background:linear-gradient(120deg,#ff8a5b,#ff5f8f);color:#0d0d0e;
+  box-shadow:0 10px 34px -8px rgba(255,90,80,.55);transition:transform .3s,box-shadow .3s;
+}
+.voiceb-btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px -8px rgba(255,90,80,.7)}
+.voiceb-btn-secondary{
+  display:inline-flex;align-items:center;gap:.5rem;border-radius:99px;padding:.9rem 1.7rem;
+  font-weight:600;font-size:.9rem;border:1px solid var(--panel-border);color:var(--text);
+  transition:border-color .3s,color .3s;
+}
+.voiceb-btn-secondary:hover{border-color:#ffb648;color:#ffb648}
+
+.voiceb-live{
+  display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-body);font-size:.8rem;
+  color:var(--muted);border:1px solid var(--panel-border);padding:.55rem 1rem;border-radius:99px;
+}
+.voiceb-live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;position:relative}
+.voiceb-live-dot::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid #4ade80;
+  animation:voicebPulseRing 2s ease-out infinite;
+}
+@keyframes voicebPulseRing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+
+.voiceb-visual{position:relative;display:flex;align-items:center;justify-content:center;height:400px}
+.voiceb-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,150,80,.4)}
+.voiceb-ring{width:170px;height:170px;animation:voicebRingOut 2.6s ease-out infinite}
+.voiceb-ring.r2{animation-delay:.65s}
+.voiceb-ring.r3{animation-delay:1.3s}
+@keyframes voicebRingOut{
+  0%{width:170px;height:170px;opacity:.75;border-color:rgba(255,150,80,.55)}
+  100%{width:390px;height:390px;opacity:0;border-color:rgba(255,150,80,0)}
+}
+.voiceb-call-btn{
+  position:relative;width:150px;height:150px;border-radius:50%;
+  background:linear-gradient(145deg,#ff8a5b,#ff5f8f);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 20px 60px -10px rgba(255,90,80,.55);
+  animation:voicebBtnPulse 2.6s ease-in-out infinite;
+}
+@keyframes voicebBtnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+.voiceb-call-btn svg{width:58px;height:58px;fill:#0d0d0e}
+
+.voiceb-badge{
+  position:absolute;background:var(--bg2);border:1px solid var(--panel-border);border-radius:99px;
+  padding:.5rem .9rem;font-family:var(--font-body);font-size:.78rem;color:var(--text);
+  display:flex;align-items:center;gap:.5rem;
+}
+.voiceb-badge.b1{top:18px;right:calc(50% - 175px);animation:voicebFloat 4.5s ease-in-out infinite}
+.voiceb-badge.b2{bottom:28px;left:calc(50% - 195px);animation:voicebFloat 4.5s ease-in-out infinite 1s}
+@keyframes voicebFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+.voiceb-wave{display:flex;align-items:center;gap:3px;height:14px}
+.voiceb-wave span{width:2.5px;background:#4ade80;border-radius:2px;animation:voicebWave 1.1s ease-in-out infinite}
+.voiceb-wave span:nth-child(1){height:6px;animation-delay:0s}
+.voiceb-wave span:nth-child(2){height:12px;animation-delay:.15s}
+.voiceb-wave span:nth-child(3){height:8px;animation-delay:.3s}
+.voiceb-wave span:nth-child(4){height:14px;animation-delay:.45s}
+.voiceb-wave span:nth-child(5){height:7px;animation-delay:.6s}
+@keyframes voicebWave{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+
+@media(max-width:900px){
+  .voiceb-section{padding:3.5rem 1.25rem}
+  .voiceb-grid{grid-template-columns:1fr;gap:2.5rem}
+  .voiceb-caps{grid-template-columns:1fr}
+  .voiceb-visual{height:300px}
+  .voiceb-ring{width:130px;height:130px}
+  .voiceb-call-btn{width:110px;height:110px}
+  .voiceb-call-btn svg{width:44px;height:44px}
+  .voiceb-badge{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .voiceb-ring,.voiceb-call-btn,.voiceb-live-dot::after,.voiceb-badge,.voiceb-wave span{animation:none}
+}
+
+/* =====================================================================
+   NORTH CITY ROOFING — MOBILE DASHBOARD CAROUSEL
+   ONE consolidated definition, ONE breakpoint (900px), used by every page.
+   >900px  = desktop 3D coverflow (.ncmobile-wrap / .nc-swiper)
+   <=900px = simple peek carousel (.nc-mobile-simple / .nc-mobile-swiper)
+   This replaces three previously-conflicting copies (two different inline
+   <style> blocks using max-width:900px + fixed px sizing, and an older
+   version of this file using max-width:1024px + percentage sizing) that
+   fought each other in the 900–1024px range and caused broken/blank
+   carousels, missing captions, and layout overflow on mobile.
+===================================================================== */
+
+.ncmobile-wrap{position:relative;width:100%;max-width:100%;overflow:hidden;padding:1rem 0}
+.ncmobile-wrap::after{
+  content:"";position:absolute;left:50%;bottom:2.6rem;transform:translateX(-50%);
+  width:280px;height:44px;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.6), transparent 72%);
+  filter:blur(4px);pointer-events:none;z-index:0;
+}
+.nc-swiper{width:100%;max-width:100%;height:660px;position:relative;z-index:1;overflow:hidden}
+.nc-swiper .swiper-wrapper{align-items:center}
+.nc-swiper .swiper-slide{
+  width:230px;display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.nc-swiper .swiper-slide .iphone-frame{
+  position:relative;width:200px;height:410px;border-radius:34px;
+  background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+  padding:9px;box-shadow:0 26px 60px -16px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06);
+  filter:brightness(.65) saturate(.7);
+  transition:width .5s var(--ease),height .5s var(--ease),filter .5s var(--ease),box-shadow .5s var(--ease);
+}
+.nc-swiper .swiper-slide-active .iphone-frame{
+  width:270px;height:554px;
+  box-shadow:0 45px 110px -14px rgba(0,0,0,.8), 0 0 70px 14px rgba(127,184,204,.38), inset 0 0 0 2px rgba(255,255,255,.14);
+  filter:brightness(1) saturate(1);
+}
+.iphone-island{
+  position:absolute;top:15px;left:50%;transform:translateX(-50%);
+  width:60px;height:17px;border-radius:99px;background:#0d0d0e;z-index:2;
+}
+.iphone-screen{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:#000}
+.iphone-screen img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.ncmobile-caption{
+  font-size:.82rem;color:var(--muted);text-align:center;opacity:.6;
+  transition:opacity .4s var(--ease),color .4s var(--ease),font-weight .4s var(--ease);
+}
+.nc-swiper .swiper-slide-active .ncmobile-caption{opacity:1;color:var(--accent-bright);font-weight:700;font-size:.92rem}
+.nc-swiper .swiper-slide-shadow-left, .nc-swiper .swiper-slide-shadow-right{border-radius:34px}
+.ncmobile-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:6;
+  width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--panel-border);background:rgba(13,13,14,.6);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;color:var(--text);
+  transition:border-color .25s,color .25s,background-color .25s;
+}
+.nc-swiper-prev{left:0}
+.nc-swiper-next{right:0}
+.ncmobile-arrow:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.1)}
+.ncmobile-arrow.swiper-button-disabled{opacity:.3;pointer-events:none}
+.ncmobile-arrow svg{width:18px;height:18px}
+
+/* Desktop coverflow only shows above 900px */
+@media(max-width:900px){
+  .ncmobile-wrap{display:none}
+}
+
+/* Mobile/tablet peek carousel — shows at 900px and below */
+.nc-mobile-simple{display:none}
+@media(max-width:900px){
+  .nc-mobile-simple{
+    display:flex;flex-direction:column;align-items:center;gap:1.25rem;
+    width:100%;max-width:100%;overflow:hidden;padding:1.5rem 0 .5rem;
   }
- 
-  /* ===== NC Mobile & Tablet Dashboard — Peek Carousel (≤1024px) ===== */
-  .nc-mobile-simple{display:none}
-  @media(max-width:1024px){
-    .nc-mobile-simple{
-      display:flex;flex-direction:column;align-items:center;gap:1.25rem;
-      width:100%;max-width:100%;overflow:hidden;padding:1.5rem 0 .5rem;
-    }
-    .nc-mobile-swiper{
-      width:100%;max-width:100%;overflow:hidden;padding:2rem 0;
-    }
-    .nc-mobile-swiper .swiper-wrapper{align-items:center}
- 
-    /* Slide width is a % of the carousel, capped by max-width — this is
-       what makes the peek amount consistent and keeps everything on
-       screen no matter how narrow or wide the device is. */
-    .nc-mobile-swiper .swiper-slide{
-      width:64%;max-width:280px;
-      display:flex;flex-direction:column;align-items:center;gap:.9rem;
-      opacity:.32;filter:brightness(.55) saturate(.75);
-      transform:scale(.86);
-      transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease);
-    }
-    .nc-mobile-swiper .swiper-slide-active{
-      opacity:1;filter:brightness(1) saturate(1);transform:scale(1);
-    }
- 
-    /* The phone frame is sized purely in % of its own slide, so it can
-       never overflow its container — no more fixed 250px/210px/182px
-       breakpoints needed. */
-    .nc-mobile-swiper .iphone-frame{
-      position:relative;width:100%;aspect-ratio:250/513;
-      border-radius:13%/6.5%;box-sizing:border-box;
-      background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
-      padding:4%;
-      box-shadow:0 24px 60px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.05);
-    }
-    .nc-mobile-swiper .swiper-slide-active .iphone-frame{
-      box-shadow:0 34px 80px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
-    }
-    .nc-mobile-swiper .iphone-island{width:24%;height:3.3%;top:3.4%}
-    .nc-mobile-swiper .iphone-screen{border-radius:9%/4.6%}
- 
-    .nc-mobile-swiper .ncmobile-caption{
-      opacity:0;color:var(--accent-bright);font-weight:700;font-size:.9rem;letter-spacing:.01em;
-      transition:opacity .4s var(--ease);
-    }
-    .nc-mobile-swiper .swiper-slide-active .ncmobile-caption{opacity:1}
- 
-    .nc-mobile-counter{
-      font-family:var(--font-body);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-      color:var(--muted-2);
-    }
-    .nc-mobile-pagination{
-      position:relative;margin-top:.1rem;display:flex;justify-content:center;align-items:center;gap:.4rem;
-    }
-    .nc-mobile-pagination .swiper-pagination-bullet{
-      width:6px;height:6px;border-radius:50%;background:var(--panel-border);opacity:1;margin:0!important;
-      transition:width .3s var(--ease),background-color .3s var(--ease),box-shadow .3s var(--ease);
-    }
-    .nc-mobile-pagination .swiper-pagination-bullet-active{
-      background:var(--accent-bright);width:20px;border-radius:99px;
-      box-shadow:0 0 10px 1px rgba(127,184,204,.6);
-    }
-    .nc-mobile-nav{display:flex;justify-content:center;gap:1rem}
-    .nc-mnav-btn{
-      width:44px;height:44px;border-radius:50%;flex:none;
-      border:1px solid var(--panel-border);background:rgba(255,255,255,.03);
-      display:flex;align-items:center;justify-content:center;color:var(--text);
-      transition:border-color .25s,color .25s,background-color .25s,transform .2s;
-    }
-    .nc-mnav-btn:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.08)}
-    .nc-mnav-btn:active{transform:scale(.92)}
-    .nc-mnav-btn svg{width:18px;height:18px}
+  .nc-mobile-swiper{
+    width:100%;max-width:100%;overflow:hidden;padding:2rem 0;
   }
- 
-  /* Slightly wider peek on narrow phones so the side phones stay
-     legible instead of shrinking to a sliver */
-  @media(max-width:640px){
-    .nc-mobile-swiper .swiper-slide{width:74%;max-width:240px}
+  .nc-mobile-swiper .swiper-wrapper{align-items:center}
+
+  /* Percentage-based slide + frame sizing — scales cleanly at any width
+     instead of relying on fixed px breakpoints that can overflow or
+     leave dead zones between them. */
+  .nc-mobile-swiper .swiper-slide{
+    width:74%;max-width:280px;
+    display:flex;flex-direction:column;align-items:center;gap:.9rem;
+    opacity:.32;filter:brightness(.55) saturate(.75);
+    transform:scale(.86);
+    transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease);
   }
-  @media(max-width:400px){
-    .nc-mobile-swiper .swiper-slide{width:80%;max-width:210px}
+  .nc-mobile-swiper .swiper-slide-active{
+    opacity:1;filter:brightness(1) saturate(1);transform:scale(1);
   }
- 
-  @media(prefers-reduced-motion:reduce){
-    .nc-mobile-swiper .swiper-slide{transition:none}
+
+  .nc-mobile-swiper .iphone-frame{
+    position:relative;width:100%;aspect-ratio:250/513;
+    border-radius:13%/6.5%;box-sizing:border-box;
+    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+    padding:4%;
+    box-shadow:0 24px 60px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.05);
   }
+  .nc-mobile-swiper .swiper-slide-active .iphone-frame{
+    box-shadow:0 34px 80px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
+  }
+  .nc-mobile-swiper .iphone-island{width:24%;height:3.3%;top:3.4%}
+  .nc-mobile-swiper .iphone-screen{border-radius:9%/4.6%}
+
+  .nc-mobile-swiper .ncmobile-caption{
+    opacity:0;color:var(--accent-bright);font-weight:700;font-size:.9rem;letter-spacing:.01em;
+    transition:opacity .4s var(--ease);
+  }
+  .nc-mobile-swiper .swiper-slide-active .ncmobile-caption{opacity:1}
+
+  .nc-mobile-counter{
+    font-family:var(--font-body);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted-2);
+  }
+  .nc-mobile-pagination{
+    position:relative;margin-top:.1rem;display:flex;justify-content:center;align-items:center;gap:.4rem;
+  }
+  .nc-mobile-pagination .swiper-pagination-bullet{
+    width:6px;height:6px;border-radius:50%;background:var(--panel-border);opacity:1;margin:0!important;
+    transition:width .3s var(--ease),background-color .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .nc-mobile-pagination .swiper-pagination-bullet-active{
+    background:var(--accent-bright);width:20px;border-radius:99px;
+    box-shadow:0 0 10px 1px rgba(127,184,204,.6);
+  }
+  .nc-mobile-nav{display:flex;justify-content:center;gap:1rem}
+  .nc-mnav-btn{
+    width:44px;height:44px;border-radius:50%;flex:none;
+    border:1px solid var(--panel-border);background:rgba(255,255,255,.03);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:border-color .25s,color .25s,background-color .25s,transform .2s;
+  }
+  .nc-mnav-btn:hover{border-color:var(--accent-bright);color:var(--accent-bright);background:rgba(127,184,204,.08)}
+  .nc-mnav-btn:active{transform:scale(.92)}
+  .nc-mnav-btn svg{width:18px;height:18px}
+}
+
+/* Slightly wider peek on narrow phones so the side phones stay legible */
+@media(max-width:480px){
+  .nc-mobile-swiper .swiper-slide{width:82%;max-width:240px}
+}
+@media(max-width:360px){
+  .nc-mobile-swiper .swiper-slide{width:88%;max-width:210px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .nc-swiper .swiper-slide .iphone-frame{transition:none}
+  .nc-mobile-swiper .swiper-slide{transition:none}
+}
+
+/* =====================================================================
+   MOBILE: hide the interactive NC Roofing dashboard section entirely.
+   The static phone-stack teaser above (.mobile-dashboard-preview) stands
+   in for it on small screens instead.
+===================================================================== */
+@media(max-width:900px){
+  #nc-mobile-dashboard{
+    display:none;
+  }
+}
+
+/* =====================================================================
+   MOBILE-ONLY: NC ROOFING PHONE STACK CAROUSEL
+   Overlapping-phone visual (big centered phone, dimmed rotated phones
+   behind it) that pages through every screen via drag/swipe or the
+   arrow buttons. Custom vanilla-JS positioning (see initMdpStack in
+   script.js) — no Swiper, no external library, nothing to conflict
+   with breakpoints elsewhere on the page.
+===================================================================== */
+.mobile-dashboard-preview{display:none}
+
+@media(max-width:900px){
+  .mobile-dashboard-preview{display:flex}
+
+  .mdp-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+  }
+
+  .mdp-stack{
+    position:relative;
+    width:100%;
+    height:420px;
+    touch-action:pan-y;
+    cursor:grab;
+    user-select:none;
+  }
+  .mdp-stack:active{cursor:grabbing}
+
+  .mdp-phone{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:210px;
+    aspect-ratio:250/513;
+    box-sizing:border-box;
+    border-radius:13%/6.5%;
+    background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+    padding:4%;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 24px 60px -16px rgba(0,0,0,.7);
+    transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .4s ease, filter .4s ease;
+    will-change:transform;
+    pointer-events:auto;
+  }
+  .mdp-phone img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    border-radius:9%/4.6%;
+    pointer-events:none;
+    -webkit-user-drag:none;
+  }
+  .mdp-island{
+    position:absolute;top:3.4%;left:50%;transform:translateX(-50%);
+    width:24%;height:3.3%;border-radius:99px;background:#0d0d0e;z-index:2;
+  }
+
+  .mdp-arrow{
+    flex:none;
+    width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--panel-border);background:rgba(13,13,14,.6);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    z-index:5;
+  }
+  .mdp-arrow svg{width:16px;height:16px}
+  .mdp-prev{margin-right:-4px}
+  .mdp-next{margin-left:-4px}
+
+  .mdp-caption{
+    text-align:center;
+    color:var(--accent-bright);
+    font-weight:700;
+    font-size:.95rem;
+    margin-top:-.5rem;
+  }
+
+  .mdp-dots{
+    display:flex;justify-content:center;align-items:center;gap:.4rem;
+  }
+  .mdp-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--panel-border);
+    transition:width .3s var(--ease),background-color .3s var(--ease);
+  }
+  .mdp-dot.is-active{
+    background:var(--accent-bright);width:20px;border-radius:99px;
+  }
+}
+
+@media(max-width:480px){
+  .mdp-stack{height:380px}
+  .mdp-phone{width:185px}
+}
+@media(max-width:360px){
+  .mdp-stack{height:340px}
+  .mdp-phone{width:162px}
+}
