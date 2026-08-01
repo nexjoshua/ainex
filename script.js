@@ -420,7 +420,7 @@ if (contactForm && window.emailjs) {
 
   // Where to send visitors after a successful submission.
   // Update this path if your thank-you page lives somewhere else.
-  const THANK_YOU_URL = 'https://nexjoshua.github.io/htmls/thank-you.html';
+  const THANK_YOU_URL = 'thank-you.html';
 
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
