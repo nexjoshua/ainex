@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio — Joshua Mendoza | NexSale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="../images/logo-x.png" type="image/png" />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+<div id="preloader">
+  <video src="../videos/landscape-logox.mp4" autoplay muted playsinline></video>
+  <span class="preloader-skip">click to skip</span>
+</div>
+
+
+<div class="glass-cursor" id="cursor">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg>
+</div>
+<div class="backdrop-blur-layer"></div>
+<div class="layout-gradient"></div>
+
+<div class="page">
+
+  <a class="brand" href="../index.html">
+    <img src="../images/no-bg-logoname.png" alt="NexSale — Joshua Mendoza" class="brand-logo">
+    <i class="brand-tri brand-tri-left"><svg viewBox="0 0 24 24" fill="#fff" width="6" height="6"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path></svg></i>
+    <i class="brand-tri brand-tri-right"><svg viewBox="0 0 24 24" fill="#fff" width="6" height="6"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path></svg></i>
+  </a>
+
+  <nav class="topnav">
+    <div class="nav-links">
+      <a href="../index.html" class="navlink"><span>Home</span></a>
+      <a href="services.html" class="navlink"><span>Services</span></a>
+      <a href="portfolio.html" class="navlink is-active"><span>Portfolio</span></a>
+      <a href="automations.html" class="navlink"><span>Automations</span></a>
+      <a href="about.html" class="navlink"><span>About</span></a>
+      <a href="contact.html" class="nav-cta">Hire Me →</a>
+    </div>
+  </nav>
+  <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+
+  <main>
+    <section class="page-banner">
+      <h2 class="eyebrow-label" style="justify-content:center">Selected Work</h2>
+      <h1>Portfolio</h1>
+      <p>Client websites, sales funnels, and the automation systems running behind them.</p>
+    </section>
+
+    <div class="sections-flow" style="margin-top:2rem">
+
+      <!-- ============ MOBILE-ONLY: NC ROOFING PHONE STACK TEASER ============
+           Same drag/swipe carousel as the homepage — hidden on desktop,
+           replaces the interactive coverflow further down the page (which
+           is hidden on mobile via the shared #nc-mobile-dashboard rule
+           in styles.css). -->
+      <section class="section mobile-dashboard-preview" id="mobile-dashboard-preview">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">North City Roofing</span>
+          <h2>Built For The Field</h2>
+          <p>A quick look at the internal ops dashboard from the North City Roofing case study. Drag or swipe to see more.</p>
+        </div>
+        <div class="mdp-wrap">
+          <button class="mdp-arrow mdp-prev" aria-label="Previous screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="mdp-stack" id="mdpStack" data-lenis-prevent>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
+              <p class="ncmobile-caption">Welcome Home</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-signin.jpg" alt="North City Roofing dashboard — secure sign-in"></div></div>
+              <p class="ncmobile-caption">Secure Sign-In</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-team-performance.jpg" alt="North City Roofing dashboard — team performance"></div></div>
+              <p class="ncmobile-caption">Team Performance</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-analytics.jpg" alt="North City Roofing dashboard — analytics and rankings"></div></div>
+              <p class="ncmobile-caption">Analytics &amp; Rankings</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-customer-database.jpg" alt="North City Roofing dashboard — customer database"></div></div>
+              <p class="ncmobile-caption">Customer Database</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-my-assignments.jpg" alt="North City Roofing dashboard — my assignments"></div></div>
+              <p class="ncmobile-caption">My Assignments</p>
+            </div>
+          </div>
+          <button class="mdp-arrow mdp-next" aria-label="Next screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="mdp-dots" id="mdpDots"></div>
+        <a href="#nc-mobile-dashboard" class="link-more center-btn">See the full case study →</a>
+      </section>
+
+      <!-- ============ FLAGSHIP CASE STUDY: VALLE DEL SOL ============ -->
+      <section class="section" id="valle-del-sol">
+        <div class="project-list">
+          <article class="project-row">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/valle-del-sol.png" alt="Valle Del Sol homepage — Cabo's Secret Valley" onerror="this.style.display='none'">
+              <span class="shot-label">valle-del-sol.png</span>
+            </div>
+            <div class="project-copy">
+              <span class="eyebrow-label">Flagship Case Study</span>
+              <h3>Valle Del Sol — Cabo's Secret Valley</h3>
+              <p>A real estate &amp; hospitality development above Cabo San Lucas — desert ranch homes, a working farm, and the award-winning Torote Restaurant. Built entirely from scratch in VS Code with custom HTML, CSS, and JavaScript, and first hosted live on Vercel. Once the client needed ongoing, non-technical management, the whole build was migrated into GoHighLevel through vibe coding, preserving the original design and animation exactly.</p>
+              <a href="https://vds-site.vibepreview.com/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+              <div class="tags"><span class="tag">VS Code</span><span class="tag">Vercel</span><span class="tag">GHL Migration</span><span class="tag">Vibe Coding</span><span class="tag">OpenTable API</span><span class="tag">Make.com</span></div>
+              <div class="step-list">
+                <div class="step"><span class="step-num">01</span><span><strong>Built From Scratch</strong> — full custom HTML, CSS, and JavaScript site coded in VS Code for the client's real estate and restaurant brand.</span></div>
+                <div class="step"><span class="step-num">02</span><span><strong>Hosted on Vercel</strong> — deployed and served the initial live version for the client and stakeholders.</span></div>
+                <div class="step"><span class="step-num">03</span><span><strong>Migrated to GoHighLevel</strong> — rebuilt the entire site inside GHL via vibe coding, so the client can manage it long-term without touching code.</span></div>
+                <div class="step"><span class="step-num">04</span><span><strong>OpenTable API Integration</strong> — configured the OpenTable API for the Torote Restaurant, then added and embedded the reservation script directly into the site so guests can book a table on the page.</span></div>
+                <div class="step"><span class="step-num">05</span><span><strong>Automation Build</strong> — set up automations in Make.com and GHL connecting reservation and lead data straight into the CRM.</span></div>
+                <div class="step"><span class="step-num">06</span><span><strong>Ad Campaign</strong> — built and manage the marketing campaign driving traffic to the development for this large hospitality client.</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ FEATURED BUILD: SOCIAL AGENT ============ -->
+      <section class="section" id="social-agent">
+        <div class="project-list">
+          <article class="project-row">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/socials.png" alt="Platforms the AI agent publishes to" onerror="this.style.display='none'">
+              <span class="shot-label">socials-grid.png</span>
+            </div>
+            <div class="project-copy">
+              <span class="eyebrow-label">Featured Build</span>
+              <h3>Autonomous Social Media AI Agent</h3>
+              <p>A fully autonomous social media agent built with Claude Code in VS Code — performs deep research, generates scroll-stopping visuals, writes platform-optimized copy, and publishes to every major platform in a single click. Zero manual work.</p>
+              <div class="tags"><span class="tag">Claude Code</span><span class="tag">Anthropic API</span><span class="tag">Blotato</span><span class="tag">Postiz</span><span class="tag">Genspark</span><span class="tag">Fal.ai</span><span class="tag">Gemini</span><span class="tag">Nanobanana</span></div>
+              <div class="step-list">
+                <div class="step"><span class="step-num">01</span><span><strong>Deep Research</strong> — Genspark &amp; Gemini research trending topics, niche insights, and high-performing content angles automatically.</span></div>
+                <div class="step"><span class="step-num">02</span><span><strong>AI Content Writing</strong> — Anthropic API writes platform-optimized copy for each channel (captions, hooks, CTAs).</span></div>
+                <div class="step"><span class="step-num">03</span><span><strong>Visual Generation</strong> — Fal.ai and Nanobanana generate unique images and video creatives. No stock photos.</span></div>
+                <div class="step"><span class="step-num">04</span><span><strong>1-Click Publishing</strong> — Blotato and Postiz push polished posts to Facebook, Instagram, LinkedIn, TikTok, X, YouTube &amp; more, simultaneously.</span></div>
+              </div>
+              <p class="fineprint" style="margin-top:.5rem">Publishes across 30+ platforms including Reddit, Threads, Google My Business, Pinterest, Discord, Bluesky, Telegram, Medium, WordPress, and more.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ FLAGSHIP CASE STUDY: NORTH CITY ROOFING ============ -->
+      <section class="section" id="north-city-roofing">
+        <div class="section-head">
+          <span class="eyebrow-label">Flagship Case Study</span>
+          <h2>North City Roofing</h2>
+          <p>End-to-end inbound lead automation system — custom HTML form, webhook architecture, CRM pipeline strategy, GHL workflow automation, plus full Google &amp; Meta Ads management with custom video/image creatives.</p>
+          <a href="https://northcityroofing.com" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+        </div>
+
+        <div class="step-list" style="max-width:720px">
+          <div class="step"><span class="step-num">01</span><span><strong>Custom HTML Form</strong> — Built from scratch with validation, targeting high-intent roofing leads.</span></div>
+          <div class="step"><span class="step-num">02</span><span><strong>Inbound Webhook</strong> — GHL automation receives form data via webhook trigger.</span></div>
+          <div class="step"><span class="step-num">03</span><span><strong>Custom Value Mapping</strong> — Workflow fetches and populates custom field values to contacts.</span></div>
+          <div class="step"><span class="step-num">04</span><span><strong>Opportunity Creation</strong> — Contacts auto-created as opportunities with enriched data.</span></div>
+          <div class="step"><span class="step-num">05</span><span><strong>Pipeline Strategy</strong> — Client Called → Booked → Quotes Sent → Inspection → Job Completed.</span></div>
+          <div class="step"><span class="step-num">06</span><span><strong>Paid Ads &amp; Creatives</strong> — Google &amp; Meta Ads with AI-generated video/image creatives driving traffic into the funnel.</span></div>
+        </div>
+
+        <div class="card-grid">
+          <div class="shot" data-cursor="expand"><div class="shot-glow" style="background:var(--accent-bright)"></div><img src="../images/nc-new.png" alt="North City Roofing website" onerror="this.style.display='none'"><span class="shot-label">northc.png — Website homepage</span></div>
+          <div class="shot" data-cursor="expand"><div class="shot-glow" style="background:var(--accent-bright)"></div><img src="../images/form-nc.png" alt="Booking form" onerror="this.style.display='none'"><span class="shot-label">form-nc.png — Multi-step booking form</span></div>
+          <div class="shot" data-cursor="expand"><div class="shot-glow" style="background:var(--accent-bright)"></div><img src="../images/pipeline-nc.png" alt="GHL pipeline" onerror="this.style.display='none'"><span class="shot-label">pipeline-nc.png — GHL pipeline stages</span></div>
+          <div class="shot" data-cursor="expand"><div class="shot-glow" style="background:var(--accent-bright)"></div><img src="../images/webhook-nc.png" alt="Webhook automation" onerror="this.style.display='none'"><span class="shot-label">webhook-nc.png — Webhook automation flow</span></div>
+        </div>
+        <div class="tags"><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">Video Ads</span><span class="tag">Image Creatives</span><span class="tag">AI Creative API</span></div>
+
+        <!-- ===== SUB-CASE-STUDY: INTERNAL OPS DASHBOARD ===== -->
+        <div class="section-head" style="margin-top:1rem">
+          <span class="eyebrow-label">Behind The Funnel</span>
+          <h3 style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem)">The Internal Ops Dashboard</h3>
+          <p>Once a lead becomes a job, the team needs somewhere to run it from. I built a password-protected internal tool — Supabase auth, role-based access — with a completely different view for owners versus inspectors.</p>
+        </div>
+
+        <div class="site-grid cols-3">
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-login.jpg" alt="North City Roofing internal tool sign-in screen" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Sign-in</h4>
+              <p>Company-domain email + password gate in front of every dashboard. Nothing is reachable without an account.</p>
+              <div class="tags"><span class="tag">Supabase Auth</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-owner.jpg" alt="North City Roofing owner dashboard" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Owner Dashboard</h4>
+              <p>Real-time inspection volume, an activity trend chart, and a top-performers ranking — the numbers an owner checks every morning.</p>
+              <div class="tags"><span class="tag">Analytics</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/nc-dashboard-member.jpg" alt="North City Roofing inspector dashboard" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Inspector Dashboard</h4>
+              <p>Field reps see only their own active and completed assignments, with a one-tap path into the inspection form.</p>
+              <div class="tags"><span class="tag">Role-Based Access</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-list" style="max-width:720px;margin-top:1rem">
+          <div class="step"><span class="step-num">—</span><span><strong>7 production automations</strong> run behind the dashboard — form intake, visit-inspection completion, calendar webhook, call-to-Supabase sync, and rep assignment — connecting GHL, Supabase, and the Jobnimbus API.</span></div>
+        </div>
+        <div class="tags"><span class="tag">Supabase</span><span class="tag">Row-Level Security</span><span class="tag">Jobnimbus API</span><span class="tag">Webhooks</span></div>
+        <a href="automations.html" class="link-more">See these workflows on the Automations page →</a>
+      </section>
+
+      <!-- ============ NC ROOFING MOBILE DASHBOARD ============ -->
+      <section class="section" id="nc-mobile-dashboard">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">North City Roofing</span>
+          <h2>The Ops Dashboard, In Your Pocket</h2>
+          <p>The same internal tool from the case study above, built mobile-first for the field team. Drag or use the arrows to spin through it — tap the front phone to see more.</p>
+        </div>
+
+        <div class="ncmobile-wrap">
+          <button class="ncmobile-arrow nc-swiper-prev" aria-label="Previous screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div class="swiper nc-swiper">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Welcome Home"
+                data-desc="The home screen the field team sees the moment they log in — active assignments and completions at a glance."
+                data-tags="Mobile,GHL,Dashboard"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
+                <p class="ncmobile-caption">Welcome Home</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Secure Sign-In"
+                data-desc="Company-domain email and password gate in front of the entire internal tool — nothing is reachable without an account."
+                data-tags="Security,Auth"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-signin.jpg" alt="North City Roofing internal tool sign-in"></div></div>
+                <p class="ncmobile-caption">Secure Sign-In</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Team Performance"
+                data-desc="Real-time inspection volume for the week, today, and the month, tracked automatically the moment a rep completes a job."
+                data-tags="Analytics,Real-Time"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-team-performance.jpg" alt="Team performance overview"></div></div>
+                <p class="ncmobile-caption">Team Performance</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Analytics &amp; Rankings"
+                data-desc="A live trend chart of contacts, assignments, and completed inspections, plus a top-performers leaderboard for the team."
+                data-tags="Charts,Rankings"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-analytics.jpg" alt="Analytics overview with top performers"></div></div>
+                <p class="ncmobile-caption">Analytics &amp; Rankings</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Quick-Access Menu"
+                data-desc="One tap to Priorities, Team, Sales Form, Bookings, Call Reports and more — the whole tool reachable from a single menu."
+                data-tags="Navigation,UX"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-menu.jpg" alt="Dashboard menu with quick links"></div></div>
+                <p class="ncmobile-caption">Quick-Access Menu</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Active Assignments"
+                data-desc="Every open assignment with its assigned rep and a one-tap delete — nothing falls through the cracks."
+                data-tags="Assignments,CRM"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-assignments.jpg" alt="Active assignments list"></div></div>
+                <p class="ncmobile-caption">Active Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Customer Database"
+                data-desc="The full contact record — property details, notice window, and date — with one-tap Assign or Form actions."
+                data-tags="CRM,Contacts"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-customer-database.jpg" alt="Customer database contact detail"></div></div>
+                <p class="ncmobile-caption">Customer Database</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Inspection Sales Form"
+                data-desc="The 1st Visit Inspection form that creates or updates the opportunity in GHL the moment it's submitted in the field."
+                data-tags="Forms,Automation"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-inspection-form.jpg" alt="1st visit inspection form"></div></div>
+                <p class="ncmobile-caption">Inspection Sales Form</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — My Assignments"
+                data-desc="Each rep's personal queue — commercial vs. residential, story count, and notice window at a glance."
+                data-tags="Field Team"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-my-assignments.jpg" alt="My assignments detail"></div></div>
+                <p class="ncmobile-caption">My Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Profile Photo Editor"
+                data-desc="Crop and zoom a profile photo right from the phone — the small polish that makes an internal tool feel native."
+                data-tags="Polish,UX"
+                data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-crop-photo.jpg" alt="Crop profile photo screen"></div></div>
+                <p class="ncmobile-caption">Profile Photo Editor</p>
+              </div>
+
+            </div>
+          </div>
+
+          <button class="ncmobile-arrow nc-swiper-next" aria-label="Next screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- Mobile/tablet carousel (shown <=900px instead of the desktop coverflow above) -->
+        <div class="nc-mobile-simple">
+          <div class="swiper nc-mobile-swiper">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Welcome Home"
+                data-desc="The home screen the field team sees the moment they log in — active assignments and completions at a glance."
+                data-tags="Mobile,GHL,Dashboard" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
+                <p class="ncmobile-caption">Welcome Home</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Secure Sign-In"
+                data-desc="Company-domain email and password gate in front of the entire internal tool — nothing is reachable without an account."
+                data-tags="Security,Auth" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-signin.jpg" alt="North City Roofing internal tool sign-in"></div></div>
+                <p class="ncmobile-caption">Secure Sign-In</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Team Performance"
+                data-desc="Real-time inspection volume for the week, today, and the month, tracked automatically the moment a rep completes a job."
+                data-tags="Analytics,Real-Time" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-team-performance.jpg" alt="Team performance overview"></div></div>
+                <p class="ncmobile-caption">Team Performance</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Analytics &amp; Rankings"
+                data-desc="A live trend chart of contacts, assignments, and completed inspections, plus a top-performers leaderboard for the team."
+                data-tags="Charts,Rankings" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-analytics.jpg" alt="Analytics overview with top performers"></div></div>
+                <p class="ncmobile-caption">Analytics &amp; Rankings</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Quick-Access Menu"
+                data-desc="One tap to Priorities, Team, Sales Form, Bookings, Call Reports and more — the whole tool reachable from a single menu."
+                data-tags="Navigation,UX" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-menu.jpg" alt="Dashboard menu with quick links"></div></div>
+                <p class="ncmobile-caption">Quick-Access Menu</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Active Assignments"
+                data-desc="Every open assignment with its assigned rep and a one-tap delete — nothing falls through the cracks."
+                data-tags="Assignments,CRM" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-assignments.jpg" alt="Active assignments list"></div></div>
+                <p class="ncmobile-caption">Active Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Customer Database"
+                data-desc="The full contact record — property details, notice window, and date — with one-tap Assign or Form actions."
+                data-tags="CRM,Contacts" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-customer-database.jpg" alt="Customer database contact detail"></div></div>
+                <p class="ncmobile-caption">Customer Database</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Inspection Sales Form"
+                data-desc="The 1st Visit Inspection form that creates or updates the opportunity in GHL the moment it's submitted in the field."
+                data-tags="Forms,Automation" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-inspection-form.jpg" alt="1st visit inspection form"></div></div>
+                <p class="ncmobile-caption">Inspection Sales Form</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — My Assignments"
+                data-desc="Each rep's personal queue — commercial vs. residential, story count, and notice window at a glance."
+                data-tags="Field Team" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-my-assignments.jpg" alt="My assignments detail"></div></div>
+                <p class="ncmobile-caption">My Assignments</p>
+              </div>
+
+              <div class="swiper-slide" data-cursor="expand"
+                data-title="North City Roofing — Profile Photo Editor"
+                data-desc="Crop and zoom a profile photo right from the phone — the small polish that makes an internal tool feel native."
+                data-tags="Polish,UX" data-href="https://www.northcityroofing.com/nc-dashboard">
+                <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-crop-photo.jpg" alt="Crop profile photo screen"></div></div>
+                <p class="ncmobile-caption">Profile Photo Editor</p>
+              </div>
+
+            </div>
+            <div class="nc-mobile-pagination"></div>
+          </div>
+
+          <span class="nc-mobile-counter" id="ncMobileCounter">1 / 10</span>
+
+          <div class="nc-mobile-nav">
+            <button class="nc-mnav-btn nc-mobile-prev" aria-label="Previous screen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="nc-mnav-btn nc-mobile-next" aria-label="Next screen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <a href="https://www.northcityroofing.com/nc-dashboard" target="_blank" rel="noopener" class="link-more center-btn">Visit the live dashboard →</a>
+      </section>
+
+      <!-- ============ FLAGSHIP CASE STUDY: MERIDIAN PLUMBING ============ -->
+      <section class="section" id="meridian-plumbing">
+        <div class="project-list">
+          <article class="project-row reverse">
+            <div class="shot" data-cursor="expand">
+              <div class="shot-glow" style="background:var(--accent-bright)"></div>
+              <img src="../images/meridian-hero.jpg" alt="Meridian Plumbing homepage with AI voice widget" onerror="this.style.display='none'">
+              <span class="shot-label">meridian-hero.jpg</span>
+            </div>
+            <div class="project-copy">
+              <span class="eyebrow-label">Flagship Case Study</span>
+              <h3>Meridian Plumbing Co. — AI Voice Agent Website</h3>
+              <p>A demo site for a plumbing company with an AI front desk built directly into the page. A visitor can start a live call with the agent from the homepage — no phone number to dial — or switch to chat if they'd rather type.</p>
+              <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="link-more">Visit live demo — call the AI agent yourself →</a>
+              <div class="tags"><span class="tag">AI Voice Agent</span><span class="tag">AI Chat Widget</span><span class="tag">Booking</span><span class="tag">Review Funnel</span></div>
+              <div class="step-list">
+                <div class="step"><span class="step-num">—</span><span><strong>Answers the call</strong> — the agent picks up live from the site, no waiting on hold.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Books the job</strong> — checks availability and confirms a service appointment on the call.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Flags emergencies</strong> — burst pipes, no heat, active leaks are recognized and prioritized automatically.</span></div>
+                <div class="step"><span class="step-num">—</span><span><strong>Captures reviews</strong> — a one-tap feedback page routes happy customers to Google and flags anything less than great back to the owner.</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="site-grid cols-3">
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-widget-live.jpg" alt="AI voice widget open on the Meridian Plumbing homepage" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Voice Agent, On The Page</h4>
+              <p>"AI Agent Nab" answers as a live web call, styled to match the site's brand.</p>
+              <div class="tags"><span class="tag">Web Call</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-chat-widget.jpg" alt="AI chat widget on Meridian Plumbing" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Chat, When They'd Rather Type</h4>
+              <p>Same agent logic, text form — questions get routed and answered without a human watching the inbox.</p>
+              <div class="tags"><span class="tag">AI Chat</span></div>
+            </div>
+          </div>
+          <div class="site-card" data-cursor="expand">
+            <div class="site-thumb"><img src="../images/meridian-review-page.jpg" alt="Meridian Plumbing review capture page" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Review Capture</h4>
+              <p>One-tap feedback page — happy customers get sent to Google, quieter ratings get routed back privately.</p>
+              <div class="tags"><span class="tag">Google Reviews</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="fineprint" style="text-align:center">Try it yourself on the <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="link-more" style="display:inline-flex;padding:0">live demo →</a> — you can pick the agent's voice and call it directly from the site.</p>
+      </section>
+
+      <!-- ============ AI VOICE AGENT — STANDOUT SECTION ============ -->
+      <section class="section" id="ai-voice-agent">
+        <div class="voiceb-section">
+          <div class="voiceb-grid">
+            <div class="voiceb-copy">
+              <span class="voiceb-eyebrow">AI Voice Agent</span>
+              <h2 class="voiceb-title">Your phone rings.<br><em>Something always answers.</em></h2>
+              <p class="voiceb-lead">An AI agent that picks up every call — day or night, weekends, holidays, mid-job — and actually gets things done instead of taking a message. It's live right now on the Meridian Plumbing demo, answering calls in real time.</p>
+
+              <div class="voiceb-caps">
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Answers every call</h5><p>Picks up in seconds, 24/7 — no hold music, no voicemail.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16M8 3v4M16 3v4M5 6h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Books the appointment</h5><p>Finds an open slot and puts it straight on the calendar.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Qualifies the lead</h5><p>Asks the right questions and flags who's ready to buy.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v6h6M20 20v-6h-6M4.5 15a8 8 0 0 0 14.6 3M19.5 9A8 8 0 0 0 5 6" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Reschedules on request</h5><p>Moves a booking the moment a customer needs to shift it.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Cancels cleanly</h5><p>Handles cancellations and clears the slot for someone else.</p></div>
+                </div>
+                <div class="voiceb-cap">
+                  <div class="voiceb-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" stroke="#ffb648" stroke-width="1.6"/></svg></div>
+                  <div><h5>Follows up on missed calls</h5><p>A missed call still gets a callback or text within minutes.</p></div>
+                </div>
+              </div>
+
+              <div class="voiceb-ctas">
+                <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="voiceb-btn-primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+                  Call the live demo
+                </a>
+                <a href="contact.html" class="voiceb-btn-secondary">Book a demo call with me →</a>
+              </div>
+
+              <div class="voiceb-live"><span class="voiceb-live-dot"></span> agent live · answering calls 24/7</div>
+            </div>
+
+            <div class="voiceb-visual">
+              <div class="voiceb-ring r1"></div>
+              <div class="voiceb-ring r2"></div>
+              <div class="voiceb-ring r3"></div>
+              <div class="voiceb-call-btn">
+                <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+              </div>
+              <div class="voiceb-badge b1">🕑 24/7 coverage</div>
+              <div class="voiceb-badge b2"><span class="voiceb-wave"><span></span><span></span><span></span><span></span><span></span></span> answering now</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============ CLIENT WEBSITES ============ -->
+      <section class="section" id="client-websites">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">Client Work</span>
+          <h2>Client Websites</h2>
+        </div>
+        <div class="site-grid cols-3">
+
+          <div class="site-card" data-cursor="expand" data-href="https://bridenti.com">
+            <div class="site-thumb"><img src="../images/bridenti.png" alt="Bridenti Dental Clinic website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Bridenti Dental Clinic</h4>
+              <p>Full GHL AI Studio build with treatment gallery, bilingual booking automation, and calendar integration.</p>
+              <div class="tags"><span class="tag">GHL AI Studio</span><span class="tag">Bilingual</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://preview-1782270856227934921.vibepreview.com/en">
+            <div class="site-thumb"><img src="../images/newsmile.png" alt="NewSmile website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>NewSmile</h4>
+              <p>Dental clinic website build — swap in the live URL and description here.</p>
+              <div class="tags"><span class="tag">GHL</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://preview-1782097357182150126.vibepreview.com/">
+            <div class="site-thumb"><img src="../images/macdental.png" alt="Macdental PV website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Macdental PV</h4>
+              <p>5-page bilingual site with a custom AI chatbot ("Macdental PV Assistant") and in-chat appointment booking.</p>
+              <div class="tags"><span class="tag">GHL AI Studio</span><span class="tag">AI Chatbot</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://preview-1782209579243541037.vibepreview.com/">
+            <div class="site-thumb"><img src="../images/pragnya.png" alt="Pragnya Cultural Society website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Pragnya Cultural Society</h4>
+              <p>School/academy website with Firebase-backed student registration, login, and dashboards.</p>
+              <div class="tags"><span class="tag">Firebase</span><span class="tag">VS Code</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://thumberacademy.com/">
+            <div class="site-thumb"><img src="../images/thumber.png" alt="Thumber Academy website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Thumber Academy</h4>
+              <p>Student coaching site — lead capture, workflow automation, inquiry management. "Real Students. Real Wins."</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">CSS</span><span class="tag">TypeForm</span><span class="tag">Zapier</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/wGG407ep67ZU1KuIBdgk">
+            <div class="site-thumb"><img src="../images/diesel-tech.png" alt="Diesel Tech website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Diesel Tech</h4>
+              <p>24/7 emergency diesel breakdown service, Northern Alberta. Mobile repair for highway trucks &amp; oilfield equipment.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">CSS</span><span class="tag">From Scratch</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/3vthcQzcbsohpopXCYlf">
+            <div class="site-thumb"><img src="../images/funnel-mwts.png" alt="MEGA Water Seal website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>MEGA Water Seal</h4>
+              <p>Waterproofing services — professional + DIY. No tile removal, no demolition.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">CSS</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://edigishark.com/">
+            <div class="site-thumb"><img src="../images/edigishark.png" alt="eDigiShark website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>eDigiShark</h4>
+              <p>Digital marketing agency — AI automation, lead gen systems, Meta Ads, sales funnels.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">CSS</span><span class="tag">AI Automation</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/1DbmtD11gv6kFKnHFYEG">
+            <div class="site-thumb"><img src="../images/peak-flow.png" alt="Peak Flow Air website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Peak Flow Air</h4>
+              <p>Business coaching site w/ ad campaigns, AI creatives, automation, lead gen funnels.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">Meta Ads</span><span class="tag">Google Ads</span><span class="tag">Funnels</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://sanjoseaduandremodeling.com/">
+            <div class="site-thumb"><img src="../images/sjadu.png" alt="San Jose ADU website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>San Jose ADU</h4>
+              <p>ADU / remodeling company — custom HTML, local SEO, webhook lead routing.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">Local SEO</span><span class="tag">HTML</span><span class="tag">Webhook</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/A25ACMQ6SSqeNG03c6Vm?notrack=true">
+            <div class="site-thumb"><img src="../images/megawts-sale.png" alt="MEGA Water Seal Sales website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>MEGA Water Seal Sales</h4>
+              <p>Revenue-focused sales funnel, AI visuals via Gemini/PicsArt.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">Canva</span><span class="tag">PicsArt</span><span class="tag">Gemini</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://nexsaledev.github.io/joshuamendoza/">
+            <div class="site-thumb"><img src="../images/nexsale.png" alt="NexSale portfolio site" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>NexSale — Josh Portfolio</h4>
+              <p>Custom-coded portfolio, EmailJS lead capture, GitHub deployment. (This site.)</p>
+              <div class="tags"><span class="tag">VS Code</span><span class="tag">GitHub</span><span class="tag">HTML</span><span class="tag">EmailJS</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ SALES FUNNELS ============ -->
+      <section class="section" id="funnels">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">Conversion Focused</span>
+          <h2>Sales Funnels</h2>
+        </div>
+        <div class="site-grid">
+
+          <div class="site-card" data-cursor="expand" data-href="https://preview-1782965623416604084.vibepreview.com/">
+            <div class="site-thumb"><img src="../images/THSP.png" alt="Trusted Home Service Pros website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Trusted Home Service Pros</h4>
+              <p>Nationwide, Angi-compliant lead-matching platform — 15 core pages plus 7,800+ programmatic SEO landing pages across 710+ cities and 10 service categories.</p>
+              <div class="tags"><span class="tag">SEO</span><span class="tag">LeadConnector</span><span class="tag">Angi Compliance</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://preview-1782969567037838547.vibepreview.com/">
+            <div class="site-thumb"><img src="../images/TRP.png" alt="Trusted Roofing Pros website" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Trusted Roofing Pros</h4>
+              <p>Roofing-focused lead-matching funnel — swap in the live URL and description here.</p>
+              <div class="tags"><span class="tag">SEO</span><span class="tag">Lead Gen</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/mZz6bbuXdGxFeoRmdw9K?notrack=true">
+            <div class="site-thumb"><img src="../images/mwts-prod.png" alt="MEGA Water Seal service funnel" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>MEGA Water Seal — Service Funnel</h4>
+              <p>"Stop Leaks, Mould, and Water Damage Without Removing Tiles." Perth regrouting. Lead form + quote integration.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">Canva</span><span class="tag">API</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://app.gohighlevel.com/v2/preview/A25ACMQ6SSqeNG03c6Vm?notrack=true">
+            <div class="site-thumb"><img src="../images/megawts-sale.png" alt="MEGA Water Seal DIY funnel" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>MEGA Water Seal — DIY Product Funnel</h4>
+              <p>Dual CTA funnel — professional services or DIY product.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">CSS</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ PERSONAL & AGENCY SITES ============ -->
+      <section class="section" id="personal-sites">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">More Work</span>
+          <h2>Personal &amp; Agency Sites</h2>
+        </div>
+        <div class="site-grid">
+
+          <div class="site-card" data-cursor="expand" data-href="https://webharvest-mendoza.github.io/joshuamendoza/">
+            <div class="site-thumb"><img src="../images/webharvest.png" alt="WebHarvest new portfolio" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>WebHarvest — New Portfolio</h4>
+              <p>"Build Systems That Generate Leads." Live metrics: 4,206+ leads, $8.32 CPL, 26.1% conversion.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">VS Code</span><span class="tag">GitHub</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://xshmendoza.github.io/webharvest/">
+            <div class="site-thumb"><img src="../images/webharvest-old.png" alt="WebHarvest old portfolio" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>WebHarvest — Old</h4>
+              <p>"Customizable Websites &amp; Funnels That Convert." Earlier minimal version.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">VS Code</span><span class="tag">GitHub</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://jonathanmendoza.framer.website/">
+            <div class="site-thumb"><img src="../images/amazon-jn.png" alt="Amazon VA Specialist portfolio" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Amazon VA Specialist</h4>
+              <p>Portfolio for Jonathan Mendoza — Amazon VA expertise, built in Framer.</p>
+              <div class="tags"><span class="tag">Framer</span><span class="tag">Canva</span><span class="tag">Figma</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://aiflores-web.github.io/portfolio/">
+            <div class="site-thumb"><img src="../images/ad-site.png" alt="Aira Denisse portfolio" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Aira Denisse — Graphic Designer</h4>
+              <p>"Design That Makes Your Brand Unforgettable." Typography-led layout.</p>
+              <div class="tags"><span class="tag">GHL</span><span class="tag">VS Code</span><span class="tag">GitHub</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://joshuamendoza.framer.website/">
+            <div class="site-thumb"><img src="../images/framer-josh.png" alt="Front-end developer portfolio" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Front-end Developer | UI/UX</h4>
+              <p>First personal portfolio version — dark aesthetic, dramatic typography.</p>
+              <div class="tags"><span class="tag">Framer</span><span class="tag">CSS</span><span class="tag">Claude</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://shuamndz.github.io/joshuamendoza/">
+            <div class="site-thumb"><img src="../images/veryfirstoldsite.png" alt="Very first portfolio site" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>Very First Portfolio Site</h4>
+              <p>Redesigned dark theme, cleaner layout, AI-assisted build with Claude.</p>
+              <div class="tags"><span class="tag">Framer</span><span class="tag">CSS</span><span class="tag">Claude</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://nexsaledev.github.io/joshuamendoza/">
+            <div class="site-thumb"><img src="../images/nexsale.png" alt="New portfolio site" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>NexSale - Portfolio Site</h4>
+              <p>My portfolio site for NexSale.</p>
+              <div class="tags"><span class="tag">TBD</span></div>
+            </div>
+          </div>
+
+          <div class="site-card" data-cursor="expand" data-href="https://nexjosh.github.io/joshuamendoza/">
+            <div class="site-thumb"><img src="../images/nex-josh.png" alt="New portfolio site" onerror="this.style.display='none'"></div>
+            <div class="site-body">
+              <h4>New Brand & Portfolio - NEX</h4>
+              <p>Premium website with modern aesthetics and seamless user experience.</p>
+              <div class="tags"><span class="tag">TBD</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ REGAS MEDIA ROLE ============ -->
+      <section class="section" id="regas">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">Current Role · 2026–Present</span>
+          <h2>Regas Media</h2>
+        </div>
+        <div class="card-grid" id="regas-grid">
+          <div class="card"><div class="card-glow"></div><span class="card-num">01</span><h3>Client Onboarding</h3><p>Creating and configuring GHL sub-accounts, users, permissions, and initial settings.</p></div>
+          <div class="card"><div class="card-glow"></div><span class="card-num">02</span><h3>Load Snapshots</h3><p>Deploying GHL snapshots into sub-accounts — funnels, workflows, pipelines, templates.</p></div>
+          <div class="card"><div class="card-glow"></div><span class="card-num">03</span><h3>AI Chatbot via Appointwise</h3><p>Automated lead qualification, appointment booking, and client communication.</p></div>
+          <div class="card"><div class="card-glow"></div><span class="card-num">04</span><h3>Zapier Integration</h3><p>Connecting GHL with third-party tools — syncing data, triggering actions.</p></div>
+          <div class="card"><div class="card-glow"></div><span class="card-num">05</span><h3>Slack Call Center Alerts</h3><p>Real-time Slack notifications for new leads, new messages, and follow-ups via GHL API/webhook integration.</p></div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="cta-dots"></div>
+        <p class="cta-title">Want a system like these?</p>
+        <p class="cta-sub">Every project starts with a conversation about what's actually broken in your funnel.</p>
+        <a href="contact.html" class="btn btn-light">Start a project</a>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h5>Website</h5>
+          <a href="../index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="automations.html">Automations</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h5>Projects</h5>
+          <a href="portfolio.html#valle-del-sol">Valle Del Sol</a>
+          <a href="portfolio.html#north-city-roofing">North City Roofing</a>
+          <a href="portfolio.html#nc-mobile-dashboard">NC Roofing — Mobile Dashboard</a>
+          <a href="portfolio.html#meridian-plumbing">Meridian Plumbing — AI Voice Agent</a>
+          <a href="https://thumberacademy.com/" target="_blank" rel="noopener">Thumber Academy</a>
+          <a href="https://edigishark.com/" target="_blank" rel="noopener">eDigiShark</a>
+          <a href="portfolio.html#social-agent">Social Media AI Agent</a>
+        </div>
+        <div class="footer-col">
+          <h5>Social</h5>
+          <a href="contact.html">Contact Form</a>
+          <a href="mailto:shuakai15@gmail.com">Email</a>
+          <a href="tel:+639696171479">Phone</a>
+          <div class="icon-links">
+            <a href="https://wa.me/639696171479" target="_blank" rel="noopener" class="icon-link" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.031 6.172c-5.055 0-9.363 4.109-9.365 9.163a9.32 9.32 0 001.24 4.657l-1.313 4.792 4.917-1.288a9.36 9.36 0 004.514 1.15h.004c5.055 0 9.365-4.109 9.367-9.163a9.099 9.099 0 00-2.652-6.503 9.061 9.061 0 00-6.712-2.808zm5.518 13.028c-.235.663-1.377 1.267-1.898 1.336-.484.065-1.09.093-1.756-.11-.405-.121-.923-.284-1.594-.559-2.807-1.212-4.634-4.02-4.777-4.208-.14-.187-1.144-1.522-1.144-2.905 0-1.383.727-2.06.984-2.34.256-.279.56-.348.746-.348.187 0 .373.001.535.008.171.007.4-.065.628.481.235.56.797 1.943.867 2.087.07.14.117.303.023.489-.093.187-.14.302-.28.465-.14.164-.294.365-.42.49-.14.14-.286.29-.123.567.163.279.727 1.198 1.56 1.94 1.072.956 1.977 1.253 2.256 1.394.28.14.443.117.606-.07.163-.187.703-.82.89-1.1.187-.28.375-.234.634-.14.258.093 1.638.774 1.918.913.28.14.466.211.535.328.07.117.07.678-.163 1.34z"></path></svg>
+            </a>
+            <a href="https://www.instagram.com/shuamndz/" target="_blank" rel="noopener" class="icon-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.facebook.com/shuamndz1123/" target="_blank" rel="noopener" class="icon-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/joshua-mendoza-461a23374/" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A6 6 0 0 1 16 8z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Copyright © 2026 Joshua Mendoza</span>
+        <img src="../images/logo-x.png" alt="" class="footer-mark">
+        <span>Web design from Antipolo, Rizal, PH</span>
+        <a href="https://docs.google.com/document/d/1_9f7_35_VIZ7tW7r9_ZqNNBKtGsROb4l/edit?usp=drive_link&ouid=113330667437187831590&rtpof=true&sd=true" target="_blank" rel="noopener" class="link-more">Click here to view my resume</a>
+        <div class="footer-legal"><a href="legal-notice.html">Legal notice</a><a href="privacy-policy.html">Privacy policy</a></div>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="m18 15-6-6-6 6"></path></svg>
+</button>
+<div class="popup" id="popup"><button class="popup-close" id="popupClose">✕</button><div class="popup-img" id="popupImg"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="../script.js"></script>
+</body>
+</html>
