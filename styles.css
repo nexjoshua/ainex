@@ -1276,3 +1276,129 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .mdp-stack{height:360px}
   .mdp-slide .iphone-frame{width:144px;height:296px}
 }
+
+/* =====================================================================
+   CUSTOM MOBILE APPS SHOWCASE
+===================================================================== */
+.capps-section{
+  position:relative;overflow:hidden;
+  padding:5rem 1.5rem;border-radius:24px;
+  background:
+    radial-gradient(ellipse 65% 55% at 85% 0%, rgba(127,184,204,.16), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 100%, rgba(91,125,140,.12), transparent 55%),
+    var(--panel);
+  border:1px solid rgba(127,184,204,.25);
+  display:flex;flex-direction:column;align-items:center;gap:3rem;text-align:center;
+}
+.capps-head{max-width:680px;display:flex;flex-direction:column;gap:1rem;align-items:center;position:relative;z-index:1}
+.capps-head p{color:var(--muted);font-size:1rem;line-height:1.65}
+
+.capps-stage{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:2rem}
+.capps-install-pill{
+  position:relative;z-index:2;display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-body);font-size:.8rem;letter-spacing:.03em;color:var(--text);
+  border:1px solid rgba(127,184,204,.35);background:rgba(127,184,204,.08);
+  padding:.6rem 1.1rem;border-radius:99px;
+  animation:cappsPillFloat 3.6s ease-in-out infinite;
+}
+.capps-install-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-bright);position:relative}
+.capps-install-dot::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent-bright);
+  animation:voicebPulseRing 2s ease-out infinite;
+}
+@keyframes cappsPillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.capps-phones{
+  position:relative;display:flex;justify-content:center;align-items:flex-end;
+  width:100%;max-width:960px;padding:1rem 0 1rem;
+}
+.capps-phone{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:.9rem;
+  width:200px;margin:0 -18px;cursor:none;
+  transition:transform .5s var(--ease), filter .5s var(--ease);
+}
+.capps-phone .iphone-frame{
+  position:relative;width:100%;aspect-ratio:200/410;border-radius:17%/8.3%;
+  background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+  padding:4.5%;box-shadow:0 26px 60px -16px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06);
+  animation:cappsFloat 5.5s ease-in-out infinite;
+}
+.capps-phone .iphone-island{width:24%;height:3.3%;top:3.4%}
+.capps-phone .iphone-screen{border-radius:9%/4.4%}
+
+.capps-phone:nth-child(1){transform:rotate(-9deg) translateY(14px);z-index:1}
+.capps-phone:nth-child(2){transform:rotate(-3deg) translateY(-8px);z-index:2}
+.capps-phone:nth-child(3){transform:rotate(3deg) translateY(-8px);z-index:2}
+.capps-phone:nth-child(4){transform:rotate(9deg) translateY(14px);z-index:1}
+.capps-phone:nth-child(1) .iphone-frame{animation-delay:.1s}
+.capps-phone:nth-child(2) .iphone-frame{animation-delay:.9s}
+.capps-phone:nth-child(3) .iphone-frame{animation-delay:1.7s}
+.capps-phone:nth-child(4) .iphone-frame{animation-delay:2.5s}
+@keyframes cappsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.capps-phone:hover{
+  transform:rotate(0deg) translateY(-16px) scale(1.06) !important;
+  z-index:5;filter:drop-shadow(0 0 30px rgba(127,184,204,.35));
+}
+.capps-phone:hover .iphone-frame{
+  animation-play-state:paused;
+  box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 60px 10px rgba(127,184,204,.4), inset 0 0 0 2px rgba(255,255,255,.14);
+}
+
+.capps-caption{
+  font-size:.78rem;color:var(--muted);opacity:.65;
+  transition:opacity .3s var(--ease), color .3s var(--ease), font-weight .3s;
+}
+.capps-phone:hover .capps-caption{opacity:1;color:var(--accent-bright);font-weight:700}
+
+.capps-note{max-width:600px;color:var(--muted-2);font-size:.88rem;line-height:1.6;position:relative;z-index:1}
+
+@media(max-width:900px){
+  .capps-phone{width:120px;margin:0 -14px}
+  .capps-phone:nth-child(1),.capps-phone:nth-child(4){transform:rotate(-7deg) translateY(10px)}
+  .capps-phone:nth-child(2),.capps-phone:nth-child(3){transform:rotate(3deg) translateY(-6px)}
+  .capps-caption{font-size:.68rem}
+}
+@media(max-width:640px){
+  .capps-section{padding:3rem 1rem;gap:2rem}
+  .capps-head{gap:.75rem}
+  .capps-head p{font-size:.92rem}
+  .capps-phones{flex-wrap:wrap;gap:1.75rem 1rem;padding:.5rem 0 0}
+  .capps-phone{width:calc(50% - .5rem);margin:0}
+  .capps-phone:nth-child(n){transform:none}
+  .capps-phone:hover{transform:translateY(-10px) scale(1.05) !important}
+  .capps-caption{font-size:.7rem}
+  .capps-install-pill{font-size:.72rem;padding:.5rem .9rem}
+  .capps-note{font-size:.82rem}
+  #custom-apps .hero-actions{width:100%}
+  #custom-apps .hero-actions .btn{flex:1 1 auto;min-width:0}
+}
+@media(max-width:480px){
+  .capps-phone{width:calc(50% - .4rem)}
+  .capps-phones{gap:1.4rem .8rem}
+  #custom-apps .hero-actions{flex-direction:column}
+  #custom-apps .hero-actions .btn{width:100%}
+}
+@media(hover:none){.capps-phone{cursor:auto}}
+@media(prefers-reduced-motion:reduce){
+  .capps-install-pill,.capps-install-dot::after,.capps-phone .iphone-frame{animation:none}
+}
+
+/* "New" badge for links pointing at an in-progress build (e.g. North City Roofing new site) */
+.link-more-group{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;max-width:100%}
+.link-more-group .link-more{white-space:nowrap}
+.tag-new{
+  display:inline-block;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+  padding:.15rem .5rem;border-radius:99px;background:var(--accent-bright);color:#0d0d0e;
+  vertical-align:middle;margin-left:.35rem;white-space:nowrap;
+}
+@media(max-width:480px){
+  .link-more-group{flex-direction:column;align-items:flex-start;gap:.65rem}
+}
+
+/* Timeline entry link (used for Rayanova) */
+.timeline-link{
+  color:inherit;text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.25);transition:color .2s,text-decoration-color .2s;
+}
+.timeline-link:hover{color:var(--accent-bright);text-decoration-color:var(--accent-bright)}
