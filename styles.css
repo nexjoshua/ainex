@@ -1177,102 +1177,193 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 }
 
 /* =====================================================================
-   MOBILE-ONLY: NC ROOFING PHONE STACK CAROUSEL
-   Reuses the exact same .iphone-frame / .iphone-screen / .iphone-island
-   / .ncmobile-caption components as the desktop coverflow carousel
-   (realistic bezel + notch + browser chrome baked into the screenshots,
-   caption brightens when active) — just repositioned via custom
-   vanilla-JS drag logic (see initMdpStack in script.js) instead of
-   Swiper, so nothing here can conflict with the desktop carousel's own
-   breakpoint/init logic elsewhere on the page.
+   MOBILE-ONLY: NC ROOFING PHONE STACK TEASER
+   Static, non-interactive layered phone mockup — three overlapping
+   screenshots, no Swiper, no JS. Desktop never sees this; mobile sees
+   this instead of the interactive carousel above.
 ===================================================================== */
 .mobile-dashboard-preview{display:none}
 
 @media(max-width:900px){
   .mobile-dashboard-preview{display:flex}
 
-  .mdp-wrap{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-  }
-
   .mdp-stack{
     position:relative;
     width:100%;
-    height:440px;
-    touch-action:pan-y;
-    cursor:grab;
-    user-select:none;
-  }
-  .mdp-stack:active{cursor:grabbing}
-
-  .mdp-slide{
-    position:absolute;
-    top:0;
-    left:50%;
+    height:420px;
     display:flex;
-    flex-direction:column;
     align-items:center;
-    gap:.85rem;
-    transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .4s ease;
-    will-change:transform;
-    pointer-events:auto;
-  }
-  .mdp-slide img{
-    pointer-events:none;
-    -webkit-user-drag:none;
+    justify-content:center;
   }
 
-  /* scoped override of the shared .iphone-frame component — sized for
-     this mobile carousel, independent of the desktop .nc-swiper sizing */
-  .mdp-slide .iphone-frame{
+  .mdp-phone{
+    position:absolute;
+    border-radius:32px;
+    overflow:hidden;
+    background:#0d0d0e;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 24px 60px -16px rgba(0,0,0,.7);
+  }
+  .mdp-phone img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+
+  .mdp-center{
+    width:220px;
+    height:452px;
+    z-index:3;
+    box-shadow:0 30px 80px -14px rgba(0,0,0,.8), 0 0 50px 8px rgba(127,184,204,.25);
+  }
+  .mdp-island{
+    position:absolute;top:12px;left:50%;transform:translateX(-50%);
+    width:56px;height:16px;border-radius:99px;background:#0d0d0e;z-index:4;
+  }
+
+  .mdp-side{
     width:190px;
     height:390px;
-    filter:brightness(.6) saturate(.72);
-    transition:filter .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
+    filter:brightness(.5) saturate(.75);
+    opacity:.85;
   }
-  .mdp-slide.is-active .iphone-frame{
-    filter:brightness(1) saturate(1);
-    box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 46px 8px rgba(127,184,204,.32), inset 0 0 0 2px rgba(255,255,255,.1);
+  .mdp-left{
+    left:calc(50% - 200px);
+    z-index:1;
+    transform:rotate(-6deg);
+  }
+  .mdp-right{
+    right:calc(50% - 200px);
+    z-index:1;
+    transform:rotate(6deg);
   }
 
-  .mdp-slide .ncmobile-caption{opacity:.6}
-  .mdp-slide.is-active .ncmobile-caption{
-    opacity:1;color:var(--accent-bright);font-weight:700;font-size:.92rem;
-  }
-
-  .mdp-arrow{
-    flex:none;
-    width:40px;height:40px;border-radius:50%;
-    border:1px solid var(--panel-border);background:rgba(13,13,14,.6);
-    display:flex;align-items:center;justify-content:center;color:var(--text);
-    z-index:5;
-  }
-  .mdp-arrow svg{width:16px;height:16px}
-  .mdp-prev{margin-right:-4px}
-  .mdp-next{margin-left:-4px}
-
-  .mdp-dots{
-    display:flex;justify-content:center;align-items:center;gap:.4rem;
+  .mdp-caption{
+    text-align:center;
+    color:var(--accent-bright);
+    font-weight:700;
+    font-size:.95rem;
     margin-top:-.5rem;
-  }
-  .mdp-dot{
-    width:6px;height:6px;border-radius:50%;background:var(--panel-border);
-    transition:width .3s var(--ease),background-color .3s var(--ease);
-  }
-  .mdp-dot.is-active{
-    background:var(--accent-bright);width:20px;border-radius:99px;
   }
 }
 
 @media(max-width:480px){
-  .mdp-stack{height:400px}
-  .mdp-slide .iphone-frame{width:165px;height:340px}
+  .mdp-stack{height:360px}
+  .mdp-center{width:190px;height:390px}
+  .mdp-side{width:160px;height:328px}
+  .mdp-left{left:calc(50% - 168px)}
+  .mdp-right{right:calc(50% - 168px)}
 }
 @media(max-width:360px){
-  .mdp-stack{height:360px}
-  .mdp-slide .iphone-frame{width:144px;height:296px}
+  .mdp-stack{height:320px}
+  .mdp-center{width:165px;height:339px}
+  .mdp-side{width:138px;height:283px}
+  .mdp-left{left:calc(50% - 144px)}
+  .mdp-right{right:calc(50% - 144px)}
 }
+/* =====================================================================
+   CUSTOM MOBILE APPS SHOWCASE
+===================================================================== */
+.capps-section{
+  position:relative;overflow:hidden;
+  padding:5rem 1.5rem;border-radius:24px;
+  background:
+    radial-gradient(ellipse 65% 55% at 85% 0%, rgba(127,184,204,.16), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 100%, rgba(91,125,140,.12), transparent 55%),
+    var(--panel);
+  border:1px solid rgba(127,184,204,.25);
+  display:flex;flex-direction:column;align-items:center;gap:3rem;text-align:center;
+}
+.capps-head{max-width:680px;display:flex;flex-direction:column;gap:1rem;align-items:center;position:relative;z-index:1}
+.capps-head p{color:var(--muted);font-size:1rem;line-height:1.65}
+
+.capps-stage{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:2rem}
+.capps-install-pill{
+  position:relative;z-index:2;display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-body);font-size:.8rem;letter-spacing:.03em;color:var(--text);
+  border:1px solid rgba(127,184,204,.35);background:rgba(127,184,204,.08);
+  padding:.6rem 1.1rem;border-radius:99px;
+  animation:cappsPillFloat 3.6s ease-in-out infinite;
+}
+.capps-install-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-bright);position:relative}
+.capps-install-dot::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent-bright);
+  animation:voicebPulseRing 2s ease-out infinite;
+}
+@keyframes cappsPillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.capps-phones{
+  position:relative;display:flex;justify-content:center;align-items:flex-end;
+  width:100%;max-width:960px;padding:1rem 0 1rem;
+}
+.capps-phone{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:.9rem;
+  width:200px;margin:0 -18px;cursor:none;
+  transition:transform .5s var(--ease), filter .5s var(--ease);
+}
+.capps-phone .iphone-frame{
+  position:relative;width:100%;aspect-ratio:200/410;border-radius:17%/8.3%;
+  background:linear-gradient(160deg,#2c2c2f,#0d0d0e 70%);
+  padding:4.5%;box-shadow:0 26px 60px -16px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.06);
+  animation:cappsFloat 5.5s ease-in-out infinite;
+}
+.capps-phone .iphone-island{width:24%;height:3.3%;top:3.4%}
+.capps-phone .iphone-screen{border-radius:9%/4.4%}
+
+.capps-phone:nth-child(1){transform:rotate(-9deg) translateY(14px);z-index:1}
+.capps-phone:nth-child(2){transform:rotate(-3deg) translateY(-8px);z-index:2}
+.capps-phone:nth-child(3){transform:rotate(3deg) translateY(-8px);z-index:2}
+.capps-phone:nth-child(4){transform:rotate(9deg) translateY(14px);z-index:1}
+.capps-phone:nth-child(1) .iphone-frame{animation-delay:.1s}
+.capps-phone:nth-child(2) .iphone-frame{animation-delay:.9s}
+.capps-phone:nth-child(3) .iphone-frame{animation-delay:1.7s}
+.capps-phone:nth-child(4) .iphone-frame{animation-delay:2.5s}
+@keyframes cappsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.capps-phone:hover{
+  transform:rotate(0deg) translateY(-16px) scale(1.06) !important;
+  z-index:5;filter:drop-shadow(0 0 30px rgba(127,184,204,.35));
+}
+.capps-phone:hover .iphone-frame{
+  animation-play-state:paused;
+  box-shadow:0 40px 90px -14px rgba(0,0,0,.8), 0 0 60px 10px rgba(127,184,204,.4), inset 0 0 0 2px rgba(255,255,255,.14);
+}
+
+.capps-caption{
+  font-size:.78rem;color:var(--muted);opacity:.65;
+  transition:opacity .3s var(--ease), color .3s var(--ease), font-weight .3s;
+}
+.capps-phone:hover .capps-caption{opacity:1;color:var(--accent-bright);font-weight:700}
+
+.capps-note{max-width:600px;color:var(--muted-2);font-size:.88rem;line-height:1.6;position:relative;z-index:1}
+
+@media(max-width:900px){
+  .capps-phone{width:120px;margin:0 -14px}
+  .capps-phone:nth-child(1),.capps-phone:nth-child(4){transform:rotate(-7deg) translateY(10px)}
+  .capps-phone:nth-child(2),.capps-phone:nth-child(3){transform:rotate(3deg) translateY(-6px)}
+  .capps-caption{font-size:.68rem}
+}
+@media(max-width:640px){
+  .capps-section{padding:3.5rem 1.1rem;gap:2.25rem}
+  .capps-phones{flex-wrap:wrap;row-gap:2rem}
+  .capps-phone{width:42%;margin:0}
+  .capps-phone:nth-child(n){transform:none}
+  .capps-phone:hover{transform:translateY(-10px) scale(1.05) !important}
+}
+@media(hover:none){.capps-phone{cursor:auto}}
+@media(prefers-reduced-motion:reduce){
+  .capps-install-pill,.capps-install-dot::after,.capps-phone .iphone-frame{animation:none}
+}
+
+/* "New" badge for the North City Roofing new-site link */
+.link-more-group{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.25rem}
+.tag-new{
+  display:inline-block;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+  padding:.15rem .5rem;border-radius:99px;background:var(--accent-bright);color:#0d0d0e;
+  vertical-align:middle;margin-left:.35rem;
+}
+
+/* Timeline entry link (used for Rayanova) */
+.timeline-link{
+  color:inherit;text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:rgba(255,255,255,.25);transition:color .2s,text-decoration-color .2s;
+}
+.timeline-link:hover{color:var(--accent-bright);text-decoration-color:var(--accent-bright)}
