@@ -1,4 +1,4 @@
-=<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -50,8 +50,7 @@
       <h1>Portfolio</h1>
       <p>Client websites, sales funnels, and the automation systems running behind them.</p>
     </section>
-
-    <!-- ============ CUSTOM MOBILE APPS SHOWCASE ============ -->
+<!-- ============ CUSTOM MOBILE APPS SHOWCASE ============ -->
 <section class="section" id="custom-apps">
   <div class="capps-section">
     <div class="capps-head">
@@ -89,8 +88,56 @@
     </div>
   </div>
 </section>
-
     <div class="sections-flow" style="margin-top:2rem">
+
+      <!-- ============ MOBILE-ONLY: NC ROOFING PHONE STACK TEASER ============
+           Same drag/swipe carousel as the homepage — hidden on desktop,
+           replaces the interactive coverflow further down the page (which
+           is hidden on mobile via the shared #nc-mobile-dashboard rule
+           in styles.css). -->
+      <section class="section mobile-dashboard-preview" id="mobile-dashboard-preview">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">North City Roofing</span>
+          <h2>Built For The Field</h2>
+          <p>A quick look at the internal ops dashboard from the North City Roofing case study. Drag or swipe to see more.</p>
+        </div>
+        <div class="mdp-wrap">
+          <button class="mdp-arrow mdp-prev" aria-label="Previous screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="mdp-stack" id="mdpStack" data-lenis-prevent>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-welcome.jpg" alt="North City Roofing dashboard — welcome home screen"></div></div>
+              <p class="ncmobile-caption">Welcome Home</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-signin.jpg" alt="North City Roofing dashboard — secure sign-in"></div></div>
+              <p class="ncmobile-caption">Secure Sign-In</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-team-performance.jpg" alt="North City Roofing dashboard — team performance"></div></div>
+              <p class="ncmobile-caption">Team Performance</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-analytics.jpg" alt="North City Roofing dashboard — analytics and rankings"></div></div>
+              <p class="ncmobile-caption">Analytics &amp; Rankings</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-customer-database.jpg" alt="North City Roofing dashboard — customer database"></div></div>
+              <p class="ncmobile-caption">Customer Database</p>
+            </div>
+            <div class="mdp-slide">
+              <div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-screen"><img src="../images/nc-mobile-my-assignments.jpg" alt="North City Roofing dashboard — my assignments"></div></div>
+              <p class="ncmobile-caption">My Assignments</p>
+            </div>
+          </div>
+          <button class="mdp-arrow mdp-next" aria-label="Next screen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="mdp-dots" id="mdpDots"></div>
+        <a href="#nc-mobile-dashboard" class="link-more center-btn">See the full case study →</a>
+      </section>
 
       <!-- ============ FLAGSHIP CASE STUDY: VALLE DEL SOL ============ -->
       <section class="section" id="valle-del-sol">
