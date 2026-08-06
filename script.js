@@ -420,7 +420,7 @@ if (contactForm && window.emailjs) {
 
   // Where to send visitors after a successful submission.
   // Update this path if your thank-you page lives somewhere else.
-  const THANK_YOU_URL = '/htmls/thank-you.html';
+  const THANK_YOU_URL = 'thank-you.html';
 
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -853,30 +853,96 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
     });
   }
 })();
-/* ================================================================
-   CUSTOM MOBILE APPS SHOWCASE — scroll-in reveal
-   (Only fades opacity in, so it never fights the CSS rotate/float
-   animations already applied to each phone.)
-================================================================ */
-(function initCustomAppsReveal() {
-  if (!document.getElementById('custom-apps') || !window.gsap || !window.ScrollTrigger) return;
 
-  gsap.from('.capps-head', {
-    opacity: 0, y: 24, duration: .7, ease: 'power2.out',
-    scrollTrigger: { trigger: '#custom-apps', start: 'top 85%' },
+/* ================================================================
+   MOBILE PHONE-STACK CAROUSEL
+   Custom, dependency-free carousel: a big centered phone with dimmed
+   rotated phones peeking on either side (coverflow look), paged
+   through via drag/swipe, the arrow buttons, or clicking a side phone.
+   No Swiper — self-contained so it can't conflict with the desktop
+   carousel's breakpoint/init logic elsewhere on the page.
+================================================================ */
+(function initMdpStack() {
+  const stack = document.getElementById('mdpStack');
+  if (!stack) return;
+
+  const slides = Array.from(stack.querySelectorAll('.mdp-slide'));
+  const total = slides.length;
+  if (!total) return;
+
+  const dotsWrap = document.getElementById('mdpDots');
+  const prevBtn = document.querySelector('.mdp-prev');
+  const nextBtn = document.querySelector('.mdp-next');
+
+  let current = 0;
+
+  // build dot indicators
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'mdp-dot';
+    dot.addEventListener('click', () => { current = i; render(); });
+    dotsWrap.appendChild(dot);
   });
-  gsap.from('.capps-install-pill', {
-    opacity: 0, y: 10, duration: .6, delay: .15, ease: 'power2.out',
-    scrollTrigger: { trigger: '#custom-apps', start: 'top 82%' },
-  });
-  gsap.utils.toArray('.capps-phone').forEach((el, i) => {
-    gsap.from(el, {
-      opacity: 0, duration: .7, delay: i * .12, ease: 'power2.out',
-      scrollTrigger: { trigger: '#custom-apps', start: 'top 78%' },
+  const dots = Array.from(dotsWrap.children);
+
+  function render() {
+    slides.forEach((slide, i) => {
+      let offset = i - current;
+      // always take the shortest path around the loop
+      if (offset > total / 2) offset -= total;
+      if (offset < -total / 2) offset += total;
+      const abs = Math.abs(offset);
+
+      const x = offset * 78;
+      const scale = abs === 0 ? 1 : 0.8;
+      const rotate = offset * 9;
+      const opacity = abs > 2 ? 0 : (abs === 0 ? 1 : 0.6);
+
+      slide.style.transform = `translateX(-50%) translateX(${x}px) rotate(${rotate}deg) scale(${scale})`;
+      slide.style.opacity = opacity;
+      slide.style.zIndex = 10 - abs;
+      slide.classList.toggle('is-active', abs === 0);
+    });
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+  }
+
+  function go(delta) {
+    current = ((current + delta) % total + total) % total;
+    render();
+  }
+
+  prevBtn?.addEventListener('click', () => go(-1));
+  nextBtn?.addEventListener('click', () => go(1));
+
+  // drag / swipe (touch + mouse, unified)
+  let dragging = false;
+  let dragged = false;
+  let startX = 0;
+
+  function down(x) { dragging = true; dragged = false; startX = x; }
+  function move(x) { if (dragging && Math.abs(x - startX) > 6) dragged = true; }
+  function up(x) {
+    if (!dragging) return;
+    dragging = false;
+    const dx = x - startX;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+  }
+
+  stack.addEventListener('touchstart', (e) => down(e.touches[0].clientX), { passive: true });
+  stack.addEventListener('touchmove', (e) => move(e.touches[0].clientX), { passive: true });
+  stack.addEventListener('touchend', (e) => up(e.changedTouches[0].clientX));
+
+  stack.addEventListener('mousedown', (e) => { down(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', (e) => move(e.clientX));
+  window.addEventListener('mouseup', (e) => up(e.clientX));
+
+  // clicking a dimmed side slide (not a drag) jumps straight to it
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => {
+      if (dragged) return;
+      if (i !== current) { current = i; render(); }
     });
   });
-  gsap.from('.capps-note, #custom-apps .hero-actions', {
-    opacity: 0, y: 16, duration: .6, delay: .2, ease: 'power2.out',
-    scrollTrigger: { trigger: '#custom-apps', start: 'top 70%' },
-  });
+
+  render();
 })();
