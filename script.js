@@ -946,3 +946,31 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
 
   render();
 })();
+
+/* ================================================================
+   CUSTOM MOBILE APPS SHOWCASE — scroll-in reveal
+   (Only fades opacity in, so it never fights the CSS rotate/float
+   animations already applied to each phone.)
+================================================================ */
+(function initCustomAppsReveal() {
+  if (!document.getElementById('custom-apps') || !window.gsap || !window.ScrollTrigger) return;
+
+  gsap.from('.capps-head', {
+    opacity: 0, y: 24, duration: .7, ease: 'power2.out',
+    scrollTrigger: { trigger: '#custom-apps', start: 'top 85%' },
+  });
+  gsap.from('.capps-install-pill', {
+    opacity: 0, y: 10, duration: .6, delay: .15, ease: 'power2.out',
+    scrollTrigger: { trigger: '#custom-apps', start: 'top 82%' },
+  });
+  gsap.utils.toArray('.capps-phone').forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0, duration: .7, delay: i * .12, ease: 'power2.out',
+      scrollTrigger: { trigger: '#custom-apps', start: 'top 78%' },
+    });
+  });
+  gsap.from('.capps-note, #custom-apps .hero-actions', {
+    opacity: 0, y: 16, duration: .6, delay: .2, ease: 'power2.out',
+    scrollTrigger: { trigger: '#custom-apps', start: 'top 70%' },
+  });
+})();
