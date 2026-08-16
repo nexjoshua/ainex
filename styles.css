@@ -1748,20 +1748,28 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .aphone-ring,.aphone-play-badge{animation:none;transition:none}
 }
 .autospot-shot-col {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 1.1rem;
   padding-bottom: 20px;
 }
 
 .autospot-shot {
-  margin: 0; /* make sure no negative margin is pulling the caption up */
+  position: relative;
+  display: block;
+  margin: 0;
+  /* prevent anything absolutely positioned inside .autospot-shot
+     (like the LIVE tag) from bleeding past its own box */
+  overflow: hidden;
 }
 
+/* Force the caption out of any absolute/overlapping positioning
+   it may have inherited, and guarantee it sits in normal flow
+   below the image */
 .autospot-shot-caption {
+  position: static !important;
   margin: 0;
-  position: relative;
-  z-index: 1;
+  padding-top: 0.25rem;
 }
 
 @media(max-width:760px){
@@ -1769,7 +1777,7 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
     padding-bottom: 32px;
     padding-left: 4px;
     padding-right: 4px;
-    gap: 1.4rem; /* extra breathing room on mobile where it's stacked */
+    gap: 1.4rem;
   }
 }
 
