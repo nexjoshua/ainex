@@ -974,3 +974,235 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
     scrollTrigger: { trigger: '#custom-apps', start: 'top 70%' },
   });
 })();
+
+/* ================================================================
+   AUTOMATION SPOTLIGHT — scroll-in reveal for the flow diagram
+================================================================ */
+(function initAutomationSpotlight() {
+  if (!document.getElementById('automation-spotlight') || !window.gsap || !window.ScrollTrigger) return;
+
+  gsap.from('.autospot-head > *', {
+    opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power2.out',
+    scrollTrigger: { trigger: '#automation-spotlight', start: 'top 82%' },
+  });
+
+  gsap.from('.autospot-flow .autospot-node', {
+    opacity: 0, y: 26, scale: .92, duration: .6, stagger: .08, ease: 'back.out(1.5)',
+    scrollTrigger: { trigger: '.autospot-flow', start: 'top 85%' },
+  });
+
+  gsap.from('.autospot-flow .autospot-line', {
+    scaleX: 0, transformOrigin: 'left center', duration: .6, stagger: .08, ease: 'power2.out',
+    scrollTrigger: { trigger: '.autospot-flow', start: 'top 85%' },
+  });
+
+  gsap.from('.autospot-stat', {
+    opacity: 0, y: 16, duration: .6, stagger: .1, ease: 'power2.out',
+    scrollTrigger: { trigger: '.autospot-stats', start: 'top 88%' },
+  });
+
+  gsap.from('.autospot-shot', {
+    opacity: 0, y: 30, scale: .97, duration: .7, stagger: .15, ease: 'power2.out',
+    scrollTrigger: { trigger: '.autospot-shots', start: 'top 85%' },
+  });
+
+  gsap.from('.autospot-card', {
+    opacity: 0, y: 24, duration: .7, stagger: .12, ease: 'power2.out',
+    scrollTrigger: { trigger: '.autospot-cards', start: 'top 88%' },
+  });
+})();
+
+/* ================================================================
+   AUTOMATION SPOTLIGHT — click a screenshot to open it full-size
+   (reuses the same #popup lightbox already in the page, since these
+   screenshots use their own class name instead of ".shot")
+================================================================ */
+(function initAutospotLightbox() {
+  const popup = document.getElementById('popup');
+  const popupImg = document.getElementById('popupImg');
+  if (!popup || !popupImg) return;
+
+  document.querySelectorAll('.autospot-shot[data-cursor="expand"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const img = el.querySelector('img');
+      if (!img) return;
+      popupImg.innerHTML = '';
+      popupImg.style.background = '';
+      const clone = img.cloneNode();
+      clone.style.cssText = 'width:100%;height:100%;object-fit:contain';
+      popupImg.appendChild(clone);
+      popup.classList.add('is-open');
+    });
+  });
+})();
+
+/* ================================================================
+   AUTOMATIONS IN ACTION — floating 3D phone: idle float + pointer
+   tilt on hover, driven by requestAnimationFrame for buttery motion.
+================================================================ */
+(function initAphoneFloat() {
+  const orbit = document.getElementById('aphoneOrbit');
+  const device = document.getElementById('aphoneDevice');
+  if (!orbit || !device) return;
+
+  let hover = false;
+  let mx = 0, my = 0; // pointer position, normalized -1..1
+  let t = Math.random() * 10; // stagger the idle loop so it doesn't feel mechanical
+
+  orbit.addEventListener('mouseenter', () => { hover = true; });
+  orbit.addEventListener('mouseleave', () => { hover = false; });
+  orbit.addEventListener('mousemove', (e) => {
+    const rect = orbit.getBoundingClientRect();
+    mx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    my = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  });
+
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    device.style.transform = 'translateY(0) rotateX(4deg) rotateY(-6deg)';
+    return;
+  }
+
+  function tick() {
+    t += 0.012;
+    const idleY = Math.sin(t) * 14;
+    const idleRotY = Math.sin(t * 0.7) * 9;
+    const idleRotX = Math.cos(t * 0.55) * 5;
+
+    let rotY, rotX, y, scale;
+    if (hover) {
+      // pointer-driven tilt, gently eased toward the cursor position
+      rotY = mx * 20;
+      rotX = -my * 15;
+      y = idleY * 0.35 - 10;
+      scale = 1.09;
+    } else {
+      rotY = idleRotY;
+      rotX = idleRotX;
+      y = idleY;
+      scale = 1;
+    }
+    device.style.transform =
+      `translateY(${y}px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(${scale})`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ================================================================
+   AUTOMATIONS IN ACTION — click the phone to open the demo video
+   in a popup with CTAs (built to match the .pv-overlay lightbox
+   used elsewhere on the site).
+================================================================ */
+(function initPhoneDemoPopup() {
+  const orbit = document.getElementById('aphoneOrbit');
+  if (!orbit) return;
+
+  const WHATSAPP_URL = 'https://wa.me/639696171479';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'pv-overlay';
+  overlay.innerHTML = `
+    <div class="pv-box">
+      <button class="pv-close" aria-label="Close preview">✕</button>
+      <video class="pv-video" src="./videos/phone-demo.mp4" controls playsinline></video>
+      <div class="pv-body">
+        <div class="pv-tags">
+          <span class="tag">Automated Google Reviews</span>
+          <span class="tag">Missed Call Text Back</span>
+          <span class="tag">GHL Automation</span>
+        </div>
+        <div class="pv-title">See It Running, Live</div>
+        <div class="pv-desc">The moment a job wraps up, the customer gets a text asking for a Google review. Miss a call, and the caller gets an instant text back so the lead never goes cold. Both run automatically, 24/7, with zero manual work.</div>
+        <div class="pv-ctas">
+          <a class="pv-btn pv-outline" href="./htmls/automations.html">See All Automations →</a>
+          <a class="pv-btn pv-whatsapp" target="_blank" rel="noopener" href="${WHATSAPP_URL}">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <a class="pv-btn pv-primary" href="./htmls/contact.html">Get This Built For Me →</a>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const video = overlay.querySelector('.pv-video');
+  const closeBtn = overlay.querySelector('.pv-close');
+
+  function open() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    video.currentTime = 0;
+    video.muted = false;
+    video.play().catch(() => {});
+  }
+  function close() {
+    overlay.classList.remove('open');
+    video.pause();
+    setTimeout(() => { document.body.style.overflow = ''; }, 300);
+  }
+
+  orbit.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+
+  // wires the custom cursor's "click" glow state to this popup's own
+  // buttons/close icon, same as every other dynamically-created popup
+  // on the site (the cursor listeners set up on page load only cover
+  // elements that already existed in the HTML at that point).
+  overlay.querySelectorAll('.pv-btn, .pv-close').forEach((el) => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('is-click'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-click'));
+  });
+})();
+
+/* ================================================================
+   AUTOMATIONS IN ACTION — scroll-in reveal
+================================================================ */
+(function initAutomationPhonesReveal() {
+  if (!document.getElementById('automation-phones') || !window.gsap || !window.ScrollTrigger) return;
+
+  gsap.from('#automation-phones .section-head > *', {
+    opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power2.out',
+    scrollTrigger: { trigger: '#automation-phones', start: 'top 82%' },
+  });
+
+  gsap.from('#aphoneOrbit', {
+    opacity: 0, y: 50, scale: .9, duration: .9, ease: 'back.out(1.4)',
+    scrollTrigger: { trigger: '#automation-phones', start: 'top 78%' },
+  });
+
+  gsap.from('.aphone-feature', {
+    opacity: 0, y: 30, duration: .7, stagger: .15, ease: 'power2.out',
+    scrollTrigger: { trigger: '.aphone-features', start: 'top 85%' },
+  });
+
+  gsap.from('#automation-phones .hero-actions', {
+    opacity: 0, y: 16, duration: .6, delay: .2, ease: 'power2.out',
+    scrollTrigger: { trigger: '#automation-phones', start: 'top 70%' },
+  });
+})();
+
+/* ================================================================
+   SCROLLTRIGGER SYNC — recheck all scroll-trigger positions once the
+   page has fully loaded, once fonts finish, and once more shortly
+   after (covers late-finishing image/video loads). Without this,
+   elements can get "stuck" at their hidden pre-animation state if
+   the page reflows (fonts swapping in, images loading) after their
+   trigger position was first calculated.
+================================================================ */
+(function keepScrollTriggerInSync() {
+  if (!window.ScrollTrigger) return;
+
+  const refresh = () => ScrollTrigger.refresh();
+
+  window.addEventListener('load', refresh);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refresh).catch(() => {});
+  }
+
+  setTimeout(refresh, 500);
+  setTimeout(refresh, 1500);
+})();
