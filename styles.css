@@ -119,9 +119,9 @@ body.has-bg-video .layout-gradient{display:none}
 
 .brand{
   position:fixed;z-index:50;display:flex;align-items:center;gap:.7rem;
-  height:60px;padding:0 24px;top:0;left:0;
+  height:60px;padding:0 32px;top:0;left:0;
 }
-.brand-logo{height:52px;width:auto;display:block;object-fit:contain}
+.brand-logo{height:38px;width:auto;display:block;object-fit:contain}
 .brand-tri{
   pointer-events:none;position:absolute;top:50%;transform:translateY(-50%);
   opacity:0;transition:opacity .2s, left .2s var(--ease), right .2s var(--ease);
@@ -143,6 +143,14 @@ body.has-bg-video .layout-gradient{display:none}
   background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.06) 60%, transparent);
 }
 .nav-links{display:flex;align-items:center;gap:.25rem}
+@media(min-width:1024px){
+  /* true centering, independent of the fixed .brand logo width and the
+     .topnav-actions width on the right — matches Astro's centered nav */
+  .nav-links{
+    position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+  }
+}
 .navlink{position:relative;padding:.5rem 1rem;font-size:.9rem;letter-spacing:.01em}
 .navlink span{position:relative}
 .navlink span::after{
@@ -158,6 +166,33 @@ body.has-bg-video .layout-gradient{display:none}
   box-shadow:0 0 30px 2px rgba(190,173,174,.25);
 }
 .nav-cta:hover{background:#fff;box-shadow:none}
+@media(min-width:1024px){
+  /* the inline CTA inside .nav-links is only used for the mobile dropdown now —
+     the desktop CTA lives in .topnav-actions instead, pinned to the right */
+  .nav-links .nav-cta{display:none}
+}
+
+/* ---------- desktop-only cluster: social icons + Hire Me, pinned right ---------- */
+.topnav-actions{
+  display:none;
+  align-items:center;
+  gap:.6rem;
+  position:absolute;
+  right:20px;top:50%;
+  transform:translateY(-50%);
+}
+@media(min-width:1024px){
+  .topnav-actions{display:flex}
+}
+.topnav-social{display:flex;align-items:center;gap:.15rem}
+.topnav-social-icon{
+  width:34px;height:34px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:color .25s ease, background-color .25s ease;
+}
+.topnav-social-icon svg{width:16px;height:16px;display:block}
+.topnav-social-icon:hover{color:var(--text);background:rgba(255,255,255,.08)}
+
 .burger{display:none;position:fixed;right:5px;top:6px;z-index:60;padding:16px}
 .burger span{display:block;width:30px;height:1px;background:#fff;margin:6px 0;border-radius:99px;transition:transform .3s var(--ease),opacity .2s var(--ease)}
 .burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -173,6 +208,7 @@ body.has-bg-video .layout-gradient{display:none}
     max-height:0;overflow:hidden;
     transition:max-height .4s var(--ease);
     gap:0;
+    transform:none;
   }
   body.menu-open .nav-links{max-height:70vh;overflow-y:auto}
   .navlink{width:100%;padding:1.1rem 1.5rem;height:auto;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -1402,3 +1438,315 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   text-decoration-color:rgba(255,255,255,.25);transition:color .2s,text-decoration-color .2s;
 }
 .timeline-link:hover{color:var(--accent-bright);text-decoration-color:var(--accent-bright)}
+
+/* =====================================================================
+   AUTOMATION SPOTLIGHT — OpenTable → Make.com → GHL flow diagram
+===================================================================== */
+.autospot-section{
+  position:relative;overflow:hidden;
+  padding:4.5rem 1.75rem;border-radius:24px;
+  background:
+    radial-gradient(ellipse 65% 55% at 8% 0%, rgba(127,184,204,.16), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(91,125,140,.12), transparent 55%),
+    var(--panel);
+  border:1px solid rgba(127,184,204,.24);
+  display:flex;flex-direction:column;gap:3rem;
+}
+.autospot-head{max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:1rem;position:relative;z-index:1}
+.autospot-head p{color:var(--muted);font-size:1rem;line-height:1.7}
+.autospot-head a{color:var(--accent-bright);text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+.autospot-head a:hover{color:#fff}
+
+.autospot-flow{
+  position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:0;padding:1rem 0;z-index:1;
+}
+.autospot-node{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  padding:1.3rem 1.15rem;min-width:132px;border-radius:16px;
+  background:rgba(255,255,255,.03);border:1px solid var(--panel-border);
+  text-align:center;transition:transform .4s var(--ease), border-color .4s, box-shadow .4s, background-color .4s;
+}
+.autospot-node span{font-size:.85rem;font-weight:700;color:var(--text);line-height:1.3;display:block}
+.autospot-node small{font-size:.68rem;color:var(--muted-2);display:block;margin-top:.1rem}
+.autospot-node-icon{
+  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:rgba(127,184,204,.1);border:1px solid rgba(127,184,204,.3);color:var(--accent-bright);
+  transition:transform .4s var(--ease), background-color .4s, box-shadow .4s;
+}
+.autospot-node-icon svg{width:20px;height:20px}
+.autospot-node:hover{
+  transform:translateY(-6px);
+  border-color:rgba(127,184,204,.55);
+  background:rgba(127,184,204,.06);
+  box-shadow:0 20px 50px -16px rgba(0,0,0,.5), 0 0 30px 2px rgba(127,184,204,.25);
+}
+.autospot-node:hover .autospot-node-icon{
+  transform:scale(1.12) rotate(-4deg);
+  box-shadow:0 0 20px 4px rgba(127,184,204,.4);
+}
+.autospot-node.is-hub{
+  border-color:rgba(127,184,204,.4);
+  background:rgba(127,184,204,.05);
+}
+.autospot-node.is-hub .autospot-node-icon{
+  background:linear-gradient(145deg, rgba(127,184,204,.3), rgba(127,184,204,.08));
+}
+
+.autospot-line{
+  position:relative;width:64px;height:2px;flex:none;
+  background:linear-gradient(90deg, rgba(127,184,204,.12), rgba(127,184,204,.5), rgba(127,184,204,.12));
+}
+.autospot-line::after{
+  content:"";position:absolute;top:50%;left:0;width:8px;height:8px;border-radius:50%;
+  background:var(--accent-bright);transform:translateY(-50%);
+  box-shadow:0 0 10px 2px rgba(127,184,204,.7);
+  animation:autospotDot 2.2s linear infinite;
+}
+@keyframes autospotDot{
+  0%{left:0;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{left:100%;opacity:0}
+}
+
+.autospot-branch{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;
+  position:relative;padding-left:1rem;
+}
+.autospot-branch::before{
+  content:"";position:absolute;left:0;top:50%;width:1rem;height:1px;
+  background:linear-gradient(90deg, rgba(127,184,204,.5), transparent);
+  transform:translateY(-50%);
+}
+.autospot-node.small{min-width:104px;padding:1rem .8rem}
+.autospot-node.small .autospot-node-icon{width:34px;height:34px}
+.autospot-node.small .autospot-node-icon svg{width:16px;height:16px}
+.autospot-node.small span{font-size:.74rem}
+
+.autospot-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1;
+}
+.autospot-stat{
+  text-align:center;padding:1.1rem;border-radius:14px;
+  background:rgba(255,255,255,.02);border:1px solid var(--panel-border);
+  transition:border-color .3s, transform .3s var(--ease);
+}
+.autospot-stat:hover{border-color:rgba(127,184,204,.4);transform:translateY(-3px)}
+.autospot-stat strong{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--accent-bright)}
+.autospot-stat span{font-size:.75rem;color:var(--muted);letter-spacing:.02em}
+
+.autospot-shots{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;
+  position:relative;z-index:1;
+}
+.autospot-shot-col{
+  display:flex;flex-direction:column;gap:1.1rem;
+}
+.autospot-shot{
+  position:relative;border-radius:14px;overflow:hidden;
+  border:1px solid var(--panel-border);background:#0b0d0e;
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.55);
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s ease;
+}
+.autospot-shot img{
+  display:block;width:100%;height:auto;
+  transition:transform .6s var(--ease), filter .5s ease;
+  filter:brightness(.92) saturate(1.02);
+}
+.autospot-shot:hover{
+  transform:translateY(-6px);
+  border-color:rgba(127,184,204,.5);
+  box-shadow:0 32px 80px -18px rgba(0,0,0,.6), 0 0 40px 4px rgba(127,184,204,.28);
+}
+.autospot-shot:hover img{transform:scale(1.06);filter:brightness(1) saturate(1.08)}
+.autospot-shot-tag{
+  position:absolute;top:.75rem;left:.75rem;z-index:1;
+  display:inline-flex;align-items:center;gap:.4rem;font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;color:#0d0d0e;background:var(--accent-bright);padding:.3rem .6rem;border-radius:99px;
+}
+.autospot-shot-caption{
+  font-size:.82rem;color:var(--muted);line-height:1.55;
+}
+.autospot-shot-caption strong{
+  display:block;color:var(--text);font-size:.88rem;font-weight:700;margin-bottom:.2rem;font-family:var(--font-body);
+}
+.autospot-shot-caption code{
+  font-size:.8em;background:rgba(255,255,255,.06);padding:.1em .35em;border-radius:5px;color:var(--accent-bright);
+}
+
+@media(max-width:760px){
+  .autospot-shots{grid-template-columns:1fr}
+}
+
+.autospot-cards{display:grid;grid-template-columns:1fr;gap:1.25rem;position:relative;z-index:1}
+@media(min-width:768px){.autospot-cards{grid-template-columns:1fr 1fr}}
+.autospot-card{
+  position:relative;padding:1.85rem;border-radius:16px;overflow:hidden;
+  background:rgba(255,255,255,.025);border:1px solid var(--panel-border);
+  display:flex;flex-direction:column;gap:.75rem;
+  transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
+}
+.autospot-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(127,184,204,.45);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.55), 0 0 34px 2px rgba(127,184,204,.2);
+}
+.autospot-card-glow{
+  position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;
+  background:var(--accent-bright);filter:blur(50px);opacity:0;transition:opacity .5s;
+}
+.autospot-card:hover .autospot-card-glow{opacity:.35}
+.autospot-card h4{font-size:1.02rem;position:relative;z-index:1;font-family:var(--font-display)}
+.autospot-card p{color:var(--muted);font-size:.86rem;line-height:1.6;position:relative;z-index:1}
+.autospot-card .tags{position:relative;z-index:1}
+
+.autospot-cta{display:flex;justify-content:center;position:relative;z-index:1}
+
+@media(max-width:760px){
+  .autospot-section{padding:3rem 1.25rem;gap:2.25rem}
+  .autospot-flow{flex-direction:column}
+  .autospot-line{width:2px;height:34px}
+  .autospot-line::after{animation:autospotDotV 2.2s linear infinite;left:50%;top:0;transform:translateX(-50%)}
+  .autospot-branch{flex-direction:column;padding-left:0;padding-top:1rem;align-items:center}
+  .autospot-branch::before{left:50%;top:0;width:1px;height:1rem;transform:translateX(-50%)}
+  .autospot-stats{grid-template-columns:1fr}
+}
+@keyframes autospotDotV{
+  0%{top:0;opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{top:100%;opacity:0}
+}
+
+/* =====================================================================
+   AUTOMATIONS IN ACTION — single floating 3D phone + video popup
+===================================================================== */
+.aphone-stage{
+  display:flex;flex-direction:column;align-items:center;gap:3.5rem;
+  width:100%;
+}
+
+.aphone-orbit{
+  position:relative;width:380px;height:440px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;
+}
+.aphone-glow{
+  position:absolute;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle, rgba(127,184,204,.4), transparent 70%);
+  filter:blur(24px);opacity:.45;pointer-events:none;
+  transition:opacity .5s ease, transform .5s ease;
+}
+.aphone-orbit:hover .aphone-glow{opacity:.9;transform:scale(1.2)}
+
+.aphone-ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(127,184,204,.25);
+  pointer-events:none;transition:border-color .5s ease;
+}
+.aphone-ring.r1{width:270px;height:270px;animation:aphoneSpin 20s linear infinite}
+.aphone-ring.r2{width:320px;height:320px;border-style:dashed;animation:aphoneSpin 30s linear infinite reverse}
+.aphone-ring.r3{width:370px;height:370px;border-color:rgba(127,184,204,.12);animation:aphonePulse 3.6s ease-in-out infinite}
+@keyframes aphoneSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes aphonePulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.06);opacity:.9}}
+.aphone-orbit:hover .aphone-ring.r1{border-color:rgba(127,184,204,.6)}
+.aphone-orbit:hover .aphone-ring.r2{border-color:rgba(127,184,204,.5)}
+.aphone-orbit:hover .aphone-ring.r3{border-color:rgba(127,184,204,.32)}
+
+.aphone-device{
+  position:relative;z-index:2;will-change:transform;
+  transform-style:preserve-3d;
+}
+/* Realistic 3D phone body — layered metallic bezel + deep contact shadow
+   instead of a flat picture-frame border */
+.aphone-device .iphone-frame{
+  width:210px;
+  height:430px;
+  border-radius:42px;
+  padding:10px;
+  border:none;
+  background:
+    linear-gradient(155deg, #3a3a3e 0%, #1a1a1c 18%, #0a0a0b 45%, #1c1c1f 78%, #38383c 100%);
+  box-shadow:
+    inset 2px 2px 3px rgba(255,255,255,.18),
+    inset -2px -2px 4px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 30px 50px -12px rgba(0,0,0,.6),
+    0 60px 90px -20px rgba(0,0,0,.8),
+    0 0 0 0 rgba(127,184,204,0);
+  transition:box-shadow .5s ease, transform .5s ease;
+}
+.aphone-orbit:hover .aphone-device .iphone-frame{
+  box-shadow:
+    inset 2px 2px 3px rgba(255,255,255,.24),
+    inset -2px -2px 4px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 40px 70px -14px rgba(0,0,0,.65),
+    0 70px 110px -18px rgba(0,0,0,.85),
+    0 0 70px 14px rgba(127,184,204,.42);
+}
+.aphone-device .iphone-island{
+  width:32%;height:3%;top:3.2%;border-radius:99px;background:#000;
+  box-shadow:inset 0 0 2px rgba(0,0,0,.9);
+}
+.aphone-device .iphone-screen{
+  border-radius:34px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.6);
+}
+.aphone-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+
+.aphone-play-badge{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(13,13,14,.55);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.28);color:#fff;
+  opacity:0;transition:opacity .35s ease, transform .35s ease;
+  pointer-events:none;
+}
+.aphone-orbit:hover .aphone-play-badge{opacity:1;transform:translateX(-50%) scale(1.08)}
+.aphone-play-icon{font-size:.95rem;padding-left:2px}
+
+.aphone-features{
+  display:flex;flex-direction:column;gap:1.5rem;max-width:640px;width:100%;
+}
+@media(min-width:640px){.aphone-features{flex-direction:row;gap:2rem}}
+.aphone-feature{
+  display:flex;gap:1rem;align-items:flex-start;flex:1;
+  padding:1.3rem;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid var(--panel-border);
+  transition:border-color .3s, transform .35s var(--ease);
+}
+.aphone-feature:hover{border-color:rgba(127,184,204,.4);transform:translateY(-3px)}
+.aphone-feature-icon{
+  flex:none;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(127,184,204,.1);border:1px solid rgba(127,184,204,.3);color:var(--accent-bright);
+}
+.aphone-feature-icon svg{width:18px;height:18px}
+.aphone-feature h4{font-size:.95rem;margin-bottom:.3rem}
+.aphone-feature p{color:var(--muted);font-size:.82rem;line-height:1.55}
+
+/* video element inside the popup lightbox (mirrors .pv-img sizing) */
+.pv-video{
+  width:100%;height:460px;object-fit:contain;object-position:center;
+  display:block;border-bottom:1px solid var(--panel-border);background:#000;
+}
+
+@media(max-width:640px){
+  .aphone-orbit{width:260px;height:300px}
+  .aphone-ring.r1{width:185px;height:185px}
+  .aphone-ring.r2{width:225px;height:225px}
+  .aphone-ring.r3{width:265px;height:265px}
+  .aphone-device .iphone-frame{
+    width:150px;height:306px;border-radius:32px;padding:7px;
+  }
+  .aphone-device .iphone-screen{border-radius:25px}
+  .pv-video{height:260px}
+}
+@media(hover:none){.aphone-orbit{cursor:auto}}
+@media(prefers-reduced-motion:reduce){
+  .aphone-ring,.aphone-play-badge{animation:none;transition:none}
+}
+.autospot-shot-col {
+  padding-bottom: 20px;
+}
