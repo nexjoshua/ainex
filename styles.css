@@ -1748,7 +1748,20 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
   .aphone-ring,.aphone-play-badge{animation:none;transition:none}
 }
 .autospot-shot-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
   padding-bottom: 20px;
+}
+
+.autospot-shot {
+  margin: 0; /* make sure no negative margin is pulling the caption up */
+}
+
+.autospot-shot-caption {
+  margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 @media(max-width:760px){
@@ -1756,11 +1769,13 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
     padding-bottom: 32px;
     padding-left: 4px;
     padding-right: 4px;
+    gap: 1.4rem; /* extra breathing room on mobile where it's stacked */
   }
 }
 
 @media(max-width:480px){
   .autospot-shot-col {
     padding-bottom: 40px;
+    gap: 1.6rem;
   }
 }
