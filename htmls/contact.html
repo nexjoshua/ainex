@@ -9,6 +9,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .page-banner{
+    position:relative;
+    padding-bottom: 5rem; /* extra breathing room at the bottom of the section */
+    background-image:
+      linear-gradient(to bottom, rgba(10,10,12,.55), rgba(10,10,12,.85)),
+      url("../images/dark-square-grid-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  /* Fade the grid background to black at the bottom edge of the section
+     so it blends smoothly into the content below instead of cutting off. */
+  .page-banner::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:140px;
+    background:linear-gradient(to bottom, rgba(10,10,12,0), var(--bg, #0d0d0e));
+    pointer-events:none;
+  }
+  </style>
 </head>
 <body class="has-bg-video">
 <div class="page-bg-video" aria-hidden="true">
