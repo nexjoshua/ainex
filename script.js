@@ -1206,3 +1206,132 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
   setTimeout(refresh, 500);
   setTimeout(refresh, 1500);
 })();
+/* ================================================================
+   FUNNELS, ADS & CROSS-PLATFORM INTEGRATIONS
+   Append this whole block to the end of script.js (after everything
+   else). Relies on `cursor`, `gsap`, and `ScrollTrigger` already being
+   defined earlier in the same file — that's already true if you're
+   pasting this at the very end of the existing script.js.
+================================================================ */
+(function initFunnelHub() {
+  const section = document.getElementById('funnel-hub');
+  if (!section) return;
+
+  /* ---- 3D tilt on the funnel stage cards, tracks the cursor ---- */
+  document.querySelectorAll('#fnlFlow .fnl-card').forEach((card) => {
+    const inner = card.querySelector('.fnl-card-inner');
+    if (!inner) return;
+    function move(e) {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      inner.style.transform = `rotateY(${px * 16}deg) rotateX(${-py * 16}deg) translateZ(6px)`;
+    }
+    function reset() { inner.style.transform = ''; }
+    card.addEventListener('mousemove', move);
+    card.addEventListener('mouseleave', reset);
+    card.addEventListener('touchstart', () => card.classList.add('is-hover'), { passive: true });
+    card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('is-hover'), 400));
+  });
+
+  /* ---- iPhone demo: idle float + click-to-expand video popup ---- */
+  const phoneStage = document.getElementById('fnlPhoneStage');
+  const phoneDevice = document.getElementById('fnlPhoneDevice');
+  if (phoneStage && phoneDevice) {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      let t = Math.random() * 10;
+      (function tick() {
+        t += 0.014;
+        const y = Math.sin(t) * 8;
+        const rot = Math.sin(t * 0.6) * 4;
+        phoneDevice.style.transform = `translateY(${y}px) rotate(${rot}deg)`;
+        requestAnimationFrame(tick);
+      })();
+    }
+
+    const WHATSAPP_URL = 'https://wa.me/639696171479';
+    const overlay = document.createElement('div');
+    overlay.className = 'pv-overlay';
+    overlay.innerHTML = `
+      <div class="pv-box">
+        <button class="pv-close" aria-label="Close preview">✕</button>
+        <video class="pv-video" src="./videos/funnel-demo.mp4" controls playsinline></video>
+        <div class="pv-body">
+          <div class="pv-tags"><span class="tag">Funnel Walkthrough</span><span class="tag">Meta Ads → GHL</span></div>
+          <div class="pv-title">The Funnel, Live On A Real Phone</div>
+          <div class="pv-desc">A real walkthrough of a funnel and booking flow exactly as a lead experiences it on their own phone — from ad click to booked appointment.</div>
+          <div class="pv-ctas">
+            <a class="pv-btn pv-outline" href="./htmls/portfolio.html#funnels">See More Funnels →</a>
+            <a class="pv-btn pv-whatsapp" target="_blank" rel="noopener" href="${WHATSAPP_URL}">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a class="pv-btn pv-primary" href="./htmls/contact.html">Get This Built For Me →</a>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+
+    const video = overlay.querySelector('.pv-video');
+    const closeBtn = overlay.querySelector('.pv-close');
+
+    function openPopup() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      video.currentTime = 0;
+      video.muted = false;
+      video.play().catch(() => {});
+    }
+    function closePopup() {
+      overlay.classList.remove('open');
+      video.pause();
+      setTimeout(() => { document.body.style.overflow = ''; }, 300);
+    }
+
+    phoneStage.addEventListener('click', openPopup);
+    closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closePopup(); });
+
+    // wires the site's custom cursor "click" glow to these dynamically
+    // created buttons, same as every other popup on the site.
+    overlay.querySelectorAll('.pv-btn, .pv-close').forEach((el) => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('is-click'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('is-click'));
+    });
+  }
+
+  /* ---- MacBook: subtle pointer-tilt; click navigates via its own href ---- */
+  const macStage = document.getElementById('fnlMacStage');
+  const mac = document.getElementById('fnlMac');
+  if (macStage && mac) {
+    macStage.addEventListener('mousemove', (e) => {
+      const rect = macStage.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      mac.style.transform = `rotateY(${px * 10}deg) rotateX(${-py * 8}deg)`;
+    });
+    macStage.addEventListener('mouseleave', () => { mac.style.transform = ''; });
+  }
+
+  /* ---- scroll-in reveal (matches the rest of the site) ---- */
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.from('.fnl-head > *', {
+      opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power2.out',
+      scrollTrigger: { trigger: '#funnel-hub', start: 'top 82%' },
+    });
+    gsap.from('#fnlFlow .fnl-card', {
+      opacity: 0, y: 30, duration: .6, stagger: .1, ease: 'power2.out',
+      scrollTrigger: { trigger: '#fnlFlow', start: 'top 85%' },
+    });
+    gsap.from('.fnl-show-col', {
+      opacity: 0, y: 30, duration: .7, stagger: .15, ease: 'power2.out',
+      scrollTrigger: { trigger: '.fnl-showcase', start: 'top 85%' },
+    });
+    gsap.from('#funnel-hub .hero-actions', {
+      opacity: 0, y: 16, duration: .6, delay: .1, ease: 'power2.out',
+      scrollTrigger: { trigger: '#funnel-hub', start: 'top 70%' },
+    });
+  }
+})();
