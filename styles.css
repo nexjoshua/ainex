@@ -362,12 +362,7 @@ main{width:100%;padding:0 20px}
 .namecard-name{font-size:clamp(2.6rem,8vw,6rem);font-weight:700;letter-spacing:-.01em;color:var(--text)}
 .namecard-role{font-size:1.05rem;letter-spacing:.03em;color:var(--muted);display:flex;gap:.75rem;align-items:center}
 .namecard-role span{color:var(--accent-bright)}
-.hero-title {
-  font-weight: 700;
-  font-size: clamp(3.2rem, 6.5vw, 5.2rem);
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
+.hero-title{font-weight:700;font-size:clamp(2.1rem,5.6vw,3.6rem);letter-spacing:-.02em;line-height:1.12}
 .hero-title .grad{background:linear-gradient(100deg,var(--accent-bright),var(--metal-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{max-width:640px;letter-spacing:.01em;font-size:1.08rem;color:var(--muted);line-height:1.6}
 .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:.5rem}
@@ -1791,4 +1786,150 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
     padding-bottom: 40px;
     gap: 1.6rem;
   }
+}
+/* =====================================================================
+   FUNNELS, ADS & CROSS-PLATFORM INTEGRATIONS
+   Append this whole block to the end of styles.css.
+   Uses the site's existing tokens (--panel, --panel-border, --accent-bright,
+   --muted, --font-display, --font-body) and reuses .iphone-frame /
+   .iphone-island / .iphone-screen / .pv-overlay / .pv-video already
+   defined elsewhere in styles.css.
+===================================================================== */
+
+.fnl-section{
+  position:relative;overflow:hidden;
+  padding:4.5rem 1.75rem;border-radius:24px;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 0%, rgba(127,184,204,.14), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(91,125,140,.12), transparent 55%),
+    var(--panel);
+  border:1px solid rgba(127,184,204,.22);
+  display:flex;flex-direction:column;gap:3.5rem;
+}
+.fnl-head{max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:1rem;position:relative;z-index:1}
+.fnl-head p{color:var(--muted);font-size:1rem;line-height:1.7}
+
+/* ---------- 3D funnel stage cards ---------- */
+.fnl-flow{
+  display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;
+  gap:0;perspective:1400px;position:relative;z-index:1;
+}
+.fnl-card{flex:1 1 170px;max-width:210px}
+.fnl-card-inner{
+  position:relative;height:100%;padding:1.6rem 1.3rem;border-radius:16px;
+  background:rgba(255,255,255,.03);border:1px solid var(--panel-border);
+  display:flex;flex-direction:column;gap:.6rem;text-align:left;
+  transform-style:preserve-3d;will-change:transform;
+  transition:box-shadow .4s ease, border-color .4s ease, transform .15s ease-out;
+}
+.fnl-card.is-final .fnl-card-inner{border-color:rgba(127,184,204,.4);background:rgba(127,184,204,.05)}
+.fnl-card-icon{
+  width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(127,184,204,.1);border:1px solid rgba(127,184,204,.3);color:var(--accent-bright);
+  transform:translateZ(24px);
+}
+.fnl-card-icon svg{width:18px;height:18px}
+.fnl-card-step{font-family:var(--font-body);text-transform:uppercase;font-size:.68rem;letter-spacing:.1em;color:var(--accent-bright);transform:translateZ(18px)}
+.fnl-card h4{font-size:.98rem;transform:translateZ(20px)}
+.fnl-card p{font-size:.8rem;color:var(--muted);line-height:1.55;transform:translateZ(14px)}
+.fnl-card-inner:hover,
+.fnl-card.is-hover .fnl-card-inner{
+  border-color:rgba(127,184,204,.55);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.55), 0 0 40px 4px rgba(127,184,204,.28);
+}
+
+.fnl-arrow{flex:0 0 auto;width:34px;align-self:center;height:2px;position:relative;
+  background:linear-gradient(90deg, rgba(127,184,204,.1), rgba(127,184,204,.5));}
+.fnl-arrow::after{
+  content:"";position:absolute;top:50%;left:0;width:7px;height:7px;border-radius:50%;
+  background:var(--accent-bright);transform:translateY(-50%);
+  box-shadow:0 0 10px 2px rgba(127,184,204,.7);
+  animation:fnlDot 2.4s linear infinite;
+}
+@keyframes fnlDot{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+
+/* ---------- showcase: iPhone demo + MacBook screenshot ---------- */
+.fnl-showcase{display:grid;grid-template-columns:1fr;gap:3rem;position:relative;z-index:1}
+@media(min-width:900px){.fnl-showcase{grid-template-columns:1fr 1fr}}
+.fnl-show-col{display:flex;flex-direction:column;align-items:center;gap:1.75rem;text-align:center}
+.fnl-show-copy{max-width:340px;display:flex;flex-direction:column;gap:.5rem}
+.fnl-show-copy p{color:var(--muted);font-size:.88rem;line-height:1.6}
+
+/* iPhone */
+.fnl-phone-stage{position:relative;width:230px;height:280px;display:flex;align-items:center;justify-content:center;cursor:none}
+.fnl-phone-glow{position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle, rgba(127,184,204,.35), transparent 70%);filter:blur(20px);opacity:.5;transition:opacity .5s}
+.fnl-phone-stage:hover .fnl-phone-glow{opacity:.9}
+.fnl-phone-ring{position:absolute;border-radius:50%;border:1px solid rgba(127,184,204,.25)}
+.fnl-phone-ring.r1{width:170px;height:170px;animation:fnlSpin 18s linear infinite}
+.fnl-phone-ring.r2{width:210px;height:210px;border-style:dashed;animation:fnlSpin 26s linear infinite reverse}
+@keyframes fnlSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.fnl-phone-device{position:relative;z-index:2;will-change:transform}
+.fnl-phone-device .iphone-frame{
+  width:130px;height:266px;border-radius:26px;padding:6px;border:none;
+  background:linear-gradient(155deg,#3a3a3e 0%,#1a1a1c 18%,#0a0a0b 45%,#1c1c1f 78%,#38383c 100%);
+  box-shadow:inset 1px 1px 2px rgba(255,255,255,.18), inset -1px -1px 3px rgba(0,0,0,.85), 0 24px 50px -12px rgba(0,0,0,.6);
+  transition:box-shadow .5s ease;
+}
+.fnl-phone-stage:hover .fnl-phone-device .iphone-frame{
+  box-shadow:inset 1px 1px 2px rgba(255,255,255,.24), inset -1px -1px 3px rgba(0,0,0,.85), 0 30px 60px -12px rgba(0,0,0,.65), 0 0 40px 8px rgba(127,184,204,.4);
+}
+.fnl-phone-device .iphone-island{width:32%;height:3%;top:3.4%;border-radius:99px;background:#000}
+.fnl-phone-device .iphone-screen{border-radius:20px}
+.fnl-phone-video{width:100%;height:100%;object-fit:cover;background:#000}
+.fnl-play-badge{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;
+  background:rgba(13,13,14,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);color:#fff;
+  display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;pointer-events:none;font-size:.75rem;
+}
+.fnl-phone-stage:hover .fnl-play-badge{opacity:1}
+
+/* MacBook Pro mockup — clickable, links to the portfolio funnels section */
+.fnl-mac-stage{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:1rem;
+  width:100%;max-width:360px;text-decoration:none;cursor:none;perspective:1400px;
+}
+.fnl-mac-glow{position:absolute;inset:-20px 10% auto;height:200px;border-radius:50%;background:radial-gradient(circle, rgba(127,184,204,.3), transparent 70%);filter:blur(30px);opacity:.4;transition:opacity .5s;pointer-events:none}
+.fnl-mac-stage:hover .fnl-mac-glow{opacity:.85}
+.fnl-mac{position:relative;width:100%;transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform;z-index:1}
+.fnl-mac-lid{
+  position:relative;background:linear-gradient(155deg,#3a3a3e,#1a1a1c 20%,#0a0a0b 55%,#1c1c1f);
+  border-radius:12px 12px 3px 3px;padding:8px 8px 4px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), 0 30px 60px -18px rgba(0,0,0,.6);
+  transition:box-shadow .4s ease;
+}
+.fnl-mac-stage:hover .fnl-mac-lid{box-shadow:inset 0 0 0 1px rgba(255,255,255,.1), 0 40px 80px -16px rgba(0,0,0,.65), 0 0 46px 8px rgba(127,184,204,.3)}
+.fnl-mac-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:6px;background:#0a0a0b;border-radius:0 0 6px 6px;z-index:2}
+.fnl-mac-screen{position:relative;border-radius:5px;overflow:hidden;background:#000;aspect-ratio:16/10.2}
+.fnl-mac-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s ease}
+.fnl-mac-stage:hover .fnl-mac-screen img{transform:scale(1.04)}
+.fnl-mac-hinge{height:6px;background:linear-gradient(180deg,#232326,#141416)}
+.fnl-mac-base{position:relative;height:12px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#3d3d41,#1a1a1c);box-shadow:0 14px 30px -8px rgba(0,0,0,.55)}
+.fnl-mac-base span{position:absolute;left:50%;top:0;transform:translateX(-50%);width:14%;height:5px;border-radius:0 0 6px 6px;background:rgba(0,0,0,.35)}
+.fnl-mac-cta{
+  font-family:var(--font-body);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:var(--accent-bright);
+  opacity:0;transform:translateY(-6px);transition:opacity .3s, transform .3s;
+}
+.fnl-mac-stage:hover .fnl-mac-cta{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .fnl-flow{flex-direction:column;align-items:center}
+  .fnl-card{max-width:320px;width:100%}
+  .fnl-arrow{width:2px;height:28px}
+  .fnl-arrow::after{animation:fnlDotV 2.4s linear infinite;left:50%;top:0;transform:translateX(-50%)}
+}
+@keyframes fnlDotV{0%{top:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+
+@media(max-width:640px){
+  .fnl-section{padding:3rem 1.25rem;gap:2.25rem}
+  .fnl-phone-stage{width:190px;height:230px}
+  .fnl-phone-device .iphone-frame{width:108px;height:222px}
+  .fnl-phone-ring.r1{width:140px;height:140px}
+  .fnl-phone-ring.r2{width:174px;height:174px}
+  .fnl-mac-stage{max-width:300px}
+}
+
+@media(hover:none){.fnl-phone-stage,.fnl-mac-stage{cursor:auto}}
+@media(prefers-reduced-motion:reduce){
+  .fnl-phone-ring,.fnl-arrow::after{animation:none}
+  .fnl-card-inner,.fnl-mac,.fnl-phone-device{transition:none}
 }
