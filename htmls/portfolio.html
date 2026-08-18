@@ -10,29 +10,6 @@
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<style>
-  /* Grid background applied ONLY to the Portfolio page banner/hero section */
-  .page-banner{
-    position:relative;
-    padding-bottom: 5rem; /* extra breathing room at the bottom of the section */
-    background-image:
-      linear-gradient(to bottom, rgba(10,10,12,.55), rgba(10,10,12,.85)),
-      url("../images/dark-square-grid-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  /* Fade the grid background to black at the bottom edge of the section
-     so it blends smoothly into the content below instead of cutting off. */
-  .page-banner::after{
-    content:"";
-    position:absolute;
-    left:0; right:0; bottom:0;
-    height:140px;
-    background:linear-gradient(to bottom, rgba(10,10,12,0), var(--bg, #0d0d0e));
-    pointer-events:none;
-  }
-</style>
 </head>
 <body>
 <div id="preloader">
@@ -79,7 +56,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A6 6 0 0 1 16 8z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
         </a>
       </div>
-      <a href="contact.html" class="nav-cta">Hire Me →</a>
+      <a href="./htmls/contact.html" class="nav-cta">Hire Me →</a>
     </div>
   </nav>
   <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -346,7 +323,6 @@
           </article>
         </div>
       </section>
-
       <!-- ============ FEATURED BUILD: SOCIAL AGENT ============ -->
       <section class="section" id="social-agent">
         <div class="project-list">
@@ -902,6 +878,36 @@
           <span class="eyebrow-label" style="justify-content:center">Conversion Focused</span>
           <h2>Sales Funnels</h2>
         </div>
+
+        <!-- ============ FUNNELS, ALL IN ONE FRAME (MacBook collage) ============ -->
+        <div class="pfm-stage" id="pfmStage" data-cursor="expand">
+          <div class="pfm-glow"></div>
+          <div class="pfm-mac" id="pfmMac">
+            <div class="pfm-mac-lid">
+              <div class="pfm-mac-notch"></div>
+              <div class="pfm-mac-screen">
+                <div class="pfm-collage">
+                  <div class="pfm-shot pfm-shot-1">
+                    <div class="pfm-shot-bar"><span></span><span></span><span></span><em>rayanova.io</em></div>
+                    <img src="../images/fnl-highlight-rayanova-xl.jpg" alt="Rayanova booking funnel">
+                  </div>
+                  <div class="pfm-shot pfm-shot-2">
+                    <div class="pfm-shot-bar"><span></span><span></span><span></span><em>edigishark.com</em></div>
+                    <img src="../images/fnl-highlight-edigishark-xl.jpg" alt="eDigiShark lead magnet funnel">
+                  </div>
+                  <div class="pfm-shot pfm-shot-3">
+                    <div class="pfm-shot-bar"><span></span><span></span><span></span><em>booking step</em></div>
+                    <img src="../images/fnl-highlight-modal-xl.jpg" alt="Rayanova booking form modal">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pfm-mac-hinge"></div>
+            <div class="pfm-mac-base"><span></span></div>
+          </div>
+          <p class="pfm-caption">Three funnels, one screen — hover to bring each one forward.</p>
+        </div>
+
         <div class="site-grid">
 
           <div class="site-card" data-cursor="expand" data-href="https://trustedhomeservicespros.com/">
@@ -1014,7 +1020,7 @@
             </div>
           </div>
 
-          <div class="site-card" data-cursor="expand" data-href="https://nexjoshua.github.io/joshuamendoza/">
+          <div class="site-card" data-cursor="expand" data-href="https://nexjosh.github.io/joshuamendoza/">
             <div class="site-thumb"><img src="../images/nex-josh.png" alt="New portfolio site" onerror="this.style.display='none'"></div>
             <div class="site-body">
               <h4>New Brand & Portfolio - NEX</h4>
