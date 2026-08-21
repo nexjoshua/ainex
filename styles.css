@@ -362,7 +362,12 @@ main{width:100%;padding:0 20px}
 .namecard-name{font-size:clamp(2.6rem,8vw,6rem);font-weight:700;letter-spacing:-.01em;color:var(--text)}
 .namecard-role{font-size:1.05rem;letter-spacing:.03em;color:var(--muted);display:flex;gap:.75rem;align-items:center}
 .namecard-role span{color:var(--accent-bright)}
-.hero-title{font-weight:700;font-size:clamp(2.1rem,5.6vw,3.6rem);letter-spacing:-.02em;line-height:1.12}
+.hero-title{
+  font-weight:700;
+  font-size:clamp(2.5rem,6.5vw,4.5rem);
+  letter-spacing:-.02em;
+  line-height:1.08;
+}
 .hero-title .grad{background:linear-gradient(100deg,var(--accent-bright),var(--metal-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{max-width:640px;letter-spacing:.01em;font-size:1.08rem;color:var(--muted);line-height:1.6}
 .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:.5rem}
