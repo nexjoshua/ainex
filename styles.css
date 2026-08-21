@@ -364,9 +364,9 @@ main{width:100%;padding:0 20px}
 .namecard-role span{color:var(--accent-bright)}
 .hero-title{
   font-weight:700;
-  font-size:clamp(2.5rem,6.5vw,4.5rem);
+  font-size:clamp(4.2rem,11.2vw,7.2rem);
   letter-spacing:-.02em;
-  line-height:1.08;
+  line-height:1.05;
 }
 .hero-title .grad{background:linear-gradient(100deg,var(--accent-bright),var(--metal-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{max-width:640px;letter-spacing:.01em;font-size:1.08rem;color:var(--muted);line-height:1.6}
