@@ -362,12 +362,7 @@ main{width:100%;padding:0 20px}
 .namecard-name{font-size:clamp(2.6rem,8vw,6rem);font-weight:700;letter-spacing:-.01em;color:var(--text)}
 .namecard-role{font-size:1.05rem;letter-spacing:.03em;color:var(--muted);display:flex;gap:.75rem;align-items:center}
 .namecard-role span{color:var(--accent-bright)}
-.hero-title{
-  font-weight:700;
-  font-size:clamp(4.2rem,11.2vw,7.2rem);
-  letter-spacing:-.02em;
-  line-height:1.05;
-}
+.hero-title{font-weight:700;font-size:clamp(2.1rem,5.6vw,3.6rem);letter-spacing:-.02em;line-height:1.12}
 .hero-title .grad{background:linear-gradient(100deg,var(--accent-bright),var(--metal-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-sub{max-width:640px;letter-spacing:.01em;font-size:1.08rem;color:var(--muted);line-height:1.6}
 .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:.5rem}
@@ -2009,3 +2004,81 @@ body.has-3d-bg .backdrop-blur-layer{display:none}
 }
 @media(hover:none){.pfm-stage{cursor:auto}}
 @media(prefers-reduced-motion:reduce){.pfm-mac,.pfm-shot{transition:none}}
+
+/* =====================================================================
+   PREMIUM WEBSITES SHOWCASE — floating MacBook + 3D phone, always-on
+   infinite motion. Reuses .pfm-mac-lid/.pfm-mac-notch/.pfm-mac-hinge/
+   .pfm-mac-base and .aphone-device/.iphone-island/.aphone-video already
+   defined above; only the layout + new video screen are added here.
+===================================================================== */
+.pws-section{
+  display:flex;flex-direction:column;align-items:center;gap:2.25rem;
+}
+.pws-stage{
+  position:relative;width:min(94vw,860px);
+  display:flex;justify-content:center;align-items:flex-end;
+  padding:2.5rem 1rem 5.5rem;
+}
+.pws-glow{
+  position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);
+  width:560px;height:420px;border-radius:50%;
+  background:radial-gradient(circle, rgba(127,184,204,.32), transparent 70%);
+  filter:blur(46px);pointer-events:none;z-index:0;
+  animation:pwsGlowPulse 5.5s ease-in-out infinite;
+}
+@keyframes pwsGlowPulse{
+  0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:.75;transform:translate(-50%,-50%) scale(1.09)}
+}
+
+.pws-mac{
+  position:relative;z-index:1;width:min(560px,76%);margin-left:10%;
+  animation:pwsFloatMac 7.5s ease-in-out infinite;
+}
+.pws-mac .pfm-mac-lid{
+  transform:perspective(1500px) rotateX(3deg) rotateY(-8deg);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 50px 100px -20px rgba(0,0,0,.7), 0 0 60px 8px rgba(127,184,204,.18);
+}
+.pws-mac-screen{
+  position:relative;border-radius:6px;overflow:hidden;background:#000;
+  aspect-ratio:16/10;box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);
+}
+.pws-mac-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+@keyframes pwsFloatMac{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-14px) rotate(.4deg)}
+}
+
+.pws-phone{
+  position:absolute;left:0;bottom:-2%;z-index:3;width:180px;
+  animation:pwsFloatPhone 6.2s ease-in-out infinite;
+  filter:drop-shadow(0 34px 50px rgba(0,0,0,.55));
+}
+.pws-phone .iphone-frame{
+  width:180px;height:368px;border-radius:34px;padding:8px;
+  box-shadow:
+    inset 2px 2px 3px rgba(255,255,255,.18),
+    inset -2px -2px 4px rgba(0,0,0,.85),
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 30px 54px -14px rgba(0,0,0,.65),
+    0 0 50px 10px rgba(127,184,204,.22);
+}
+.pws-phone .iphone-island{width:30%;height:3.3%;top:3.4%}
+.pws-phone .iphone-screen{border-radius:27px}
+@keyframes pwsFloatPhone{
+  0%,100%{transform:translateY(0) rotate(-6deg)}
+  50%{transform:translateY(-22px) rotate(-3deg)}
+}
+
+.pws-caption{color:var(--muted);font-size:.9rem;text-align:center;max-width:640px}
+
+@media(max-width:760px){
+  .pws-stage{padding:1.5rem 1rem 6.5rem}
+  .pws-mac{width:88%;margin-left:0}
+  .pws-phone{width:128px;left:-6%;bottom:-6%}
+  .pws-phone .iphone-frame{width:128px;height:262px;border-radius:26px}
+  .pws-phone .iphone-screen{border-radius:19px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pws-glow,.pws-mac,.pws-phone{animation:none}
+}
