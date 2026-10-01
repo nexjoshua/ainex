@@ -590,7 +590,9 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
 ================================================================ */
 (function initPreviewPopup() {
   const WHATSAPP_URL = 'https://wa.me/639696171479';
-  const HIRE_URL = 'contact.html';
+  // Pages inside /htmls/ link to contact.html directly; the homepage needs the folder prefix.
+  const IN_SUBFOLDER = /\/htmls\//.test(window.location.pathname);
+  const HIRE_URL = IN_SUBFOLDER ? 'contact.html' : './htmls/contact.html';
 
   const overlay = document.createElement('div');
   overlay.className = 'pv-overlay';
@@ -598,6 +600,7 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
     <div class="pv-box">
       <button class="pv-close" aria-label="Close preview">✕</button>
       <img class="pv-img" src="" alt="">
+      <video class="pv-video pv-vid" muted loop playsinline controls style="display:none"></video>
       <div class="pv-body">
         <div class="pv-tags"></div>
         <div class="pv-title"></div>
@@ -614,15 +617,13 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
     </div>`;
   document.body.appendChild(overlay);
 
-  // the custom cursor only gets its "click" hover state wired up for elements
-  // that exist at page load — these buttons are created dynamically right here,
-  // so without this they'd show no cursor at all on hover.
   overlay.querySelectorAll('.pv-btn, .pv-close').forEach((el) => {
     el.addEventListener('mouseenter', () => cursor.classList.add('is-click'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('is-click'));
   });
 
   const pvImg = overlay.querySelector('.pv-img');
+  const pvVid = overlay.querySelector('.pv-vid');
   const pvTitle = overlay.querySelector('.pv-title');
   const pvDesc = overlay.querySelector('.pv-desc');
   const pvTags = overlay.querySelector('.pv-tags');
@@ -631,6 +632,7 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
 
   function extractCard(el) {
     const img = el.querySelector('img');
+    const vid = el.querySelector('video');
     const titleEl = el.querySelector('h3, h4');
     const descEl = el.querySelector('.project-copy p, .automation-caption, .site-card p, p');
     const tagEls = el.querySelectorAll('.tag');
@@ -640,11 +642,11 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
       link = externalLink ? externalLink.href : '';
     }
     let desc = descEl ? descEl.textContent.trim() : '';
-    // automation-caption puts the bold title inline with the description — strip it out
     const strongEl = descEl ? descEl.querySelector('strong') : null;
     if (strongEl) desc = desc.replace(strongEl.textContent, '').trim();
     return {
       img: img ? img.src : '',
+      video: vid ? (vid.dataset.src || vid.currentSrc || vid.getAttribute('src') || '') : '',
       title: (titleEl ? titleEl.textContent.trim() : '') || (strongEl ? strongEl.textContent.trim() : ''),
       desc,
       tags: Array.from(tagEls).map((t) => t.textContent.trim()),
@@ -654,9 +656,21 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
 
   function openPreview(el) {
     const data = extractCard(el);
-    if (!data.title && !data.img) return;
+    if (!data.title && !data.img && !data.video) return;
+
     if (data.img) { pvImg.src = data.img; pvImg.style.display = 'block'; }
     else { pvImg.style.display = 'none'; }
+
+    if (!data.img && data.video) {
+      pvVid.src = data.video;
+      pvVid.style.display = 'block';
+      pvVid.play().catch(() => {});
+    } else {
+      pvVid.pause();
+      pvVid.removeAttribute('src');
+      pvVid.style.display = 'none';
+    }
+
     pvTitle.textContent = data.title;
     pvDesc.textContent = data.desc;
     pvTags.innerHTML = '';
@@ -673,6 +687,7 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
   }
 
   function closePreview() {
+    pvVid.pause();
     overlay.classList.remove('open');
     setTimeout(() => { document.body.style.overflow = ''; }, 300);
   }
@@ -683,15 +698,13 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
 
   document.querySelectorAll('.project-row, .site-card, .automation-card').forEach((card) => {
     card.addEventListener('click', (e) => {
-      if (e.target.closest('a')) return; // an explicit link inside the card still navigates directly
+      if (e.target.closest('a')) return;
       openPreview(card);
     });
   });
 
-  // exposed so the NC dashboard carousel (below) can reuse the same modal
   window.__nexsaleOpenPreview = { overlay, pvImg, pvTitle, pvDesc, pvTags, pvLive };
 })();
-
 /* ================================================================
    Auto-glow for the three "hero" screenshots (social platforms grid,
    North City Roofing site, GHL workflow builder) — matches by image
@@ -1480,4 +1493,215 @@ window.addEventListener('load', () => ScrollTrigger.refresh());
       scrollTrigger: { trigger: stage, start: 'top 82%' },
     });
   }
+})();
+
+/* ================================================================
+   SHARED VIDEO HELPERS
+   - nexOpenVideoLightbox: plays any video URL full size in #popup
+   - lazy loader: .lazy-vid videos only download when near the
+     viewport, and pause again when scrolled away (saves data)
+================================================================ */
+function nexOpenVideoLightbox(src, startAt) {
+  const popup = document.getElementById('popup');
+  const box = document.getElementById('popupImg');
+  if (!popup || !box || !src) return;
+  box.innerHTML = '';
+  box.style.background = '';
+  const v = document.createElement('video');
+  v.src = src;
+  v.controls = true;
+  v.playsInline = true;
+  v.loop = true;
+  v.preload = 'auto';
+  v.style.cssText = 'width:100%;height:100%;max-height:85vh;object-fit:contain;background:#000';
+  if (startAt > 0) {
+    v.addEventListener('loadedmetadata', () => { try { v.currentTime = startAt; } catch (e) {} }, { once: true });
+  }
+  box.appendChild(v);
+  popup.classList.add('is-open');
+  v.play().catch(() => { v.muted = true; v.play().catch(() => {}); });
+}
+
+(function initVideoLightboxTriggers() {
+  document.querySelectorAll('[data-video-lightbox]').forEach((el) => {
+    const open = () => nexOpenVideoLightbox(el.dataset.videoLightbox);
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  });
+
+  // Esc closes the #popup lightbox
+  const popup = document.getElementById('popup');
+  const box = document.getElementById('popupImg');
+  if (popup && box) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup.classList.contains('is-open')) {
+        popup.classList.remove('is-open');
+        box.innerHTML = '';
+      }
+    });
+  }
+})();
+
+(function initLazyVideos() {
+  const vids = document.querySelectorAll('video.lazy-vid[data-src]');
+  if (!vids.length) return;
+  const load = (v) => {
+    if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; }
+    v.muted = true;
+  };
+  if (!('IntersectionObserver' in window)) {
+    vids.forEach((v) => { load(v); v.play().catch(() => {}); });
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const v = entry.target;
+      if (entry.isIntersecting) { load(v); v.play().catch(() => {}); }
+      else if (!v.paused) { v.pause(); }
+    });
+  }, { rootMargin: '200px 0px', threshold: 0.15 });
+  vids.forEach((v) => io.observe(v));
+})();
+
+/* ================================================================
+   3D WEBSITE HIGHLIGHTS — tabbed MacBook player
+   One video plays at a time; each tab shows a progress bar; when a
+   video ends the next industry plays automatically. Only loads once
+   the section is on screen, and pauses when scrolled away.
+================================================================ */
+(function initWeb3dHighlights() {
+  const section = document.getElementById('web-3d');
+  if (!section) return;
+  const videos = Array.from(section.querySelectorAll('.w3d-video'));
+  const tabs = Array.from(section.querySelectorAll('.w3d-tab'));
+  const stage = document.getElementById('w3dStage');
+  const mac = document.getElementById('w3dMac');
+  const badgeText = section.querySelector('.w3d-badge-text');
+  if (!videos.length) return;
+
+  let current = 0;
+  let inView = false;
+
+  const ensureSrc = (v) => {
+    if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; }
+    v.muted = true;
+  };
+  const setBar = (i, p) => {
+    const bar = tabs[i] && tabs[i].querySelector('.w3d-tab-bar i');
+    if (bar) bar.style.width = (Math.min(p, 1) * 100) + '%';
+  };
+
+  function show(i, restart) {
+    current = i;
+    videos.forEach((v, idx) => {
+      const active = idx === i;
+      v.classList.toggle('is-active', active);
+      if (!active) { v.pause(); setBar(idx, 0); }
+    });
+    tabs.forEach((t, idx) => {
+      t.classList.toggle('is-active', idx === i);
+      t.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+    });
+    if (badgeText && tabs[i]) {
+      const s = tabs[i].querySelector('strong');
+      badgeText.textContent = s ? s.textContent : '';
+    }
+    const v = videos[i];
+    if (inView) {
+      ensureSrc(v);
+      if (restart) { try { v.currentTime = 0; } catch (e) {} }
+      v.play().catch(() => {});
+    }
+  }
+
+  videos.forEach((v, idx) => {
+    v.addEventListener('timeupdate', () => {
+      if (idx === current && v.duration) setBar(idx, v.currentTime / v.duration);
+    });
+    v.addEventListener('ended', () => {
+      if (idx === current) show((idx + 1) % videos.length, true);
+    });
+  });
+
+  tabs.forEach((t, idx) => {
+    t.addEventListener('click', () => show(idx, true));
+    if (typeof cursor !== 'undefined' && cursor) {
+      t.addEventListener('mouseenter', () => cursor.classList.add('is-click'));
+      t.addEventListener('mouseleave', () => cursor.classList.remove('is-click'));
+    }
+  });
+
+  show(0, false); // set initial UI state without downloading anything yet
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        inView = entry.isIntersecting;
+        const v = videos[current];
+        if (inView) { ensureSrc(v); v.play().catch(() => {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.2 }).observe(stage || section);
+  } else {
+    inView = true;
+    show(0, true);
+  }
+
+  if (stage && mac) {
+    stage.addEventListener('mousemove', (e) => {
+      const r = stage.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      mac.style.transform = `rotateX(${7 - py * 8}deg) rotateY(${px * 10}deg)`;
+    });
+    stage.addEventListener('mouseleave', () => { mac.style.transform = ''; });
+
+    const openActive = () => {
+      const v = videos[current];
+      nexOpenVideoLightbox(v.dataset.src, v.currentTime || 0);
+    };
+    mac.addEventListener('click', openActive);
+    mac.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openActive(); }
+    });
+  }
+
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.from('#web-3d .w3d-head > *', {
+      opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power2.out',
+      scrollTrigger: { trigger: '#web-3d', start: 'top 82%' },
+    });
+    gsap.from('#w3dStage', {
+      opacity: 0, y: 50, scale: .94, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#w3dStage', start: 'top 85%' },
+    });
+    gsap.from('#web-3d .w3d-tab', {
+      opacity: 0, y: 20, duration: .6, stagger: .1, ease: 'power2.out',
+      scrollTrigger: { trigger: '#web-3d .w3d-tabs', start: 'top 92%' },
+    });
+  }
+})();
+
+/* ================================================================
+   RECENT WEBSITES BUILT — scroll-in reveal
+================================================================ */
+(function initRecentBuilds() {
+  if (!document.getElementById('recent-builds') || !window.gsap || !window.ScrollTrigger) return;
+
+  gsap.from('#recent-builds .section-head > *', {
+    opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power2.out',
+    scrollTrigger: { trigger: '#recent-builds', start: 'top 82%' },
+  });
+  gsap.from('#recent-builds .rwb-feature', {
+    opacity: 0, y: 40, duration: .9, ease: 'power2.out',
+    scrollTrigger: { trigger: '#recent-builds .rwb-feature', start: 'top 85%' },
+  });
+  gsap.utils.toArray('#recent-builds .rwb-card').forEach((card, i) => {
+    gsap.from(card, {
+      opacity: 0, y: 40, duration: .8, delay: (i % 2) * .12, ease: 'power2.out',
+      scrollTrigger: { trigger: card, start: 'top 88%' },
+    });
+  });
 })();
