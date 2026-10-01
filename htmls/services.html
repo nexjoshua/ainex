@@ -10,27 +10,6 @@
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
 <style>
-  /* Grid background applied ONLY to the Portfolio page banner/hero section */
-  .page-banner{
-    position:relative;
-    padding-bottom: 5rem; /* extra breathing room at the bottom of the section */
-    background-image:
-      linear-gradient(to bottom, rgba(10,10,12,.55), rgba(10,10,12,.85)),
-      url("../images/dark-square-grid-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  /* Fade the grid background to black at the bottom edge of the section
-     so it blends smoothly into the content below instead of cutting off. */
-  .page-banner::after{
-    content:"";
-    position:absolute;
-    left:0; right:0; bottom:0;
-    height:140px;
-    background:linear-gradient(to bottom, rgba(10,10,12,0), var(--bg, #0d0d0e));
-    pointer-events:none;
-  }
   /* ===== AI Voice Agent card — page-specific hooky animation ===== */
   .service-card.voice-agent{
     position:relative;
@@ -102,11 +81,11 @@
   <nav class="topnav">
     <div class="nav-links">
       <a href="../index.html" class="navlink"><span>Home</span></a>
-      <a href="services.html" class="navlink is-active"><span>Services</span></a>
-      <a href="portfolio.html" class="navlink"><span>Portfolio</span></a>
-      <a href="automations.html" class="navlink"><span>Automations</span></a>
-      <a href="about.html" class="navlink"><span>About</span></a>
-      <a href="contact.html" class="nav-cta">Hire Me →</a>
+      <a href="./services.html" class="navlink is-active"><span>Services</span></a>
+      <a href="./portfolio.html" class="navlink"><span>Portfolio</span></a>
+      <a href="./automations.html" class="navlink"><span>Automations</span></a>
+      <a href="./about.html" class="navlink"><span>About</span></a>
+      <a href="./contact.html" class="nav-cta">Hire Me →</a>
     </div>
     <div class="topnav-actions">
       <div class="topnav-social">
@@ -123,7 +102,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A6 6 0 0 1 16 8z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
         </a>
       </div>
-      <a href="contact.html" class="nav-cta">Hire Me →</a>
+      <a href="./contact.html" class="nav-cta">Hire Me →</a>
     </div>
   </nav>
   <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -135,6 +114,9 @@
       <p>Ten disciplines, one goal: systems that turn traffic into booked, paying clients — end to end.</p>
     </section>
 
+    </div>
+  </div>
+</section>
     <div class="sections-flow" style="margin-top:2rem">
 
       <div class="skills-3d-scene">
@@ -142,7 +124,169 @@
           <div class="skills-3d-world" id="skillsWorld"></div>
         </div>
       </div>
+      <!-- ============ 3D WEBSITE HIGHLIGHTS ============ -->
+      <section class="section" id="web-3d">
+        <div class="w3d-section">
+          <div class="section-head center w3d-head">
+            <span class="eyebrow-label" style="justify-content:center">3D Website Highlights</span>
+            <h2>Premium Websites, Built in 3D</h2>
+            <p>Scroll-driven 3D builds for local service businesses, recorded live in desktop view. Pick an industry below, or click the screen to watch it full size.</p>
+          </div>
 
+          <div class="w3d-stage" id="w3dStage">
+            <div class="w3d-glow" aria-hidden="true"></div>
+            <div class="w3d-float">
+              <div class="w3d-mac" id="w3dMac" data-cursor="expand" role="button" tabindex="0" aria-label="Watch the active 3D website full size">
+                <div class="pfm-mac-lid">
+                  <div class="pfm-mac-notch"></div>
+                  <div class="w3d-screen">
+                    <video class="w3d-video is-active" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6ab218d3de8ed1c29fbaef7c.mp4" muted playsinline preload="none"></video>
+                    <video class="w3d-video" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a47f8e19690f823bfa.mov" muted playsinline preload="none"></video>
+                    <video class="w3d-video" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a4dbed623a52188f28.mov" muted playsinline preload="none"></video>
+                    <span class="w3d-badge"><span class="w3d-badge-dot"></span><span class="w3d-badge-text">Stove Installers</span></span>
+                    <span class="w3d-expand">⤢ Watch full size</span>
+                  </div>
+                </div>
+                <div class="pfm-mac-hinge"></div>
+                <div class="pfm-mac-base"><span></span></div>
+              </div>
+            </div>
+            <div class="w3d-shadow" aria-hidden="true"></div>
+          </div>
+
+          <div class="w3d-tabs" role="tablist" aria-label="3D website industries">
+            <button class="w3d-tab is-active" type="button" role="tab" aria-selected="true">
+              <span class="w3d-tab-num">01</span>
+              <span class="w3d-tab-copy"><strong>Stove Installers</strong><small>Home heating · 3D scroll</small></span>
+              <span class="w3d-tab-bar"><i></i></span>
+            </button>
+            <button class="w3d-tab" type="button" role="tab" aria-selected="false">
+              <span class="w3d-tab-num">02</span>
+              <span class="w3d-tab-copy"><strong>Roofing Company</strong><small>Residential &amp; commercial</small></span>
+              <span class="w3d-tab-bar"><i></i></span>
+            </button>
+            <button class="w3d-tab" type="button" role="tab" aria-selected="false">
+              <span class="w3d-tab-num">03</span>
+              <span class="w3d-tab-copy"><strong>General Builder</strong><small>Construction &amp; renovation</small></span>
+              <span class="w3d-tab-bar"><i></i></span>
+            </button>
+          </div>
+
+          <div class="hero-actions">
+            <a href="contact.html" class="btn btn-light">Get a 3D website built</a>
+            <a href="portfolio.html#recent-builds" class="btn btn-outline">See recent builds</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ RECENT WEBSITES BUILT ============ -->
+      <section class="section" id="recent-builds">
+        <div class="section-head center">
+          <span class="eyebrow-label" style="justify-content:center">Recent Websites Built</span>
+          <h2>Fresh Off The Build</h2>
+          <p>The latest sites I've shipped across hospitality, home services, roofing, and personal brands. Every video is a real screen recording. Click one to watch it full size, or open the live site.</p>
+        </div>
+
+        <article class="rwb-feature">
+          <div class="pws-stage rwb-feature-stage">
+            <div class="pws-glow"></div>
+            <div class="pws-mac" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6ab218d3bdaa5e26a985c4d4.mp4" role="button" tabindex="0" aria-label="Watch the Ember and Flue desktop demo full size">
+              <div class="pfm-mac-lid">
+                <div class="pfm-mac-notch"></div>
+                <div class="pws-mac-screen">
+                  <video class="pws-mac-video lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6ab218d3bdaa5e26a985c4d4.mp4" muted loop playsinline preload="none"></video>
+                </div>
+              </div>
+              <div class="pfm-mac-hinge"></div>
+              <div class="pfm-mac-base"><span></span></div>
+            </div>
+            <div class="pws-phone" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6ab218d3de8ed1c29fbaef82.mp4" role="button" tabindex="0" aria-label="Watch the Ember and Flue mobile demo full size">
+              <div class="iphone-frame">
+                <div class="iphone-island"></div>
+                <div class="iphone-screen">
+                  <video class="aphone-video lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6ab218d3de8ed1c29fbaef82.mp4" muted loop playsinline preload="none"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rwb-feature-copy">
+            <span class="eyebrow-label">Featured Build · Home Services</span>
+            <h3>Ember &amp; Flue Stoves</h3>
+            <p>A HETAS-registered stove installation demo with a cinematic dark-and-ember palette, floating ember particles, and a "Book a Free Survey" funnel up front. Built to look just as premium on a phone as it does on a desktop.</p>
+            <div class="tags"><span class="tag">Desktop + Mobile</span><span class="tag">Survey Funnel</span><span class="tag">GitHub Pages</span></div>
+            <a href="https://nexjoshua.github.io/demo-stove/" target="_blank" rel="noopener" class="link-more">Visit live demo →</a>
+          </div>
+        </article>
+
+        <div class="rwb-grid">
+
+          <article class="rwb-card">
+            <div class="rwb-window" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a410a2b7bc2b523bcd.mov" role="button" tabindex="0" aria-label="Watch the North City Roofing website recording">
+              <div class="rwb-bar"><span></span><span></span><span></span><em>northcityroofing.com</em></div>
+              <div class="rwb-screen">
+                <video class="lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a410a2b7bc2b523bcd.mov" muted loop playsinline preload="none"></video>
+                <span class="rwb-expand">⤢ Watch full size</span>
+              </div>
+            </div>
+            <div class="rwb-body">
+              <span class="rwb-kind">Roofing · Bay Area, CA</span>
+              <h4>North City Roofing</h4>
+              <p>Bold industrial look for a Bay Area roofer, with a 24/7 call bar, a free-estimate CTA, an English/Spanish toggle, and an on-site chat assistant feeding leads straight into the CRM.</p>
+              <a href="https://northcityroofing.com/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+            </div>
+          </article>
+
+          <article class="rwb-card">
+            <div class="rwb-window" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a4dbed623a52188f1d.mov" role="button" tabindex="0" aria-label="Watch The Parnell Dublin website recording">
+              <div class="rwb-bar"><span></span><span></span><span></span><em>theparnelldublin.ie</em></div>
+              <div class="rwb-screen">
+                <video class="lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a4dbed623a52188f1d.mov" muted loop playsinline preload="none"></video>
+                <span class="rwb-expand">⤢ Watch full size</span>
+              </div>
+            </div>
+            <div class="rwb-body">
+              <span class="rwb-kind">Restaurant &amp; Bar · Dublin</span>
+              <h4>The Parnell Dublin</h4>
+              <p>A pub and kitchen established in 1879, given heritage gold-on-black styling with a framed video hero and one-tap paths to food, cocktails, private events, and table bookings.</p>
+              <a href="https://theparnelldublin.ie/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+            </div>
+          </article>
+
+          <article class="rwb-card">
+            <div class="rwb-window" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a410a2b7bc2b523bd8.mov" role="button" tabindex="0" aria-label="Watch the Tucker Reilly's website recording">
+              <div class="rwb-bar"><span></span><span></span><span></span><em>tuckerreillys.ie</em></div>
+              <div class="rwb-screen">
+                <video class="lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4a410a2b7bc2b523bd8.mov" muted loop playsinline preload="none"></video>
+                <span class="rwb-expand">⤢ Watch full size</span>
+              </div>
+            </div>
+            <div class="rwb-body">
+              <span class="rwb-kind">Restaurant &amp; Bar · Camden Street</span>
+              <h4>Tucker Reilly's</h4>
+              <p>A city pub on Camden Street with vintage serif branding over a full-bleed bar hero, plus bookings, food &amp; drink, what's on, and a Spanish language toggle.</p>
+              <a href="https://www.tuckerreillys.ie/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+            </div>
+          </article>
+
+          <article class="rwb-card">
+            <div class="rwb-window" data-cursor="expand" data-video-lightbox="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4fd10a2b7bc2b52453f.mov" role="button" tabindex="0" aria-label="Watch the JMX Next website recording">
+              <div class="rwb-bar"><span></span><span></span><span></span><em>jmxnext.com</em></div>
+              <div class="rwb-screen">
+                <video class="lazy-vid" data-src="https://assets.cdn.filesafe.space/hNOfqrviXSOAm48tJDLo/media/6abdd4fd10a2b7bc2b52453f.mov" muted loop playsinline preload="none"></video>
+                <span class="rwb-expand">⤢ Watch full size</span>
+              </div>
+            </div>
+            <div class="rwb-body">
+              <span class="rwb-kind">Portfolio · Graphics &amp; Tech</span>
+              <h4>JMX Next</h4>
+              <p>A personal brand for a GHL, AI automation, creative ads, and Amazon specialist. It pairs a neon-violet UI with a live phone carousel that cycles through real GHL builds.</p>
+              <a href="http://jmxnext.com/" target="_blank" rel="noopener" class="link-more">Visit live site →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
       <section class="section" id="services-list">
         <div class="services-grid">
 
@@ -340,11 +484,11 @@
         <div class="footer-col">
           <h5>Website</h5>
           <a href="../index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="automations.html">Automations</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="./services.html">Services</a>
+          <a href="./portfolio.html">Portfolio</a>
+          <a href="./automations.html">Automations</a>
+          <a href="./about.html">About</a>
+          <a href="./contact.html">Contact</a>
         </div>
         <div class="footer-col">
           <h5>Projects</h5>
