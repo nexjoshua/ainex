@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="./images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="./styles.css?v=4" />
+<link rel="stylesheet" href="./case-study.css" />
+<script>document.documentElement.classList.add('cs-js');</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <!-- ============ NX HERO (NEW TOP HERO) STYLES ============ -->
 <style>
@@ -522,7 +524,52 @@
       </div>
       <div class="proof-spacer" style="height:0"></div>
     </section>
+      <!-- ============ FEATURED CASE STUDY: NORTH CITY ROOFING ============ -->
+      <section class="cs-article cs-feature-wrap" id="featured-case-study" aria-labelledby="cs-feature-title">
+        <article class="cs-feature cs-reveal">
+          <span class="cs-feature-orb" aria-hidden="true"></span>
 
+          <div class="cs-feature-visual">
+            <a class="cs-feature-shot" href="./htmls/portfolio.html" data-cursor="expand" aria-label="Read the North City Roofing case study">
+              <div class="cs-mac" data-tilt>
+                <div class="pfm-mac-lid">
+                  <div class="pfm-mac-notch"></div>
+                  <div class="cs-mac-screen">
+                    <img src="./assets/case-studies/north-city-roofing/ncr-dashboard-desktop.webp" width="1600" height="803" decoding="async" alt="North City Roofing owner dashboard with team performance KPIs and a 90-day analytics chart">
+                  </div>
+                </div>
+                <div class="pfm-mac-hinge"></div>
+                <div class="pfm-mac-base"><span></span></div>
+              </div>
+            </a>
+            <div class="cs-phone" data-tilt>
+              <span class="cs-phone-island" aria-hidden="true"></span>
+              <video class="cs-video" src="./assets/case-studies/north-city-roofing/ncr-owner-mobile.mp4" poster="./assets/case-studies/north-city-roofing/ncr-owner-mobile-poster.webp" width="1186" height="2576" muted loop playsinline preload="none" aria-label="Screen recording of the North City Roofing owner app on a phone"></video>
+            </div>
+          </div>
+
+          <div class="cs-feature-copy">
+            <span class="cs-badge"><span class="cs-live-dot" aria-hidden="true"></span>Featured Case Study</span>
+            <h2 id="cs-feature-title">North City Roofing — From First Click to Signed Job</h2>
+            <p>An AI lead engine and an installable ops app took a Bay Area roofer from five scattered tools and missed leads to one connected pipeline. Website and Yelp leads get answered in seconds, inspections happen on the roof, and qualified jobs reach sales automatically.</p>
+
+            <ul class="cs-stats" aria-label="Headline results">
+              <li class="cs-stat"><strong><span data-count="17">17</span></strong><span>live automations</span></li>
+              <li class="cs-stat"><strong><span data-count="43000">43,000</span></strong><span>duplicates eliminated</span></li>
+              <li class="cs-stat"><strong><span data-count="5">5</span> <span aria-hidden="true">→</span><span class="cs-sr">to</span> 1</strong><span>tools into one app</span></li>
+            </ul>
+
+            <ul class="tags">
+              <li class="tag">GoHighLevel</li><li class="tag">Zapier</li><li class="tag">JobNimbus</li><li class="tag">Supabase</li><li class="tag">React</li>
+            </ul>
+
+            <div class="cs-feature-actions">
+              <a class="btn btn-light" href="./case-study-north-city-roofing.html">Read Case Study →</a>
+              <a class="btn btn-outline" href="./assets/case-studies/north-city-roofing/north-city-roofing-case-study.pdf" target="_blank" rel="noopener" data-pdf-open>View PDF</a>
+            </div>
+          </div>
+        </article>
+      </section>
     <div class="sections-flow">
       <!-- ============ 3D WEBSITE HIGHLIGHTS ============ -->
       <section class="section" id="web-3d">
@@ -1044,7 +1091,7 @@
               <h3>Autonomous Social Media AI Agent</h3>
               <p>Built entirely in Claude Code inside VS Code — a system that researches trending topics, writes platform-optimized copy, generates unique visuals, and publishes to every major platform in a single click. Zero manual work.</p>
               <div class="tags"><span class="tag">Claude Code</span><span class="tag">Anthropic API</span><span class="tag">Blotato</span><span class="tag">Postiz</span><span class="tag">Fal.ai</span></div>
-              <a href="portfolio.html#social-agent" class="link-more">See how it works</a>
+                            <a href="./htmls/portfolio.html#social-agent" class="link-more">See how it works</a>
             </div>
           </article>
 
@@ -1062,7 +1109,7 @@
               <span class="link-more-group">
                 <a href="https://northcityroofing.com" target="_blank" rel="noopener" class="link-more">Visit Live Website →</a>
                 <a href="https://nc-new.vibepreview.com/" target="_blank" rel="noopener" class="link-more">New site preview →<span class="tag-new">New</span></a>
-                <a href="portfolio.html#north-city-roofing" class="link-more">View full case study</a>
+                <a href="./case-study-north-city-roofing.html" class="link-more">Read the full case study</a>
               </span>
             </div>
           </article>
@@ -1079,7 +1126,7 @@
               <p>A demo site with an AI agent that picks up the phone itself. It answers calls straight from the homepage, books the appointment, qualifies the lead, and follows up on anything it misses — live, 24/7, with a matching chat widget for anyone who'd rather type.</p>
               <div class="tags"><span class="tag">AI Voice Agent</span><span class="tag">AI Chat Widget</span><span class="tag">Booking</span><span class="tag">Review Funnel</span></div>
               <a href="https://go.rayanova.io/meridian-plumbing-demo-uk" target="_blank" rel="noopener" class="link-more">Call the AI agent — live demo →</a>
-              <a href="portfolio.html#meridian-plumbing" class="link-more">See how it works</a>
+              <a href="./htmls/portfolio.html#meridian-plumbing" class="link-more">See how it works</a>
             </div>
           </article>
         </div>
@@ -1521,11 +1568,22 @@
   <button class="popup-close" id="popupClose">✕</button>
   <div class="popup-img" id="popupImg"></div>
 </div>
-
+<dialog class="cs-modal" id="csPdf" aria-labelledby="csPdfTitle" data-lenis-prevent>
+  <div class="cs-modal-head">
+    <h2 id="csPdfTitle">North City Roofing — Case Study PDF</h2>
+    <div class="cs-modal-actions">
+      <a class="btn btn-outline" href="./assets/case-studies/north-city-roofing/north-city-roofing-case-study.pdf" target="_blank" rel="noopener">Open in new tab</a>
+      <a class="btn btn-light" href="./assets/case-studies/north-city-roofing/north-city-roofing-case-study.pdf" download>Download</a>
+      <button class="cs-icon-btn cs-dialog-close" type="button" aria-label="Close PDF viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </div>
+  <iframe class="cs-pdf-frame" title="North City Roofing case study PDF" data-src="./assets/case-studies/north-city-roofing/north-city-roofing-case-study.pdf"></iframe>
+</dialog>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./script.js?v=3"></script>
+<script src="./case-study.js"></script>
 </body>
 </html>
