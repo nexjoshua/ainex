@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../case-study.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
@@ -60,8 +61,292 @@
     </div>
   </nav>
   <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <main id="main">
+    <article class="cs-article">
 
-  <main>
+      <!-- ============ HERO ============ -->
+      <header class="cs-hero">
+        <div class="cs-hero-copy">
+          <nav class="cs-crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="./htmls/portfolio.html">Portfolio</a></li>
+              <li aria-current="page">North City Roofing</li>
+            </ol>
+          </nav>
+          <span class="eyebrow-label cs-reveal">Case Study · Oct 2026</span>
+          <h1 class="cs-title cs-reveal">North City Roofing — From First Click to <span class="cs-accent">Signed Job</span></h1>
+          <p class="cs-lead cs-reveal">An AI-powered lead engine and an installable operations app took a Bay Area roofer from five scattered tools and missed leads to one connected pipeline.</p>
+
+          <dl class="cs-chips cs-reveal">
+            <div class="cs-chip"><dt>Client</dt><dd>North City Roofing · Santa Clara County, CA</dd></div>
+            <div class="cs-chip"><dt>Role</dt><dd>Automation architecture, product design, full-stack dev</dd></div>
+            <div class="cs-chip"><dt>Stack</dt><dd>GoHighLevel · Zapier · JobNimbus · React · Supabase</dd></div>
+          </dl>
+
+          <div class="cs-hero-actions cs-reveal">
+            <a class="btn btn-light" href="/assets/case-studies/north-city-roofing/north-city-roofing-case-study.pdf" target="_blank" rel="noopener" data-pdf-open>View Case Study PDF</a>
+            <a class="btn btn-outline" href="https://northcityroofing.com" target="_blank" rel="noopener">Visit northcityroofing.com<span class="cs-sr"> (opens in a new tab)</span></a>
+          </div>
+
+          <p class="cs-live cs-reveal"><span class="cs-live-dot" aria-hidden="true"></span>Live at dashboard.northcityroofing.com · private client app</p>
+        </div>
+
+        <div class="cs-hero-visual" data-parallax="0.08">
+          <div class="cs-hero-glow" aria-hidden="true"></div>
+          <div class="cs-mac" data-tilt>
+            <div class="pfm-mac-lid">
+              <div class="pfm-mac-notch"></div>
+              <div class="cs-mac-screen">
+                <img src="/assets/case-studies/north-city-roofing/ncr-dashboard-desktop.webp" width="1600" height="803" fetchpriority="high" decoding="async" alt="North City Roofing owner dashboard: Team Performance KPI cards and a 90-day chart of contacts, assignments, and completed inspections">
+              </div>
+            </div>
+            <div class="pfm-mac-hinge"></div>
+            <div class="pfm-mac-base"><span></span></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ STATS ============ -->
+      <section class="cs-stats-band" aria-label="Results at a glance">
+        <ul class="cs-stats">
+          <li class="cs-stat cs-reveal"><strong><span data-count="17">17</span></strong><span>live automations</span></li>
+          <li class="cs-stat cs-reveal"><strong><span data-count="100">100</span>+</strong><span>custom fields</span></li>
+          <li class="cs-stat cs-reveal"><strong><span data-count="43000">43,000</span></strong><span>duplicates eliminated</span></li>
+          <li class="cs-stat cs-reveal"><strong><span data-count="5">5</span> <span aria-hidden="true">→</span><span class="cs-sr">to</span> 1</strong><span>tools merged into one app</span></li>
+          <li class="cs-stat cs-reveal"><strong><span data-count="6">6</span>-step</strong><span>mobile inspection</span></li>
+        </ul>
+      </section>
+
+      <!-- ============ THE PROBLEM ============ -->
+      <section class="cs-section" aria-labelledby="cs-problem-title">
+        <div class="cs-head">
+          <span class="eyebrow-label cs-reveal">The Problem</span>
+          <h2 id="cs-problem-title" class="cs-reveal">Leads were lost before anyone reached a roof.</h2>
+        </div>
+        <ul class="cs-problems">
+          <li class="cs-card cs-reveal"><h3>Website leads waited on a callback</h3><p>Someone still had to follow up, find a time, and book the estimate by hand.</p></li>
+          <li class="cs-card cs-reveal"><h3>Yelp leads stayed trapped in Yelp</h3><p>Many arrived after hours, often with no phone number. If no one replied fast, the homeowner hired the next roofer.</p></li>
+          <li class="cs-card cs-reveal"><h3>Every qualified lead was retyped</h3><p>Leads were copied into JobNimbus by hand, where sales runs its jobs. Slow, and easy to get wrong.</p></li>
+          <li class="cs-card cs-reveal"><h3>Five disconnected tools</h3><p>A CRM, paper forms, a separate calendar, an assignments spreadsheet, and a folder of PDFs no one could find.</p></li>
+          <li class="cs-card cs-reveal"><h3>Paper inspections</h3><p>Forms filled out on rooftops were retyped later. Nobody knew which jobs were worth pursuing for weeks.</p></li>
+          <li class="cs-card cs-reveal"><h3>43,000 duplicate contacts</h3><p>Repeated CRM syncs made the contact list unusable.</p></li>
+        </ul>
+      </section>
+
+      <!-- ============ SYSTEM MAP ============ -->
+      <section class="cs-section" aria-labelledby="cs-map-title">
+        <div class="cs-head">
+          <span class="eyebrow-label cs-reveal">System Map</span>
+          <h2 id="cs-map-title" class="cs-reveal">One pipeline, from first click to signed job.</h2>
+        </div>
+        <figure class="cs-system-map" aria-describedby="cs-map-caption">
+          <svg class="cs-map-lines" aria-hidden="true" focusable="false"></svg>
+          <ol class="cs-map-nodes">
+            <li class="cs-node cs-node--source" id="map-web" data-to="map-ghl"><span class="cs-node-kicker">Source</span><strong>Website Form</strong><small>4-step, booking-first</small></li>
+            <li class="cs-node cs-node--source" id="map-yelp" data-to="map-ghl"><span class="cs-node-kicker">Source</span><strong>Yelp</strong><small>via Zapier</small></li>
+            <li class="cs-node cs-node--hub" id="map-ghl" data-to="map-app"><span class="cs-node-kicker">Hub</span><strong>GoHighLevel</strong><small>17 workflows · AI voice agent · SMS/email alerts</small></li>
+            <li class="cs-node" id="map-app" data-to="map-ghl map-qualified"><span class="cs-node-kicker">Field</span><strong>Team App</strong><small>Supabase · 6-step inspection · two-way sync</small></li>
+            <li class="cs-node" id="map-qualified" data-to="map-jn"><span class="cs-node-kicker">Gate</span><strong>Qualified</strong><small>Inspector's one-tap verdict</small></li>
+            <li class="cs-node" id="map-jn" data-to="map-sms"><span class="cs-node-kicker">Sales</span><strong>JobNimbus</strong><small>Lead created, no retyping</small></li>
+            <li class="cs-node" id="map-sms"><span class="cs-node-kicker">Alert</span><strong>Team SMS</strong><small>Sales knows instantly</small></li>
+          </ol>
+          <figcaption id="cs-map-caption" class="cs-map-caption">Website and Yelp leads flow into GoHighLevel, which syncs both ways with the team app. Qualified inspections go to JobNimbus, and the team gets an SMS alert.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ LAYER 1: LEAD ENGINE ============ -->
+      <section class="cs-section" aria-labelledby="cs-layer1-title">
+        <div class="cs-head">
+          <span class="eyebrow-label cs-reveal">Layer 1 · Lead Engine</span>
+          <h2 id="cs-layer1-title" class="cs-reveal">Every lead captured, answered, and routed in seconds.</h2>
+          <p class="cs-reveal">17 live GoHighLevel workflows and 100+ custom fields handle each lead from the website or Yelp, day or night.</p>
+        </div>
+
+        <div class="cs-split">
+          <div class="cs-split-copy cs-reveal">
+            <h3>A booking-first estimate form</h3>
+            <p>Eight services (roofing, repairs, gutters, cleaning, skylights, inspection, roof coating, and rejuvenation), plus a one-tap toggle for financing interest. On submit a booking calendar opens right away, so the homeowner leaves with an appointment instead of a "we'll call you."</p>
+          </div>
+          <ol class="cs-steps">
+            <li class="cs-reveal"><strong>Service</strong><span>Pick from eight roofing services</span></li>
+            <li class="cs-reveal"><strong>Property</strong><span>Type, size, and financing interest</span></li>
+            <li class="cs-reveal"><strong>Address</strong><span>Where the job is</span></li>
+            <li class="cs-reveal"><strong>Contact</strong><span>Then the calendar opens instantly</span></li>
+          </ol>
+        </div>
+
+        <div class="cs-split cs-split--flip">
+          <div class="cs-split-copy cs-reveal">
+            <h3>Yelp, straight into the CRM</h3>
+            <p>A Zapier integration creates or updates each new Yelp lead as a GoHighLevel contact, with the Yelp Lead ID, the requested service, and the homeowner's full project answers. A bot engages each lead immediately, even after hours.</p>
+          </div>
+          <button class="cs-shot cs-reveal" type="button" data-lightbox-index="2" data-cursor="expand" aria-label="Enlarge: Zapier run pushing a new Yelp lead into GoHighLevel">
+            <img src="/assets/case-studies/north-city-roofing/ncr-zapier-yelp.webp" width="1920" height="951" loading="lazy" decoding="async" alt="Zapier run: Yelp Leads New Lead step feeding LeadConnector Add/Update Contact, with lead data">
+          </button>
+        </div>
+
+        <div class="cs-groups">
+          <article class="cs-card cs-group cs-reveal">
+            <span class="cs-group-count">6 workflows</span>
+            <h3>Website</h3>
+            <p>Create the contact and opportunity, assign a team member, tag by source, property, and service, fast-track emergencies and financing, and alert the team. An AI voice agent calls urgent-repair leads to finish intake.</p>
+            <ul class="tags"><li class="tag">Form Intake</li><li class="tag">AI Intake</li><li class="tag">AI Urgent Repairs</li><li class="tag">Calendar Form Webhook</li><li class="tag">Lead → Assign Bot</li><li class="tag">Appointment Booked</li></ul>
+            <button class="cs-text-btn" type="button" data-lightbox-index="4">See the workflows →</button>
+          </article>
+          <article class="cs-card cs-group cs-reveal">
+            <span class="cs-group-count">7 workflows</span>
+            <h3>Yelp</h3>
+            <p>Engage every Yelp lead instantly, recover leads that go quiet or don't book, confirm bookings, and follow up on won jobs.</p>
+            <ul class="tags"><li class="tag">Lead → Assign Bot</li><li class="tag">Detect Abandoned</li><li class="tag">Abandoned Workflow</li><li class="tag">Bot – No Booking</li><li class="tag">Booking Confirmed</li><li class="tag">Send to JobNimbus</li><li class="tag">Won Workflow</li></ul>
+            <button class="cs-text-btn" type="button" data-lightbox-index="5">See the workflows →</button>
+          </article>
+          <article class="cs-card cs-group cs-reveal">
+            <span class="cs-group-count">4 workflows</span>
+            <h3>Dashboard Sync</h3>
+            <p>Keep GoHighLevel and the team app in sync: contacts, calls, inspections, and assessments.</p>
+            <ul class="tags"><li class="tag">Contact to Dashboard</li><li class="tag">Call Completed</li><li class="tag">Visit Inspection Completed</li><li class="tag">Assessment Form Webhook</li></ul>
+            <button class="cs-text-btn" type="button" data-lightbox-index="6">See the workflows →</button>
+          </article>
+        </div>
+
+        <div class="cs-deep">
+          <div class="cs-head">
+            <span class="eyebrow-label cs-reveal">Deep Dive</span>
+            <h3 class="cs-reveal">The JobNimbus handoff</h3>
+            <p class="cs-reveal">Qualified leads reach the sales team's job system with zero retyping and zero duplicates.</p>
+          </div>
+          <div class="cs-deep-scroll" data-lenis-prevent>
+            <button class="cs-deep-figure cs-reveal" type="button" data-lightbox-index="3" data-cursor="expand" aria-label="Enlarge the JobNimbus handoff workflow">
+              <img src="/assets/case-studies/north-city-roofing/ncr-ghl-jobnimbus-workflow.webp" width="1777" height="479" loading="lazy" decoding="async" alt="GoHighLevel workflow: contact tag and pipeline triggers, a sent_to_jobnimbus duplicate check, custom code, a lead-source branch for Yelp or website, webhooks to JobNimbus, and internal SMS alerts">
+              <span class="cs-pin" style="--x:7%;--y:46%" aria-hidden="true">1</span>
+              <span class="cs-pin" style="--x:20%;--y:30%" aria-hidden="true">2</span>
+              <span class="cs-pin" style="--x:45%;--y:22%" aria-hidden="true">3</span>
+              <span class="cs-pin" style="--x:52%;--y:34%" aria-hidden="true">4</span>
+              <span class="cs-pin" style="--x:85%;--y:20%" aria-hidden="true">5</span>
+            </button>
+          </div>
+          <ol class="cs-callouts">
+            <li class="cs-reveal"><strong>Trigger</strong>A contact is tagged qualified, or its pipeline stage changes.</li>
+            <li class="cs-reveal"><strong>Duplicate guard</strong>If the contact already carries the <code>sent_to_jobnimbus</code> tag, the flow stops.</li>
+            <li class="cs-reveal"><strong>Format</strong>Custom code builds the payload.</li>
+            <li class="cs-reveal"><strong>Route by source</strong>A branch checks the Yelp Lead ID, so Yelp and website leads each arrive with the right data.</li>
+            <li class="cs-reveal"><strong>Send</strong>The contact is tagged as sent, a webhook creates the lead in JobNimbus, and the team gets an SMS.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ LAYER 2: OPERATIONS APP ============ -->
+      <section class="cs-section" aria-labelledby="cs-layer2-title">
+        <div class="cs-head">
+          <span class="eyebrow-label cs-reveal">Layer 2 · Operations App</span>
+          <h2 id="cs-layer2-title" class="cs-reveal">One role-based app replaces five tools.</h2>
+          <p class="cs-reveal">The owner runs the business from a command center, and inspectors run assessments from the roof.</p>
+        </div>
+
+        <div class="cs-phones">
+          <figure class="cs-phone-wrap cs-reveal">
+            <div class="cs-phone" data-tilt>
+              <span class="cs-phone-island" aria-hidden="true"></span>
+              <video class="cs-video" src="/assets/case-studies/north-city-roofing/ncr-owner-mobile.mp4" poster="/assets/case-studies/north-city-roofing/ncr-owner-mobile-poster.webp" width="1186" height="2576" muted loop playsinline preload="none" aria-label="Screen recording of the owner command center on a phone"></video>
+            </div>
+            <figcaption>Owner command center</figcaption>
+          </figure>
+          <figure class="cs-phone-wrap cs-reveal">
+            <div class="cs-phone" data-tilt>
+              <span class="cs-phone-island" aria-hidden="true"></span>
+              <video class="cs-video" src="/assets/case-studies/north-city-roofing/ncr-member-mobile.mp4" poster="/assets/case-studies/north-city-roofing/ncr-member-mobile-poster.webp" width="1186" height="2576" muted loop playsinline preload="none" aria-label="Screen recording of the inspector app: assignments and the assessment wizard"></video>
+            </div>
+            <figcaption>Member app, built for the roof</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-features">
+          <div class="cs-card cs-reveal">
+            <h3>Owner command center</h3>
+            <ul class="cs-list">
+              <li><strong>Team Performance:</strong> live KPIs for today, this week, and this month, plus 7/30/90-day analytics. A server-side Postgres function keeps it fast across 31,000+ contacts.</li>
+              <li><strong>Top Performers:</strong> team members ranked by assigned and completed inspections.</li>
+              <li><strong>Leads pipeline:</strong> every assessed contact marked Qualified or Not Qualified, with a full assessment drawer and CSV export. Status syncs back to the CRM.</li>
+              <li><strong>Daily operations:</strong> Priorities, Contacts with tap-to-call, Team, live-synced Calendars, Appointments, Admin Booking, Sales Form, Announcements, and Files &amp; Completions.</li>
+            </ul>
+          </div>
+          <div class="cs-card cs-reveal">
+            <h3>Member app</h3>
+            <ul class="cs-list">
+              <li><strong>Assignments</strong> move through Start → Continue → Completed.</li>
+              <li><strong>A 6-step wizard:</strong> project details, roofing material, wood damage, vents and flashings, materials and access, and final review. Large tap targets, autosave, and a sticky action bar make it usable on a phone in the sun.</li>
+              <li><strong>Instant qualification:</strong> "Is this a qualified lead?" updates the CRM in real time.</li>
+              <li><strong>Branded PDF reports</strong> are generated automatically, viewable in the app, and saved to the contact.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ INSTALLABLE APP ============ -->
+      <section class="cs-section cs-pwa" aria-labelledby="cs-pwa-title">
+        <div class="cs-pwa-visual cs-reveal">
+          <div class="cs-phone cs-phone--pwa" data-tilt>
+            <span class="cs-phone-island" aria-hidden="true"></span>
+            <img src="/assets/case-studies/north-city-roofing/ncr-pwa-icon.webp" width="591" height="591" loading="lazy" decoding="async" alt="The NC Roofing app icon on an iPhone home screen">
+            <div class="cs-a2hs" aria-hidden="true">
+              <span class="cs-a2hs-row">Add to Home Screen</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-pwa-copy">
+          <span class="eyebrow-label cs-reveal">Installable</span>
+          <h2 id="cs-pwa-title" class="cs-reveal">Installs like a native app.</h2>
+          <p class="cs-reveal">The dashboard is an installable web app on iOS and Android, with its own branded icon. It opens full screen and needs no app store or update queue.</p>
+          <ul class="cs-list cs-reveal">
+            <li><strong>iOS:</strong> Safari → Share → Add to Home Screen</li>
+            <li><strong>Android:</strong> Chrome → Install app</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ TECHNICAL HIGHLIGHTS ============ -->
+      <section class="cs-section" aria-labelledby="cs-tech-title">
+        <div class="cs-head">
+          <span class="eyebrow-label cs-reveal">Technical Highlights</span>
+          <h2 id="cs-tech-title" class="cs-reveal">Built to stay fast and clean at scale.</h2>
+        </div>
+        <ul class="cs-grid">
+          <li class="cs-card cs-reveal"><h3>CRM sync that scales</h3><p>Upserts run in 500-row batches on a unique contact ID, with deduplication before every write and a guard against overlapping runs. 43,000 duplicates gone for good.</p></li>
+          <li class="cs-card cs-reveal"><h3>Server-side analytics</h3><p>Chart counts run in Postgres, so the dashboard stays instant at any contact volume.</p></li>
+          <li class="cs-card cs-reveal"><h3>100+ custom fields</h3><p>Mapped across GoHighLevel, the dashboard, and JobNimbus.</p></li>
+          <li class="cs-card cs-reveal"><h3>One webhook, one payload</h3><p>Each assessment sends the full scope, the PDF link, the qualification answer, and the inspector's identity in one request.</p></li>
+          <li class="cs-card cs-reveal"><h3>Real-time by default</h3><p>Supabase realtime keeps every view current without a refresh.</p></li>
+          <li class="cs-card cs-reveal"><h3>Safe handoffs</h3><p>Tag guards make sure no lead is ever sent to JobNimbus twice.</p></li>
+        </ul>
+      </section>
+
+      <!-- ============ RESULTS + WHAT'S NEXT ============ -->
+      <section class="cs-section cs-results" aria-labelledby="cs-results-title">
+        <div class="cs-card cs-results-card cs-reveal">
+          <span class="eyebrow-label">Results</span>
+          <h2 id="cs-results-title">What changed</h2>
+          <ul class="cs-checks">
+            <li><strong>No more lost leads.</strong> Website and Yelp leads land in one CRM with instant replies and booking, day or night.</li>
+            <li><strong>Abandoned leads are recovered</strong> automatically instead of forgotten.</li>
+            <li><strong>One app replaces five tools.</strong></li>
+            <li><strong>Paper to PDF in minutes.</strong> Inspections are captured on a phone, on the roof.</li>
+            <li><strong>Instant qualification.</strong> The office sees the verdict the moment an inspector submits, not weeks later.</li>
+            <li><strong>43,000 duplicates eliminated</strong> and prevented from returning.</li>
+            <li><strong>Zero double entry.</strong> Qualified leads flow into JobNimbus automatically.</li>
+          </ul>
+        </div>
+        <div class="cs-card cs-next-card cs-reveal">
+          <span class="eyebrow-label">What's Next</span>
+          <h2>On the roadmap</h2>
+          <ul class="cs-list">
+            <li><strong>Offline mode</strong> for the inspection wizard, for rooftops with weak signal.</li>
+            <li><strong>Personal performance analytics</strong> for each inspector.</li>
+          </ul>
+          <p class="cs-credit">Built end to end by Ainex: automation architecture, product design, front-end engineering, CRM integration, and database optimization.</p>
+        </div>
+      </section>
+
+
     <section class="page-banner">
       <h2 class="eyebrow-label" style="justify-content:center">Selected Work</h2>
       <h1>Portfolio</h1>
@@ -1314,5 +1599,6 @@
 <script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="../script.js"></script>
+<script src="../case-study.js"></script>
 </body>
 </html>
