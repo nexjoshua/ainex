@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="../images/logo-x.png" type="image/png" />
 <link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../case-study.css" />
+<script>document.documentElement.classList.add('cs-js');</script>
 </head>
 <style>
   @font-face{
@@ -227,7 +229,112 @@
 </section>
 
     <div class="sections-flow" style="margin-top:2rem">
+      <!-- ============ CASE STUDY: NORTH CITY ROOFING LEAD ENGINE ============ -->
+      <section class="cs-article cs-auto" id="ncr-lead-engine" aria-labelledby="cs-auto-title">
+        <div class="cs-head cs-reveal">
+          <span class="eyebrow-label">Case Study · North City Roofing</span>
+          <h2 id="cs-auto-title">Case Study: A 17-Workflow Lead Engine for a Roofing Company</h2>
+          <p>Website and Yelp leads used to land in separate inboxes and get retyped into JobNimbus by hand. Now 17 GoHighLevel workflows catch every lead, keep the field team's app in sync, and hand each qualified job to sales exactly once.</p>
+        </div>
 
+        <figure class="cs-system-map cs-system-map--compact cs-reveal">
+          <svg class="cs-map-lines" aria-hidden="true"></svg>
+          <ol class="cs-map-nodes">
+            <li class="cs-node cs-node--source" id="map-web" data-to="map-ghl">
+              <span class="cs-node-kicker">Source</span>
+              <strong>Website form</strong>
+              <small>4-step booking form</small>
+            </li>
+            <li class="cs-node cs-node--source" id="map-yelp" data-to="map-ghl">
+              <span class="cs-node-kicker">Source</span>
+              <strong>Yelp leads</strong>
+              <small>Synced by Zapier</small>
+            </li>
+            <li class="cs-node cs-node--hub" id="map-ghl" data-to="map-app">
+              <span class="cs-node-kicker">Hub</span>
+              <strong>GoHighLevel</strong>
+              <small>17 live workflows</small>
+            </li>
+            <li class="cs-node" id="map-app" data-to="map-ghl map-qualified">
+              <span class="cs-node-kicker">Field app</span>
+              <strong>Ops dashboard</strong>
+              <small>React + Supabase</small>
+            </li>
+            <li class="cs-node" id="map-qualified" data-to="map-jn map-sms">
+              <span class="cs-node-kicker">Gate</span>
+              <strong>Qualified job</strong>
+              <small>6-step inspection</small>
+            </li>
+            <li class="cs-node" id="map-jn" data-to="map-sms">
+              <span class="cs-node-kicker">Handoff</span>
+              <strong>JobNimbus</strong>
+              <small>Tag-guarded, sent once</small>
+            </li>
+            <li class="cs-node" id="map-sms">
+              <span class="cs-node-kicker">Notify</span>
+              <strong>Team alerts</strong>
+              <small>Sales knows instantly</small>
+            </li>
+          </ol>
+          <figcaption class="cs-map-caption">A lead comes in from the website or Yelp, runs through GoHighLevel, gets inspected in the field app, and goes to JobNimbus once it qualifies.</figcaption>
+        </figure>
+
+        <div class="cs-gallery cs-auto-shots">
+          <ul class="cs-groups">
+            <li class="cs-card cs-group cs-reveal">
+              <button class="cs-shot" type="button" data-cursor="expand" aria-label="Enlarge the website lead workflows screenshot">
+                <img src="../assets/case-studies/north-city-roofing/ncr-workflows-website.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="GoHighLevel folder holding the six website lead workflows for North City Roofing">
+              </button>
+              <span class="cs-group-count">6 workflows</span>
+              <h3>Website leads</h3>
+              <p>Every booking-form submission becomes a tagged contact and opportunity the moment it arrives, with booking and follow-up handled automatically.</p>
+              <div class="tags"><span class="tag">Webhook intake</span><span class="tag">Opportunities</span><span class="tag">Auto follow-up</span></div>
+            </li>
+            <li class="cs-card cs-group cs-reveal">
+              <button class="cs-shot" type="button" data-cursor="expand" aria-label="Enlarge the Yelp lead workflows screenshot">
+                <img src="../assets/case-studies/north-city-roofing/ncr-workflows-yelp.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="GoHighLevel folder holding the seven Yelp lead workflows for North City Roofing">
+              </button>
+              <span class="cs-group-count">7 workflows</span>
+              <h3>Yelp leads</h3>
+              <p>Zapier pulls leads out of the Yelp inbox and into GoHighLevel, so they get the same instant follow-up as website leads instead of sitting unseen.</p>
+              <div class="tags"><span class="tag">Zapier</span><span class="tag">Yelp sync</span><span class="tag">Tag guards</span></div>
+            </li>
+            <li class="cs-card cs-group cs-reveal">
+              <button class="cs-shot" type="button" data-cursor="expand" aria-label="Enlarge the dashboard sync workflows screenshot">
+                <img src="../assets/case-studies/north-city-roofing/ncr-workflows-supabase.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="GoHighLevel folder holding the four Supabase dashboard sync workflows">
+              </button>
+              <span class="cs-group-count">4 workflows</span>
+              <h3>Dashboard sync</h3>
+              <p>Keeps the Supabase-backed ops app in step with GoHighLevel, so new contacts, assignments and completed inspections show up for the team in real time.</p>
+              <div class="tags"><span class="tag">Supabase</span><span class="tag">Realtime</span><span class="tag">Batch upserts</span></div>
+            </li>
+          </ul>
+
+          <div class="cs-split cs-auto-jn cs-reveal">
+            <div class="cs-split-copy">
+              <span class="eyebrow-label">Deep Dive</span>
+              <h3>The JobNimbus handoff, without duplicates</h3>
+              <p>When an inspector marks a job qualified in the field app, one webhook carries the full assessment into GoHighLevel, which creates the matching JobNimbus job. A tag check runs before every send, so the same lead can't be pushed twice.</p>
+              <ul class="cs-checks">
+                <li><strong>One payload per assessment.</strong> The whole inspection travels together, so nothing is retyped and nothing arrives half-filled.</li>
+                <li><strong>Tag guards on every send.</strong> A job that's already been handed off is skipped, even if a workflow fires again.</li>
+                <li><strong>43,000 duplicates eliminated.</strong> The old duplicate backlog was cleared, and the guards keep it from coming back.</li>
+              </ul>
+            </div>
+            <div class="cs-auto-jn-visual">
+              <button class="cs-shot" type="button" data-cursor="expand" aria-label="Enlarge the GoHighLevel to JobNimbus workflow screenshot">
+                <img src="../assets/case-studies/north-city-roofing/ncr-ghl-jobnimbus-workflow.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="GoHighLevel workflow that sends qualified jobs to JobNimbus, with tag checks before each send">
+              </button>
+              <p class="cs-auto-cap">The GoHighLevel → JobNimbus workflow, with a tag check before each send.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-feature-actions cs-reveal">
+          <a class="btn btn-light" href="../case-study-north-city-roofing.html">Read the full case study →</a>
+          <a class="btn btn-outline" href="portfolio.html#featured-case-study">See it on the portfolio</a>
+        </div>
+      </section>
       <section class="section" id="automations-gallery">
 
         <div class="section-head">
@@ -457,10 +564,21 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="m18 15-6-6-6 6"></path></svg>
 </button>
 <div class="popup" id="popup"><button class="popup-close" id="popupClose">✕</button><div class="popup-img" id="popupImg"></div></div>
+<dialog class="cs-lightbox" id="csLightbox" aria-label="Screenshot viewer" data-lenis-prevent>
+  <p class="cs-lightbox-count" aria-live="polite"></p>
+  <button class="cs-icon-btn cs-dialog-close" type="button" aria-label="Close viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <button class="cs-icon-btn cs-lightbox-prev" type="button" aria-label="Previous screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <figure class="cs-lightbox-figure">
+    <img class="cs-lightbox-img" src="" alt="">
+    <figcaption class="cs-lightbox-caption"></figcaption>
+  </figure>
+  <button class="cs-icon-btn cs-lightbox-next" type="button" aria-label="Next screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+</dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/darkroomengineering/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="../script.js"></script>
+<script src="../case-study.js"></script>
 </body>
 </html>
