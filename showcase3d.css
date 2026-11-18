@@ -1,0 +1,201 @@
+/* =========================================================
+   3D DEVICE SHOWCASE — iPhone + MacBook (section #showcase)
+   Loads after site.css. Everything is prefixed .cn- / .cf-
+   so it cannot clash with the rest of the site.
+
+   Sizing: every dimension is written as  calc(var(--u) * N)
+   where --u is 1% of the stage width, so the whole 3D scene
+   scales as one piece on any screen.
+   ========================================================= */
+
+/* ---------- section band (always dark, fades into the page) ---------- */
+.cine{position:relative;overflow:clip;isolation:isolate;padding:clamp(4.5rem,9vw,8rem) 0}
+.cine::before{content:"";position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(180deg,var(--bg) 0,#05060a 22%,#05060a 78%,var(--bg) 100%)}
+
+/* dark tokens, scoped to the content so site buttons/headings flip to light-on-dark */
+.cine-in{
+  --bg:#05060a;--bg2:#0b0d12;--card:#10131a;--ink:#f1f0ee;--muted:#a9aeb8;--line:rgba(255,255,255,.14);
+  --primary:#9fd0e2;--on-primary:#06121a;--accent-ink:#8cc4d8;--shadow:rgba(0,0,0,.6);
+  position:relative;max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,5vw,5.5rem);color:var(--ink)}
+.cine-in .head{margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+.cine-in .head h2{max-width:20ch}
+
+/* backdrop light: cool pool, warm kicker, one soft beam from above */
+.cn-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.cn-bg::before{content:"";position:absolute;left:50%;top:50%;width:min(1500px,130%);aspect-ratio:1.5;transform:translate(-50%,-48%);
+  background:
+    radial-gradient(closest-side,rgba(127,184,204,.22),transparent 72%),
+    radial-gradient(34% 40% at 72% 62%,rgba(255,122,89,.14),transparent 72%)}
+.cn-bg::after{content:"";position:absolute;left:50%;top:-8%;width:1200px;max-width:150%;height:92%;transform:translateX(-50%);
+  background:conic-gradient(from 180deg at 50% 0,transparent 156deg,rgba(159,208,226,.13) 180deg,transparent 204deg);filter:blur(26px)}
+
+/* ---------- stage ---------- */
+.cn-wrap{container-type:inline-size;position:relative;width:min(100%,1240px);margin:0 auto;aspect-ratio:100/68}
+.cn-cam{--k:1;--u:calc(1cqw * var(--k));position:absolute;inset:0;perspective:calc(var(--u) * 150);perspective-origin:50% 36%}
+.cn-cam,.cn-orbit,.cn-look,.cn-scene,.cn-dev,.cn-float,.cn-lift,.cn-tilt,.cn-hinge,.cn-lid,.cn-sls{transform-style:preserve-3d}
+.cn-orbit,.cn-look{position:absolute;inset:0;transform-origin:50% 72%}
+.cn-orbit{will-change:transform}
+html:not(.js) .cn-orbit{transform:rotateX(-9deg) rotateY(-14deg)}
+.cn-scene{
+  --mw:calc(var(--u) * 64);--mh:calc(var(--u) * 40.9);--md:calc(var(--u) * 42);--mt:calc(var(--u) * 1.1);--ml:calc(var(--u) * .55);
+  --pw:calc(var(--u) * 17.5);--ph:calc(var(--u) * 36);--pr:calc(var(--u) * 3.3);
+  position:absolute;left:50%;top:72%;width:0;height:0}
+
+/* floor: soft pool of light + contact shadows (planes laid flat at y = 0) */
+.cn-floor,.cn-sh{position:absolute;border-radius:50%;pointer-events:none}
+.cn-floor{left:calc(var(--u) * -62);top:calc(var(--u) * -62);width:calc(var(--u) * 124);height:calc(var(--u) * 124);
+  background:radial-gradient(closest-side,rgba(127,184,204,.26),rgba(127,184,204,.07) 58%,transparent);
+  transform:rotateX(90deg) translateZ(calc(var(--u) * -.06))}
+.cn-sh-mac{left:calc(var(--u) * -45);top:calc(var(--u) * -31);width:calc(var(--u) * 74);height:calc(var(--u) * 62);
+  background:radial-gradient(closest-side,rgba(0,0,0,.8),rgba(0,0,0,.35) 60%,transparent);filter:blur(calc(var(--u) * 1.2));
+  transform:rotateX(90deg) translateZ(calc(var(--u) * -.03))}
+.cn-sh-ph{left:calc(var(--u) * 19.5);top:calc(var(--u) * -8);width:calc(var(--u) * 23);height:calc(var(--u) * 16);
+  background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(calc(var(--u) * .8));
+  transform:translate3d(0,0,calc(var(--u) * 14)) rotateX(90deg);animation:cnShadow 7s ease-in-out infinite}
+@keyframes cnShadow{50%{transform:translate3d(0,0,calc(var(--u) * 14)) rotateX(90deg) scale(.86);opacity:.75}}
+
+/* ---------- device anchors ---------- */
+.cn-dev{position:absolute;left:0;top:0;width:0;height:0}
+.cn-mac{transform:translate3d(calc(var(--u) * -40),calc(var(--u) * -42),calc(var(--u) * -21))}
+.cn-ph{transform:translate3d(calc(var(--u) * 22.25),calc(var(--u) * -37.4),calc(var(--u) * 14))}
+.cn-float{position:absolute;left:0;top:0;width:0;height:0;animation:cnFloat 7s ease-in-out infinite}
+@keyframes cnFloat{50%{transform:translate3d(0,calc(var(--u) * -.9),0)}}
+.cn-lift{position:absolute;left:0;top:0}
+.cn-mac .cn-lift{width:var(--mw);height:var(--mh)}
+.cn-ph .cn-lift{width:var(--pw);height:var(--ph)}
+.cn-tilt{position:absolute;inset:0}
+
+/* glow that blooms behind a device on hover */
+.cn-bloom{position:absolute;left:-8%;top:-8%;width:116%;height:116%;border-radius:calc(var(--u) * 3);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(159,208,226,.6),rgba(127,184,204,.18) 60%,transparent 80%);
+  filter:blur(calc(var(--u) * 1.6));opacity:0;transition:opacity .9s var(--ease);transform:translateZ(calc(var(--u) * -9))}
+.cn-ph .cn-bloom{transform:translateZ(calc(var(--u) * -4))}
+.is-hot .cn-bloom{opacity:.95}
+
+/* ---------- MacBook ---------- */
+.cn-hinge{position:absolute;left:0;top:100%;width:100%;height:0}
+html:not(.js) .cn-hinge{transform:rotateX(7deg)}
+.cn-lid{position:absolute;left:0;bottom:0;width:100%;height:var(--mh)}
+.cn-lid-front{position:absolute;inset:0;padding:calc(var(--u) * .9) calc(var(--u) * .9) calc(var(--u) * 1.1);
+  border-radius:calc(var(--u) * 1.1) calc(var(--u) * 1.1) calc(var(--u) * .25) calc(var(--u) * .25);
+  background:#08090b;box-shadow:inset 0 0 0 calc(var(--u) * .14) #4a4c52;backface-visibility:hidden}
+.cn-lid-front::before{content:"";position:absolute;left:50%;top:calc(var(--u) * .38);width:calc(var(--u) * .22);height:calc(var(--u) * .22);
+  border-radius:50%;background:#1b2330;box-shadow:0 0 0 calc(var(--u) * .05) #2c3441;transform:translateX(-50%)}
+.cn-lid-back{position:absolute;inset:0;display:grid;place-items:center;border-radius:calc(var(--u) * 1.1) calc(var(--u) * 1.1) calc(var(--u) * .25) calc(var(--u) * .25);
+  background:linear-gradient(150deg,#5a5c62,#2b2c30 45%,#46484e);backface-visibility:hidden;
+  transform:translateZ(calc(var(--ml) * -1)) rotateY(180deg)}
+.cn-lid-back img{width:calc(var(--u) * 6);height:auto;opacity:.8}
+.cn-lid-l,.cn-lid-r{position:absolute;top:0;width:var(--ml);height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(#55575d,#2a2b2f)}
+.cn-lid-l{left:0}.cn-lid-r{left:100%}
+.cn-lid-t{position:absolute;left:0;top:0;width:100%;height:var(--ml);transform-origin:50% 0;transform:rotateX(-90deg);background:#4a4c52}
+
+.cn-deck{position:absolute;left:0;top:100%;width:100%;height:var(--md);transform-origin:50% 0;transform:rotateX(90deg);
+  border-radius:0 0 calc(var(--u) * 1.4) calc(var(--u) * 1.4);background:linear-gradient(180deg,#34363b,#25262a 70%,#2d2e33)}
+.cn-kb{position:absolute;left:6%;right:6%;top:7%;height:50%;border-radius:calc(var(--u) * .5);background-color:#3a3c43;
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0 calc(var(--u) * 3.55),#0d0e10 calc(var(--u) * 3.55) calc(var(--u) * 3.9)),
+    repeating-linear-gradient(180deg,transparent 0 calc(var(--u) * 3.2),#0d0e10 calc(var(--u) * 3.2) calc(var(--u) * 3.6));
+  box-shadow:0 0 0 calc(var(--u) * .35) #0d0e10}
+.cn-tp{position:absolute;left:34%;right:34%;bottom:7%;height:24%;border-radius:calc(var(--u) * .7);
+  background:linear-gradient(#2b2d32,#26282c);box-shadow:inset 0 0 0 calc(var(--u) * .08) rgba(255,255,255,.12)}
+.cn-base-f{position:absolute;left:0;top:100%;width:100%;height:var(--mt);transform:translateZ(var(--md));
+  border-radius:0 0 calc(var(--u) * 1.2) calc(var(--u) * 1.2);background:linear-gradient(#5b5d63,#2a2b2f)}
+.cn-base-f::after{content:"";position:absolute;left:50%;top:0;width:15%;height:45%;border-radius:0 0 calc(var(--u) * .6) calc(var(--u) * .6);
+  background:#17181b;transform:translateX(-50%)}
+.cn-base-l,.cn-base-r{position:absolute;top:100%;width:var(--md);height:var(--mt);transform-origin:0 50%;transform:rotateY(-90deg);background:linear-gradient(#4a4c52,#232427)}
+.cn-base-l{left:0}.cn-base-r{left:100%}
+
+/* ---------- iPhone ---------- */
+.cn-sls{position:absolute;inset:0}
+.cn-sl{position:absolute;inset:0;border-radius:var(--pr);background:linear-gradient(160deg,#7a7c82,#303135 38%,#1c1d20 60%,#5d5f65);
+  transform:translateZ(calc(var(--u) * var(--i) * -.11))}
+.cn-ph-front{position:absolute;inset:0;padding:calc(var(--u) * .5);border-radius:var(--pr);background:#000;
+  box-shadow:inset 0 0 0 calc(var(--u) * .13) #777a80;transform:translateZ(calc(var(--u) * .02));backface-visibility:hidden}
+.cn-ph-back{position:absolute;inset:0;border-radius:var(--pr);backface-visibility:hidden;
+  background:linear-gradient(155deg,#4a4c52,#26272b 55%,#3b3d43);transform:translateZ(calc(var(--u) * -1.14)) rotateY(180deg)}
+.cn-ph .cn-screen{border-radius:calc(var(--u) * 2.8)}
+.cn-mac .cn-screen{border-radius:calc(var(--u) * .3)}
+
+/* ---------- screens (shared) ---------- */
+.cn-screen{position:relative;display:block;width:100%;height:100%;padding:0;border:0;overflow:hidden;background:#000;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cn-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;transition:transform 1.8s var(--ease)}
+/* the Mac recording includes the macOS menu bar, browser tabs and Dock — crop them out.
+   Tune: --mz = zoom, --my = vertical shift */
+/* done with real sizing, not transform: a scaled <video> inside a 3D-transformed, clipped layer renders black in Safari.
+   Same result as translateY(-2.4%) scale(1.154): width/height = 100% * zoom, centred, nudged up. */
+.cn-mac .cn-vid{--mz:1.154;--my:-2.4%;inset:auto;width:calc(100% * var(--mz));height:calc(100% * var(--mz));
+  left:calc((1 - var(--mz)) * 50%);top:calc((1 - var(--mz)) * 50% + var(--my));transform:none;transition:none}
+.cn-screen>span{position:absolute;pointer-events:none}
+.cn-off{inset:0;background:#000;opacity:0}
+.js .cn-off{opacity:1}
+.cn-dim{inset:0;background:#000;opacity:0;transition:opacity .7s var(--ease)}
+.is-dim .cn-dim{opacity:.62}
+.cn-gloss{inset:0;background:linear-gradient(118deg,rgba(255,255,255,.11),transparent 36%,transparent 64%,rgba(255,255,255,.05))}
+.cn-sweep{inset:-25%;background:linear-gradient(104deg,transparent 41%,rgba(255,255,255,.34) 50%,transparent 59%);transform:translateX(-125%)}
+.is-hot .cn-sweep{transform:translateX(125%);transition:transform 1.3s var(--ease)}
+.cn-flare{left:-10%;right:-10%;top:50%;height:2px;opacity:0;transform:scaleX(0);
+  background:linear-gradient(90deg,transparent,#a7dcf2 25%,#fff 50%,#a7dcf2 75%,transparent);box-shadow:0 0 28px 6px rgba(159,208,226,.55)}
+.is-hot .cn-flare{animation:cnFlare 1.2s var(--ease) both}
+@keyframes cnFlare{0%{opacity:0;transform:scaleX(0)}28%{opacity:1;transform:scaleX(.55)}100%{opacity:0;transform:scaleX(1.15)}}
+.cn-pill{left:50%;top:50%;display:inline-flex;align-items:center;gap:.5em;padding:.72em 1.1em;border-radius:99px;white-space:nowrap;
+  font:800 clamp(.66rem,1.05cqw,.92rem)/1 var(--fb);color:#fff;background:rgba(8,10,14,.66);border:1px solid rgba(255,255,255,.3);
+  opacity:0;transform:translate(-50%,-30%) scale(.9);transition:opacity .45s,transform .8s var(--ease)}
+.cn-pill svg{flex:none}
+.is-hot .cn-pill{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.cn-screen.is-failed::after{content:"Preview unavailable";position:absolute;left:0;right:0;bottom:8%;text-align:center;font:600 clamp(.6rem,1cqw,.85rem) var(--fb);color:rgba(255,255,255,.7);pointer-events:none}
+.cn-screen:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---------- copy under the stage ---------- */
+.cn-hint{margin-top:clamp(.5rem,1.5vw,1.2rem);text-align:center;font:500 .8rem var(--fm);letter-spacing:.04em;color:var(--muted)}
+.cn-hint-touch{display:none}
+.cn-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:1080px;margin:clamp(2.5rem,5vw,4rem) auto 0}
+.cn-proof li{padding:0 clamp(1rem,2.6vw,2.4rem)}
+.cn-proof li+li{border-left:1px solid var(--line)}
+.cn-proof h3{font-size:clamp(1.05rem,1.5vw,1.3rem);margin-bottom:.5rem}
+.cn-proof p{color:var(--muted);font-size:.96rem;max-width:34ch}
+.cn-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:clamp(2rem,4vw,3rem)}
+
+/* ---------- full-screen player ---------- */
+.cf{position:fixed;inset:0;z-index:130;display:none;overscroll-behavior:contain;touch-action:none}
+.cf.is-on{display:block}
+.cf-bg{position:absolute;inset:0;background:#030409;opacity:0}
+.cf-amb{position:absolute;left:-6%;top:-6%;width:112%;height:112%;object-fit:cover;opacity:0;filter:blur(48px) saturate(1.5) brightness(.55);pointer-events:none}
+.cf-frame{position:absolute;overflow:hidden;background:#000;box-shadow:0 50px 140px -20px rgba(0,0,0,.85);cursor:pointer}
+.cf-vid{position:absolute;display:block;max-width:none;background:#000}
+.cf-flare{position:absolute;left:-10%;right:-10%;top:50%;height:2px;opacity:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent,#a7dcf2 25%,#fff 50%,#a7dcf2 75%,transparent);box-shadow:0 0 40px 8px rgba(159,208,226,.6)}
+.cf-ui{position:absolute;inset:0;pointer-events:none;opacity:0}
+.cf-btn{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:.5rem;height:46px;padding:0 1.1rem;border-radius:99px;pointer-events:auto;
+  font:800 .85rem var(--fb);color:#fff;background:rgba(10,12,16,.6);border:1px solid rgba(255,255,255,.26);transition:background-color .3s,border-color .3s}
+.cf-btn:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5)}
+.cf-close{top:1.1rem;right:1.1rem;width:46px;padding:0;justify-content:center}
+.cf-snd{top:1.1rem;left:1.1rem}
+.cf-hint{position:absolute;left:50%;bottom:1.3rem;transform:translateX(-50%);z-index:3;padding:.4rem .9rem;border-radius:99px;font:500 .72rem var(--fm);letter-spacing:.06em;color:#c8cbd2;background:rgba(10,12,16,.5)}
+.cf-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.14)}
+.cf-bar i{display:block;height:100%;width:0;background:var(--accent,#7fb8cc)}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .cn-cam{--k:1.12}
+  .cn-wrap{aspect-ratio:100/74}
+  .cn-pill{font-size:.7rem}
+}
+@media (max-width:640px){
+  .cn-cam{--k:1.2}
+  .cn-wrap{aspect-ratio:100/80}
+  .cn-proof{grid-template-columns:1fr;gap:1.6rem}
+  .cn-proof li{padding:0}
+  .cn-proof li+li{border-left:0;border-top:1px solid var(--line);padding-top:1.6rem}
+  .cn-cta .btn{flex:1 1 100%}
+  .cf-hint{display:none}
+}
+@media (hover:none){
+  .cn-hint-fine{display:none}.cn-hint-touch{display:inline}
+  .cn-pill{opacity:.95;transform:translate(-50%,-50%) scale(1);top:auto;bottom:6%;transform:translate(-50%,0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .cn-float,.cn-sh-ph{animation:none}
+  .cn-vid,.cn-sweep,.cn-pill,.cn-bloom,.cn-dim{transition:none!important}
+  .is-hot .cn-flare{animation:none}
+}
